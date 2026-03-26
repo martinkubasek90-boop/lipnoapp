@@ -37,7 +37,7 @@ export default function LipnoExperiencesPage() {
         label: "Letní režim",
         title: "Stezka, půjčovny a voda bez zbytečného čekání",
         text: "Poskládej den kolem hlavních atrakcí, jezera a půjčoven tak, aby rodina nečekala ve špičce.",
-        href: "https://www.lipno.info/pujcovny.html",
+        href: "/pujcovny",
         cta: "Otevřít půjčovny",
       };
 
@@ -157,22 +157,20 @@ export default function LipnoExperiencesPage() {
                   <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Letní půjčovny</p>
                   <h2 className="mt-2 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Nejlepší start u jezera</h2>
                 </div>
-                <a href="https://www.lipno.info/pujcovny.html" target="_blank" rel="noreferrer" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</a>
+                <Link href="/pujcovny" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</Link>
               </div>
               <div className="mt-4 space-y-3">
                 {seasonalRentals.map((item) => (
-                  <a
+                  <Link
                     key={item.id}
                     href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
                     className="block rounded-[1.4rem] p-4"
                     style={{ background: lipnoBrand.secondarySoft }}
                   >
                     <h3 className="font-headline text-lg font-extrabold" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
                     <p className="mt-1 text-sm font-semibold" style={{ color: lipnoBrand.secondary }}>{item.area}</p>
                     <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.summary}</p>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

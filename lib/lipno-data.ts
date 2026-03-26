@@ -103,14 +103,14 @@ export const lipnoBrand = {
 };
 
 export const lipnoQuickActions: LipnoQuickAction[] = [
-  { id: 1, title: "Vstupenky", icon: "confirmation_number", href: "https://www.lipnocard.cz/", seasons: ["leto", "zima"] },
+  { id: 1, title: "Vstupenky", icon: "confirmation_number", href: "/lipnocard", seasons: ["leto", "zima"] },
   { id: 2, title: "Webkamery", icon: "videocam", href: "https://www.lipno.info/webkamery-na-lipne.html", seasons: ["leto", "zima"] },
   { id: 3, title: "Otevírací doby", icon: "schedule", href: "https://www.lipno.info/oteviraci-a-provozni-doby.html", seasons: ["leto", "zima"] },
   { id: 4, title: "Infocentrum", icon: "info", href: "https://www.lipno.info/infocentrum.html", seasons: ["leto", "zima"] },
-  { id: 5, title: "Půjčovny", icon: "pedal_bike", href: "/servis", seasons: ["leto"] },
+  { id: 5, title: "Půjčovny", icon: "pedal_bike", href: "/pujcovny", seasons: ["leto"] },
   { id: 6, title: "Servis", icon: "downhill_skiing", href: "/servis", seasons: ["zima"] },
   { id: 7, title: "Plánovat", icon: "event", href: "/planovat", seasons: ["leto", "zima"] },
-  { id: 8, title: "Vodní plavidla", icon: "kayaking", href: "https://www.lipno.info/pujcovny/vodni-plavidla.html", seasons: ["leto"] },
+  { id: 8, title: "Vodní plavidla", icon: "kayaking", href: "/pujcovny/vodni-plavidla", seasons: ["leto"] },
   { id: 9, title: "Lanovky", icon: "downhill_skiing", href: "/servis", seasons: ["zima"] },
 ];
 
@@ -120,7 +120,7 @@ export const lipnoServiceLinks: LipnoServiceLink[] = [
     title: "Vstupenky a Lipno.card",
     text: "Rychlý vstup do online prodeje skipasů, atrakcí a výhod.",
     icon: "confirmation_number",
-    href: "https://www.lipnocard.cz/",
+    href: "/lipnocard",
     badge: "Oficiální prodej",
     seasons: ["leto", "zima"],
   },
@@ -163,6 +163,15 @@ export const lipnoServiceLinks: LipnoServiceLink[] = [
     icon: "call",
     href: "https://www.lipno.info/kontakty.html",
     seasons: ["leto", "zima"],
+  },
+  {
+    id: 7,
+    title: "Půjčovny a ceníky",
+    text: "Interní přehled půjčoven s kontakty, otevírací dobou a cenovými highlighty.",
+    icon: "pedal_bike",
+    href: "/pujcovny",
+    badge: "Nové",
+    seasons: ["leto"],
   },
 ];
 
@@ -299,7 +308,7 @@ export const lipnoRentals: LipnoRental[] = [
     area: "Beach aréna a pláž pod bazénem",
     contact: "+420 731 410 813",
     summary: "Šlapadla, kajaky, veslice a paddleboardy s poslední výpůjčkou 60 minut před koncem provozu.",
-    href: "https://www.lipno.info/pujcovny/vodni-plavidla.html",
+    href: "/pujcovny/vodni-plavidla",
     seasons: ["leto"],
   },
   {
@@ -308,7 +317,7 @@ export const lipnoRentals: LipnoRental[] = [
     area: "INTERSPORT Element u centrálního parkoviště",
     contact: "+420 731 656 154",
     summary: "Celoodpružená kola, rezervace se slevou a návaznost na provoz lanové dráhy Promenádní.",
-    href: "https://www.lipno.info/pujcovny/bikepark-pujcovna.html",
+    href: "/pujcovny/bikepark-pujcovna",
     seasons: ["leto"],
   },
   {
@@ -317,7 +326,7 @@ export const lipnoRentals: LipnoRental[] = [
     area: "INTERSPORT Element",
     contact: "+420 731 656 154",
     summary: "Rodinný singletrack, horská kola a 10% výhoda s Lipno.card přímo v areálu.",
-    href: "https://www.lipno.info/pujcovny/singletrack-pujcovna.html",
+    href: "/pujcovny/singletrack-pujcovna",
     seasons: ["leto"],
   },
   {
@@ -326,7 +335,7 @@ export const lipnoRentals: LipnoRental[] = [
     area: "Intersport Rent u Stezky korunami stromů",
     contact: "+420 731 410 812",
     summary: "Oblíbená rodinná trasa z Kramolína, helma zdarma a dětské koloběžky od 8 let.",
-    href: "https://www.lipno.info/pujcovny/sjezdove-kolobezky.html",
+    href: "/pujcovny/sjezdove-kolobezky",
     seasons: ["leto"],
   },
   {
@@ -335,7 +344,7 @@ export const lipnoRentals: LipnoRental[] = [
     area: "Půjčovna INTERSPORT Element",
     contact: "+420 720 471 267",
     summary: "Sezónní cykloservis, defekty, řetězy, brzdy i základní opravy pro den bez výpadku.",
-    href: "https://www.lipno.info/pujcovny/servis-a-oprava-kol.html",
+    href: "/pujcovny/servis-a-oprava-kol",
     seasons: ["leto"],
   },
   {

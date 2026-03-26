@@ -154,31 +154,55 @@ export default function LipnoServicePage() {
 
         <section className="px-4 pt-5">
           <div className="grid grid-cols-2 gap-3">
-            {serviceItems.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-[1.8rem] p-5 block"
-                style={{ background: "#fff", boxShadow: "0 10px 22px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <span className="material-symbols-outlined text-2xl" style={{ color: lipnoBrand.primary }}>{item.icon}</span>
-                  {item.badge && (
-                    <span className="rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em]" style={{ background: lipnoBrand.accentSoft, color: lipnoBrand.accent }}>
-                      {item.badge}
-                    </span>
-                  )}
-                </div>
-                <h2 className="mt-4 font-headline text-base font-extrabold leading-snug" style={{ color: lipnoBrand.ink }}>
-                  {item.title}
-                </h2>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-                  {item.text}
-                </p>
-              </a>
-            ))}
+            {serviceItems.map((item) =>
+              item.href.startsWith("http") ? (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-[1.8rem] p-5 block"
+                  style={{ background: "#fff", boxShadow: "0 10px 22px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="material-symbols-outlined text-2xl" style={{ color: lipnoBrand.primary }}>{item.icon}</span>
+                    {item.badge && (
+                      <span className="rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em]" style={{ background: lipnoBrand.accentSoft, color: lipnoBrand.accent }}>
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="mt-4 font-headline text-base font-extrabold leading-snug" style={{ color: lipnoBrand.ink }}>
+                    {item.title}
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
+                    {item.text}
+                  </p>
+                </a>
+              ) : (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className="rounded-[1.8rem] p-5 block"
+                  style={{ background: "#fff", boxShadow: "0 10px 22px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="material-symbols-outlined text-2xl" style={{ color: lipnoBrand.primary }}>{item.icon}</span>
+                    {item.badge && (
+                      <span className="rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em]" style={{ background: lipnoBrand.accentSoft, color: lipnoBrand.accent }}>
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="mt-4 font-headline text-base font-extrabold leading-snug" style={{ color: lipnoBrand.ink }}>
+                    {item.title}
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
+                    {item.text}
+                  </p>
+                </Link>
+              ),
+            )}
           </div>
         </section>
 
@@ -188,16 +212,14 @@ export default function LipnoServicePage() {
             {isWinter ? (
               <Link href="/zazitky" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Zážitky</Link>
             ) : (
-              <a href="https://www.lipno.info/pujcovny.html" target="_blank" rel="noreferrer" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Všechny půjčovny</a>
+              <Link href="/pujcovny" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Všechny půjčovny</Link>
             )}
           </div>
           <div className="space-y-3">
             {rentals.map((item) => (
-              <a
+              <Link
                 key={item.id}
                 href={item.href}
-                target="_blank"
-                rel="noreferrer"
                 className="rounded-[1.8rem] p-5 block"
                 style={{ background: "#fff", boxShadow: "0 12px 24px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
               >
@@ -205,7 +227,7 @@ export default function LipnoServicePage() {
                 <p className="mt-1 text-sm font-semibold" style={{ color: lipnoBrand.secondary }}>{item.area}</p>
                 <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.summary}</p>
                 <p className="mt-3 text-sm font-semibold" style={{ color: lipnoBrand.primary }}>{item.contact}</p>
-              </a>
+              </Link>
             ))}
           </div>
         </section>
