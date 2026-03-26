@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Material Design 3 — Vimperk palette
+        // Material Design 3 — Lipno palette
         "secondary-fixed":           "#bdefbe",
         "surface-container-high":    "#e5e8ee",
         "surface":                   "#f7f9ff",

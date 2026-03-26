@@ -21,7 +21,7 @@ function answerLipno(query: string): string {
     return "Pomohu s Lipnem: vstupenky, otevírací doby, webkamery, infocentrum, půjčovny i tipy na zážitky.";
   }
 
-  if (/(prachatice|vimperk|brno|praha|ceske budejovice)/.test(q) && !q.includes("lipno")) {
+  if (/(prachatice|brno|praha|ceske budejovice)/.test(q) && !q.includes("lipno")) {
     return "Pomohu hlavně s informacemi o Lipně. Zeptejte se prosím na vstupenky, provoz, zážitky, půjčovny nebo infocentrum.";
   }
 

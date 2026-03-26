@@ -9,7 +9,7 @@ const items = [
   { href: "/zazitky", icon: "map", label: "Zážitky" },
   { href: "/kalendar", icon: "calendar_month", label: "Kalendář" },
   { href: "/servis", icon: "build_circle", label: "Servis" },
-  { href: "/lipno/ai", icon: "smart_toy", label: "AI" },
+  { href: "/ai", icon: "smart_toy", label: "AI" },
 ];
 
 export default function LipnoBottomNav() {
