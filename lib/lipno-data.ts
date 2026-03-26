@@ -56,6 +56,17 @@ export type LipnoPlannerTip = {
   text: string;
 };
 
+export type LipnoServiceModule = {
+  id: number;
+  title: string;
+  value: string;
+  detail: string;
+  icon: string;
+  href: string;
+  cta: string;
+  seasons: LipnoSeason[];
+};
+
 export type LipnoSeasonHero = {
   heroBackground: string;
   heroGlow: string;
@@ -324,6 +335,83 @@ export const lipnoConditions = {
   snow: "85 cm",
   lifts: "4 lanovky",
   status: "Denní lyžování 8:30–16:00",
+  wind: "12 km/h",
+  webcams: "6 kamer online",
+  parking: "P1 volnější po 11:00",
+  lake: "19 °C voda",
+};
+
+export const lipnoServiceModules: Record<LipnoSeason, LipnoServiceModule[]> = {
+  leto: [
+    {
+      id: 1,
+      title: "Počasí a voda",
+      value: `${lipnoConditions.weather} · ${lipnoConditions.lake}`,
+      detail: "Rychlý přehled pro den u jezera, koupání a lehké plánování rodinného programu.",
+      icon: "wb_sunny",
+      href: "https://www.lipno.info/webkamery-na-lipne.html",
+      cta: "Počasí a kamery",
+      seasons: ["leto"],
+    },
+    {
+      id: 2,
+      title: "Webkamery live",
+      value: lipnoConditions.webcams,
+      detail: "Jezero, Stezka i centrální areál na jednom místě před odjezdem z ubytování.",
+      icon: "videocam",
+      href: "https://www.lipno.info/webkamery-na-lipne.html",
+      cta: "Otevřít kamery",
+      seasons: ["leto"],
+    },
+    {
+      id: 3,
+      title: "Parkování",
+      value: lipnoConditions.parking,
+      detail: "Praktický orientační stav pro příjezd do areálu a přesun k hlavním atrakcím.",
+      icon: "local_parking",
+      href: "https://www.lipno.info/infocentrum.html",
+      cta: "Info k parkování",
+      seasons: ["leto"],
+    },
+  ],
+  zima: [
+    {
+      id: 4,
+      title: "Sníh a počasí",
+      value: `${lipnoConditions.snow} · ${lipnoConditions.wind}`,
+      detail: "Výška sněhu, vítr a základní podmínky pro ranní rozhodnutí, jestli jít rovnou na svah.",
+      icon: "ac_unit",
+      href: "https://www.lipno.info/webkamery-na-lipne.html",
+      cta: "Sníh a kamery",
+      seasons: ["zima"],
+    },
+    {
+      id: 5,
+      title: "Lanovky dnes",
+      value: lipnoConditions.lifts,
+      detail: "Aktuální provozní režim areálu a rychlý vstup do zimního provozu a otevíracích dob.",
+      icon: "downhill_skiing",
+      href: "https://www.lipno.info/oteviraci-a-provozni-doby-zima.html",
+      cta: "Provoz lanovek",
+      seasons: ["zima"],
+    },
+    {
+      id: 6,
+      title: "Skipasy a vstup",
+      value: "Lipno.card online",
+      detail: "Kup skipasy a další vstupy dopředu, ať ráno nečekáš u pokladen.",
+      icon: "confirmation_number",
+      href: "https://www.lipnocard.cz/",
+      cta: "Koupit online",
+      seasons: ["zima"],
+    },
+  ],
+};
+
+export const lipnoFoxPersona = {
+  name: "Fox",
+  tone: "Krátký, praktický a přátelský průvodce pro rodiny.",
+  intro: "Fox není jen chat, ale rodinný planner pro Lipno.",
 };
 
 export const lipnoAiPrompts = [

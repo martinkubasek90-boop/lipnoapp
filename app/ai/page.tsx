@@ -5,7 +5,7 @@ import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
 import SeasonToggle from "@/components/lipno/SeasonToggle";
 import { useSeason } from "@/components/lipno/SeasonProvider";
-import { lipnoBrand, lipnoFoxPrompts, lipnoSeasonCopy } from "@/lib/lipno-data";
+import { lipnoBrand, lipnoFoxPersona, lipnoFoxPrompts, lipnoSeasonCopy } from "@/lib/lipno-data";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -46,7 +46,7 @@ function renderMessage(content: string, isUser: boolean) {
 
 export default function LipnoAiPage() {
   const { season } = useSeason();
-  const introMessage = `Ahoj, jsem Fox AI průvodce.\nPomohu s dětmi, počasím, vstupenkami, obědem i plánem ${lipnoSeasonCopy[season].label.toLowerCase()} dne na Lipně.`;
+  const introMessage = `Ahoj, jsem ${lipnoFoxPersona.name}.\nPomohu s dětmi, počasím, vstupenkami, obědem i plánem ${lipnoSeasonCopy[season].label.toLowerCase()} dne na Lipně.\nŘekni mi věk dětí, počasí nebo kolik máte času a navrhnu konkrétní itinerář.`;
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: "assistant",
@@ -81,7 +81,7 @@ export default function LipnoAiPage() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ messages: next, season }),
       });
       const data = await res.json();
       setMessages([...next, { role: "assistant", content: data.reply }]);
@@ -105,7 +105,7 @@ export default function LipnoAiPage() {
               <div>
                 <h1 className="font-headline font-extrabold text-xl" style={{ color: lipnoBrand.primary }}>AI průvodce Fox</h1>
                 <p className="text-sm mt-1" style={{ color: lipnoBrand.muted }}>
-                  Osobnější asistent pro rodiny, počasí a rychlý itinerář podle aktuální sezóny.
+                  {lipnoFoxPersona.intro} {lipnoFoxPersona.tone}
                 </p>
                 <div className="mt-3">
                   <SeasonToggle compact />
@@ -146,6 +146,12 @@ export default function LipnoAiPage() {
 
           {messages.length === 1 && (
             <div className="py-3">
+              <div className="mb-3 rounded-[1.4rem] p-4" style={{ background: lipnoBrand.secondarySoft }}>
+                <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Fox tip</p>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.ink }}>
+                  Napiš třeba: <strong>{season === "zima" ? "Mám dvě děti 4 a 8 let, je zima a máme 4 hodiny." : "Máme dvě děti 4 a 8 let, prší a máme půlden."}</strong>
+                </p>
+              </div>
               <p className="text-xs font-semibold text-center mb-3 uppercase tracking-wide" style={{ color: lipnoBrand.muted }}>Časté dotazy</p>
               <div className="flex flex-wrap gap-2 justify-center">
                 {lipnoFoxPrompts[season].map((prompt) => (
@@ -171,7 +177,7 @@ export default function LipnoAiPage() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && send(input)}
-              placeholder="Zeptejte se na Lipno..."
+              placeholder="Zeptejte se Foxe na plán dne..."
               className="flex-1 text-sm px-2 py-2 outline-none bg-transparent"
               style={{ color: lipnoBrand.ink }}
             />
