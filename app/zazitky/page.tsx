@@ -6,7 +6,7 @@ import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
 import SeasonToggle from "@/components/lipno/SeasonToggle";
 import { useSeason } from "@/components/lipno/SeasonProvider";
-import { lipnoBrand, lipnoExperiences, type LipnoExperience } from "@/lib/lipno-data";
+import { lipnoBrand, lipnoExperiences, lipnoRentals, type LipnoExperience } from "@/lib/lipno-data";
 
 type Category = LipnoExperience["category"] | "vše";
 
@@ -29,17 +29,17 @@ export default function LipnoExperiencesPage() {
   const seasonHighlight = isWinter
     ? {
         label: "Zimní režim",
-        title: "Dopoledne na sněhu, odpoledne s dětmi v teple",
+        title: "Skiareál, lanovky a večerní program bez chaosu",
         text: "Začni skiareálem, po obědě přepni na Fox tipy, indoor zázemí nebo večerní program v areálu.",
-        href: "/planovat",
-        cta: "Naplánovat zimní den",
+        href: "/servis",
+        cta: "Otevřít zimní servis",
       }
     : {
         label: "Letní režim",
-        title: "Stezka, Království lesa a voda bez chaosu",
+        title: "Stezka, půjčovny a voda bez zbytečného čekání",
         text: "Poskládej den kolem hlavních atrakcí, jezera a půjčoven tak, aby rodina nečekala ve špičce.",
-        href: "/planovat",
-        cta: "Naplánovat letní den",
+        href: "https://www.lipno.info/pujcovny.html",
+        cta: "Otevřít půjčovny",
       };
 
   const items = useMemo(
@@ -47,6 +47,7 @@ export default function LipnoExperiencesPage() {
     [active, season],
   );
   const seasonalItems = lipnoExperiences.filter((item) => item.seasons.includes(season));
+  const seasonalRentals = lipnoRentals.filter((item) => !item.seasons || item.seasons.includes(season)).slice(0, 2);
   const allSeasonCount = seasonalItems.filter((item) => item.seasons.length === 2).length;
   const familyCount = seasonalItems.filter((item) => item.category === "rodiny").length;
 
@@ -109,25 +110,78 @@ export default function LipnoExperiencesPage() {
         </div>
 
         <section className="px-4 pt-4">
-          <Link
-            href={seasonHighlight.href}
-            className="block rounded-[2rem] p-5"
-            style={{
-              background: isWinter
-                ? "linear-gradient(135deg, #001a46 0%, #0b2f6f 62%, #2d85dd 100%)"
-                : "linear-gradient(135deg, #002a73 0%, #0a5ea3 62%, #00a85a 100%)",
-              boxShadow: "0 16px 34px rgba(12,74,110,0.16)",
-            }}
-          >
-            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/72">{seasonHighlight.label}</p>
-            <h2 className="mt-3 max-w-sm font-headline text-2xl font-extrabold leading-tight text-white">{seasonHighlight.title}</h2>
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-white/82">{seasonHighlight.text}</p>
-            <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold" style={{ background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }}>
-              {seasonHighlight.cta}
-              <span className="material-symbols-outlined text-base">arrow_forward</span>
-            </div>
-          </Link>
+          {seasonHighlight.href.startsWith("http") ? (
+            <a
+              href={seasonHighlight.href}
+              target="_blank"
+              rel="noreferrer"
+              className="block rounded-[2rem] p-5"
+              style={{
+                background: isWinter
+                  ? "linear-gradient(135deg, #001a46 0%, #0b2f6f 62%, #2d85dd 100%)"
+                  : "linear-gradient(135deg, #002a73 0%, #0a5ea3 62%, #00a85a 100%)",
+                boxShadow: "0 16px 34px rgba(12,74,110,0.16)",
+              }}
+            >
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/72">{seasonHighlight.label}</p>
+              <h2 className="mt-3 max-w-sm font-headline text-2xl font-extrabold leading-tight text-white">{seasonHighlight.title}</h2>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-white/82">{seasonHighlight.text}</p>
+              <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold" style={{ background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }}>
+                {seasonHighlight.cta}
+                <span className="material-symbols-outlined text-base">arrow_forward</span>
+              </div>
+            </a>
+          ) : (
+            <Link
+              href={seasonHighlight.href}
+              className="block rounded-[2rem] p-5"
+              style={{
+                background: isWinter
+                  ? "linear-gradient(135deg, #001a46 0%, #0b2f6f 62%, #2d85dd 100%)"
+                  : "linear-gradient(135deg, #002a73 0%, #0a5ea3 62%, #00a85a 100%)",
+                boxShadow: "0 16px 34px rgba(12,74,110,0.16)",
+              }}
+            >
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/72">{seasonHighlight.label}</p>
+              <h2 className="mt-3 max-w-sm font-headline text-2xl font-extrabold leading-tight text-white">{seasonHighlight.title}</h2>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-white/82">{seasonHighlight.text}</p>
+              <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold" style={{ background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }}>
+                {seasonHighlight.cta}
+                <span className="material-symbols-outlined text-base">arrow_forward</span>
+              </div>
+            </Link>
+          )}
         </section>
+
+        {isWinter ? null : (
+          <section className="px-4 pt-4">
+            <div className="rounded-[2rem] p-5" style={{ background: "#fff", boxShadow: "0 12px 24px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}>
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Letní půjčovny</p>
+                  <h2 className="mt-2 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Nejlepší start u jezera</h2>
+                </div>
+                <a href="https://www.lipno.info/pujcovny.html" target="_blank" rel="noreferrer" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</a>
+              </div>
+              <div className="mt-4 space-y-3">
+                {seasonalRentals.map((item) => (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block rounded-[1.4rem] p-4"
+                    style={{ background: lipnoBrand.secondarySoft }}
+                  >
+                    <h3 className="font-headline text-lg font-extrabold" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
+                    <p className="mt-1 text-sm font-semibold" style={{ color: lipnoBrand.secondary }}>{item.area}</p>
+                    <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.summary}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="px-4 pt-4 space-y-3">
           {items.map((item) => (
@@ -176,7 +230,7 @@ export default function LipnoExperiencesPage() {
             <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
               {isWinter
                 ? "Lanovky, webkamery, otevírací doby a rychlý vstup do skipasů a zimního servisu."
-                : "Otevírací doby, webkamery, parkování a rychlý vstup do oficiálního prodeje."}
+                : "Půjčovny, otevírací doby, webkamery a letní servis přímo z oficiálního webu Lipna."}
             </p>
           </Link>
         </section>
