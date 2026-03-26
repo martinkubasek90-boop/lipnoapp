@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
-import { lipnoAiPrompts, lipnoBrand } from "@/lib/lipno-data";
+import { lipnoBrand, lipnoFoxPrompts } from "@/lib/lipno-data";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -46,7 +46,7 @@ export default function LipnoAiPage() {
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: "assistant",
-      content: "Ahoj, jsem Lipno AI.\nPomohu s otevíracími dobami, vstupenkami, webkamerami, půjčovnami i tipy na zážitky.",
+      content: "Ahoj, jsem Fox AI průvodce.\nPomohu s dětmi, počasím, vstupenkami, obědem i plánem dne na Lipně.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -87,12 +87,12 @@ export default function LipnoAiPage() {
           <div className="rounded-[2rem] p-5" style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.08) 0%, rgba(0,150,57,0.08) 100%)" }}>
             <div className="flex items-start gap-4">
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0" style={{ background: `linear-gradient(135deg, ${lipnoBrand.primary}, ${lipnoBrand.secondary})` }}>
-                <span className="material-symbols-outlined text-white text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>smart_toy</span>
+                <span className="material-symbols-outlined text-white text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>pets</span>
               </div>
               <div>
-                <h1 className="font-headline font-extrabold text-xl" style={{ color: lipnoBrand.primary }}>Lipno AI</h1>
+                <h1 className="font-headline font-extrabold text-xl" style={{ color: lipnoBrand.primary }}>AI průvodce Fox</h1>
                 <p className="text-sm mt-1" style={{ color: lipnoBrand.muted }}>
-                  Praktický asist pro vstupenky, provoz areálu a rychlé plánování dne.
+                  Hlavní differentiator appky: osobnější asistent pro rodiny, počasí a rychlý itinerář.
                 </p>
               </div>
             </div>
@@ -107,7 +107,7 @@ export default function LipnoAiPage() {
                 style={msg.role === "user" ? { background: lipnoBrand.primarySoft, color: lipnoBrand.primary } : { background: lipnoBrand.primary, color: "#fff" }}
               >
                 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1", fontSize: "16px" }}>
-                  {msg.role === "user" ? "person" : "smart_toy"}
+                  {msg.role === "user" ? "person" : "pets"}
                 </span>
               </div>
               <div
@@ -132,7 +132,7 @@ export default function LipnoAiPage() {
             <div className="py-3">
               <p className="text-xs font-semibold text-center mb-3 uppercase tracking-wide" style={{ color: lipnoBrand.muted }}>Časté dotazy</p>
               <div className="flex flex-wrap gap-2 justify-center">
-                {lipnoAiPrompts.map((prompt) => (
+                {lipnoFoxPrompts.map((prompt) => (
                   <button
                     key={prompt}
                     onClick={() => send(prompt)}

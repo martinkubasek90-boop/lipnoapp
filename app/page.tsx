@@ -1,4 +1,7 @@
+ "use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
 import {
@@ -6,12 +9,17 @@ import {
   lipnoConditions,
   lipnoEvents,
   lipnoExperiences,
+  lipnoFoxPrompts,
   lipnoInfoCenter,
   lipnoQuickActions,
+  lipnoSeasonCopy,
+  type LipnoSeason,
   lipnoServiceLinks,
 } from "@/lib/lipno-data";
 
 export default function LipnoHomePage() {
+  const [season, setSeason] = useState<LipnoSeason>("leto");
+  const seasonCopy = lipnoSeasonCopy[season];
   const featuredExperiences = lipnoExperiences.slice(0, 3);
   const featuredServices = lipnoServiceLinks.slice(0, 4);
   const [featuredEvent] = lipnoEvents;
@@ -33,13 +41,28 @@ export default function LipnoHomePage() {
             <div className="relative z-10 flex min-h-[22rem] flex-col justify-between">
               <div>
                 <p className="text-sm font-semibold text-white/80">Čtvrtek, 26. března 2026</p>
+                <div className="mt-4 inline-flex rounded-full p-1" style={{ background: "rgba(255,255,255,0.14)" }}>
+                  {(["leto", "zima"] as const).map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => setSeason(item)}
+                      className="rounded-full px-3 py-1.5 text-xs font-bold transition-all"
+                      style={season === item ? { background: "#fff", color: lipnoBrand.primary } : { color: "rgba(255,255,255,0.76)" }}
+                    >
+                      {lipnoSeasonCopy[item].label}
+                    </button>
+                  ))}
+                </div>
                 <h1 className="mt-3 font-headline text-[2.9rem] font-extrabold leading-[0.92] tracking-tight text-white md:text-[3.4rem]">
-                  Dnes na
-                  <br />
-                  Lipně
+                  {seasonCopy.heroTitle.split("\n").map((line, index) => (
+                    <span key={line}>
+                      {index > 0 && <br />}
+                      {line}
+                    </span>
+                  ))}
                 </h1>
                 <p className="mt-3 max-w-[18rem] text-sm leading-relaxed text-white/78">
-                  Vstupenky, lanovky, rodinné zážitky a servis v jednom kompaktním mobilním rozhraní.
+                  {seasonCopy.heroText}
                 </p>
               </div>
 
@@ -49,20 +72,20 @@ export default function LipnoHomePage() {
               >
                 <div className="grid grid-cols-2 gap-3 text-white sm:grid-cols-4">
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">Počasí</p>
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{seasonCopy.weatherLabel}</p>
                     <p className="mt-1 font-headline text-xl font-black">{lipnoConditions.weather}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">Sníh</p>
-                    <p className="mt-1 font-headline text-xl font-black">{lipnoConditions.snow}</p>
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{seasonCopy.conditionsLabel}</p>
+                    <p className="mt-1 font-headline text-xl font-black">{season === "zima" ? lipnoConditions.snow : "19 °C voda"}</p>
                   </div>
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">Lanovky</p>
                     <p className="mt-1 font-headline text-xl font-black">{lipnoConditions.lifts}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">Provoz</p>
-                    <p className="mt-1 text-sm font-semibold">{lipnoConditions.status}</p>
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">Highlight</p>
+                    <p className="mt-1 text-sm font-semibold">{seasonCopy.featureOne}</p>
                   </div>
                 </div>
               </div>
@@ -107,10 +130,37 @@ export default function LipnoHomePage() {
         </section>
 
         <section className="px-4 pt-8">
+          <div className="grid grid-cols-2 gap-3">
+            <Link
+              href="/planovat"
+              className="rounded-[1.8rem] p-5 block"
+              style={{ background: lipnoBrand.primarySoft, boxShadow: "0 12px 24px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
+            >
+              <span className="material-symbols-outlined text-2xl" style={{ color: lipnoBrand.primary }}>edit_calendar</span>
+              <h2 className="mt-4 font-headline text-lg font-extrabold" style={{ color: lipnoBrand.ink }}>Plánovat den</h2>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
+                Kalendář akcí, doporučení na dnes a jednoduchý plán pobytu.
+              </p>
+            </Link>
+            <Link
+              href="/ai"
+              className="rounded-[1.8rem] p-5 block"
+              style={{ background: lipnoBrand.secondarySoft, boxShadow: "0 12px 24px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
+            >
+              <span className="material-symbols-outlined text-2xl" style={{ color: lipnoBrand.secondary }}>pets</span>
+              <h2 className="mt-4 font-headline text-lg font-extrabold" style={{ color: lipnoBrand.ink }}>Fox AI průvodce</h2>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
+                Pomůže s dětmi, počasím, obědem i plánem dne podle sezóny.
+              </p>
+            </Link>
+          </div>
+        </section>
+
+        <section className="px-4 pt-8">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Top zážitky</h2>
-              <p className="text-xs mt-0.5" style={{ color: lipnoBrand.muted }}>Rodiny, sport i pobyt u jezera</p>
+              <p className="text-xs mt-0.5" style={{ color: lipnoBrand.muted }}>{seasonCopy.featureOne} · {seasonCopy.featureTwo}</p>
             </div>
             <Link href="/zazitky" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</Link>
           </div>
@@ -182,15 +232,39 @@ export default function LipnoHomePage() {
             className="rounded-[2rem] p-6"
             style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Kalendář akcí</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Plánovat pobyt</p>
             <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight text-white">{featuredEvent.title}</h2>
             <p className="mt-2 text-sm text-white/82">{featuredEvent.summary}</p>
             <div className="mt-4 flex items-center justify-between gap-3">
               <span className="rounded-full px-3 py-1.5 text-xs font-semibold" style={{ background: "rgba(255,255,255,0.14)", color: "#fff" }}>{featuredEvent.dateLabel}</span>
-              <Link href="/kalendar" className="inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold" style={{ background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }}>
-                Otevřít program
+              <Link href="/planovat" className="inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold" style={{ background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }}>
+                Otevřít plán
                 <span className="material-symbols-outlined text-base">arrow_forward</span>
               </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="px-4 pt-8">
+          <div className="rounded-[2rem] p-5" style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}>
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>AI průvodce</p>
+                <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Fox doporučuje</h2>
+              </div>
+              <span className="material-symbols-outlined text-3xl" style={{ color: lipnoBrand.accent }}>pets</span>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {lipnoFoxPrompts.slice(0, 4).map((prompt) => (
+                <Link
+                  key={prompt}
+                  href="/ai"
+                  className="rounded-full px-3 py-2 text-xs font-semibold"
+                  style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}
+                >
+                  {prompt}
+                </Link>
+              ))}
             </div>
           </div>
         </section>

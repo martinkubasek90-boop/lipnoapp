@@ -43,6 +43,14 @@ export type LipnoRental = {
   href: string;
 };
 
+export type LipnoSeason = "leto" | "zima";
+
+export type LipnoPlannerTip = {
+  id: number;
+  title: string;
+  text: string;
+};
+
 export const lipnoBrand = {
   primary: "#001E60",
   primarySoft: "#e8eefc",
@@ -66,7 +74,7 @@ export const lipnoQuickActions: LipnoQuickAction[] = [
   { id: 3, title: "Otevírací doby", icon: "schedule", href: "https://www.lipno.info/oteviraci-a-provozni-doby.html" },
   { id: 4, title: "Infocentrum", icon: "info", href: "https://www.lipno.info/infocentrum.html" },
   { id: 5, title: "Půjčovny", icon: "downhill_skiing", href: "/servis" },
-  { id: 6, title: "Kalendář", icon: "event", href: "/kalendar" },
+  { id: 6, title: "Plánovat", icon: "event", href: "/planovat" },
 ];
 
 export const lipnoServiceLinks: LipnoServiceLink[] = [
@@ -262,4 +270,47 @@ export const lipnoAiPrompts = [
   "Kde najdu webkamery a počasí?",
   "Jak kontaktuji infocentrum?",
   "Co dělat s dětmi na Lipně?",
+];
+
+export const lipnoFoxPrompts = [
+  "Co dělat s pětiletým dítětem při dešti?",
+  "Kam na oběd bez rezervace?",
+  "Co je dnes otevřené?",
+  "Jak naplánovat půlden na Lipně?",
+  "Kde koupím vstupenky a slevy?",
+];
+
+export const lipnoSeasonCopy: Record<LipnoSeason, {
+  label: string;
+  heroTitle: string;
+  heroText: string;
+  weatherLabel: string;
+  conditionsLabel: string;
+  featureOne: string;
+  featureTwo: string;
+}> = {
+  leto: {
+    label: "Léto",
+    heroTitle: "Dnes na\nLipně",
+    heroText: "Jezero, rodinné zážitky, webkamery a servis pro celý den v resortu.",
+    weatherLabel: "Počasí",
+    conditionsLabel: "Voda",
+    featureOne: "Stezka + Království lesa",
+    featureTwo: "Beach + vodní sporty",
+  },
+  zima: {
+    label: "Zima",
+    heroTitle: "Dnes na\nLipně",
+    heroText: "Sníh, lanovky, skipasy a rodinný program přepnutý do zimního režimu.",
+    weatherLabel: "Počasí",
+    conditionsLabel: "Sníh",
+    featureOne: "Skiareál + Fox park",
+    featureTwo: "Večerní lyžování",
+  },
+};
+
+export const lipnoPlannerTips: LipnoPlannerTip[] = [
+  { id: 1, title: "Na co čekat", text: "Stezka korunami stromů a Království lesa jsou hlavní taháky. Jdi tam dopoledne nebo později odpoledne." },
+  { id: 2, title: "Sezónní tip", text: "V létě kombinuj Stezku, jezero a půjčovnu. V zimě stav den kolem lanovek, skipasu a večerního programu." },
+  { id: 3, title: "Rodinný plán", text: "Dopoledne atrakce, poledne oběd v centru areálu, odpoledne lehčí program nebo voda." },
 ];

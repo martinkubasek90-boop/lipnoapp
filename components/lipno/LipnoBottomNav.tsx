@@ -7,9 +7,9 @@ import { lipnoBrand } from "@/lib/lipno-data";
 const items = [
   { href: "/", icon: "home", label: "Domů" },
   { href: "/zazitky", icon: "map", label: "Zážitky" },
-  { href: "/kalendar", icon: "calendar_month", label: "Kalendář" },
+  { href: "/planovat", icon: "edit_calendar", label: "Plánovat" },
   { href: "/servis", icon: "build_circle", label: "Servis" },
-  { href: "/ai", icon: "smart_toy", label: "AI" },
+  { href: "/ai", icon: "pets", label: "AI průvodce" },
 ];
 
 export default function LipnoBottomNav() {
@@ -36,7 +36,7 @@ export default function LipnoBottomNav() {
               <span className="material-symbols-outlined mb-0.5" style={{ fontVariationSettings: active ? "'FILL' 1" : "'FILL' 0", fontSize: "22px" }}>
                 {icon}
               </span>
-              <span className="font-label font-medium" style={{ fontSize: "11px" }}>{label}</span>
+              <span className="font-label font-medium text-center leading-tight" style={{ fontSize: "11px", maxWidth: "4.6rem" }}>{label}</span>
             </Link>
           );
         })}
