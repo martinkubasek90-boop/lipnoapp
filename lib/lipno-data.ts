@@ -35,6 +35,7 @@ export type LipnoQuickAction = {
   title: string;
   icon: string;
   href: string;
+  seasons?: LipnoSeason[];
 };
 
 export type LipnoRental = {
@@ -55,6 +56,24 @@ export type LipnoPlannerTip = {
   text: string;
 };
 
+export type LipnoSeasonHero = {
+  heroBackground: string;
+  heroGlow: string;
+  heroGlowSecondary: string;
+  panelBackground: string;
+  panelBorder: string;
+  statThreeLabel: string;
+  statThreeValue: string;
+  quickLabel: string;
+  quickSubtitle: string;
+  spotlightLabel: string;
+  spotlightTitle: string;
+  spotlightText: string;
+  spotlightHref: string;
+  spotlightCta: string;
+  plannerLabel: string;
+};
+
 export const lipnoBrand = {
   primary: "#001E60",
   primarySoft: "#e8eefc",
@@ -73,12 +92,14 @@ export const lipnoBrand = {
 };
 
 export const lipnoQuickActions: LipnoQuickAction[] = [
-  { id: 1, title: "Vstupenky", icon: "confirmation_number", href: "https://www.lipnocard.cz/" },
-  { id: 2, title: "Webkamery", icon: "videocam", href: "https://www.lipno.info/webkamery-na-lipne.html" },
-  { id: 3, title: "Otevírací doby", icon: "schedule", href: "https://www.lipno.info/oteviraci-a-provozni-doby.html" },
-  { id: 4, title: "Infocentrum", icon: "info", href: "https://www.lipno.info/infocentrum.html" },
-  { id: 5, title: "Servis", icon: "downhill_skiing", href: "/servis" },
-  { id: 6, title: "Plánovat", icon: "event", href: "/planovat" },
+  { id: 1, title: "Vstupenky", icon: "confirmation_number", href: "https://www.lipnocard.cz/", seasons: ["leto", "zima"] },
+  { id: 2, title: "Webkamery", icon: "videocam", href: "https://www.lipno.info/webkamery-na-lipne.html", seasons: ["leto", "zima"] },
+  { id: 3, title: "Otevírací doby", icon: "schedule", href: "https://www.lipno.info/oteviraci-a-provozni-doby.html", seasons: ["leto", "zima"] },
+  { id: 4, title: "Infocentrum", icon: "info", href: "https://www.lipno.info/infocentrum.html", seasons: ["leto", "zima"] },
+  { id: 5, title: "Servis", icon: "downhill_skiing", href: "/servis", seasons: ["leto", "zima"] },
+  { id: 6, title: "Plánovat", icon: "event", href: "/planovat", seasons: ["leto", "zima"] },
+  { id: 7, title: "U jezera", icon: "beach_access", href: "/zazitky", seasons: ["leto"] },
+  { id: 8, title: "Lanovky", icon: "downhill_skiing", href: "/servis", seasons: ["zima"] },
 ];
 
 export const lipnoServiceLinks: LipnoServiceLink[] = [
@@ -356,6 +377,43 @@ export const lipnoSeasonCopy: Record<LipnoSeason, {
     conditionsLabel: "Sníh",
     featureOne: "Skiareál + Fox park",
     featureTwo: "Večerní lyžování",
+  },
+};
+
+export const lipnoSeasonHero: Record<LipnoSeason, LipnoSeasonHero> = {
+  leto: {
+    heroBackground: "linear-gradient(160deg, #002f7a 0%, #0a5ea3 38%, #00a85a 100%)",
+    heroGlow: "rgba(0, 150, 57, 0.22)",
+    heroGlowSecondary: "rgba(255, 255, 255, 0.16)",
+    panelBackground: "rgba(255,255,255,0.16)",
+    panelBorder: "1px solid rgba(255,255,255,0.16)",
+    statThreeLabel: "Sezóna",
+    statThreeValue: "Jezero + pláž",
+    quickLabel: "Léto právě teď",
+    quickSubtitle: "Voda, rodiny a lehké plánování dne.",
+    spotlightLabel: "Letní highlight",
+    spotlightTitle: "Jezero, Stezka a rodinný den",
+    spotlightText: "Spoj dopolední atrakce, odpoledne u vody a večer v kalendáři akcí bez zbytečných přesunů.",
+    spotlightHref: "/planovat",
+    spotlightCta: "Naplánovat léto",
+    plannerLabel: "Letní plán",
+  },
+  zima: {
+    heroBackground: "linear-gradient(160deg, #00163f 0%, #0b2f6f 48%, #1f7fd6 100%)",
+    heroGlow: "rgba(166, 215, 255, 0.18)",
+    heroGlowSecondary: "rgba(255, 255, 255, 0.12)",
+    panelBackground: "rgba(255,255,255,0.12)",
+    panelBorder: "1px solid rgba(255,255,255,0.14)",
+    statThreeLabel: "Sezóna",
+    statThreeValue: "Skipasy + lanovky",
+    quickLabel: "Zima právě teď",
+    quickSubtitle: "Sníh, provoz areálu a rodinný servis.",
+    spotlightLabel: "Zimní highlight",
+    spotlightTitle: "Lyžování bez zdržení",
+    spotlightText: "Měj po ruce stav lanovek, skipasy, večerní program a Fox tipy pro děti po lyžování.",
+    spotlightHref: "/servis",
+    spotlightCta: "Otevřít zimní servis",
+    plannerLabel: "Zimní plán",
   },
 };
 

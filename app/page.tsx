@@ -14,15 +14,19 @@ import {
   lipnoInfoCenter,
   lipnoQuickActions,
   lipnoSeasonCopy,
+  lipnoSeasonHero,
   lipnoServiceLinks,
 } from "@/lib/lipno-data";
 
 export default function LipnoHomePage() {
   const { season } = useSeason();
   const seasonCopy = lipnoSeasonCopy[season];
+  const seasonHero = lipnoSeasonHero[season];
   const featuredExperiences = lipnoExperiences.filter((item) => item.seasons.includes(season)).slice(0, 3);
   const featuredServices = lipnoServiceLinks.filter((item) => !item.seasons || item.seasons.includes(season)).slice(0, 4);
   const [featuredEvent] = lipnoEvents.filter((item) => item.seasons.includes(season));
+  const seasonQuickActions = lipnoQuickActions.filter((item) => !item.seasons || item.seasons.includes(season)).slice(0, 6);
+  const isWinter = season === "zima";
 
   return (
     <>
@@ -32,12 +36,18 @@ export default function LipnoHomePage() {
           <div
             className="relative overflow-hidden rounded-[2rem] min-h-[25rem] p-5 md:p-6"
             style={{
-              background: "linear-gradient(155deg, #001E60 0%, #003083 52%, #009639 100%)",
+              background: seasonHero.heroBackground,
               boxShadow: "0 18px 40px rgba(12,74,110,0.18)",
             }}
           >
-            <div className="absolute right-[-2rem] top-[-2rem] h-40 w-40 rounded-full bg-white/12 blur-2xl" />
-            <div className="absolute left-[-3rem] bottom-[-4rem] h-52 w-52 rounded-full blur-3xl" style={{ background: "rgba(0,150,57,0.16)" }} />
+            <div className="absolute inset-x-0 top-0 h-32 opacity-70" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.18), transparent)" }} />
+            <div className="absolute right-[-2rem] top-[-2rem] h-40 w-40 rounded-full blur-2xl" style={{ background: seasonHero.heroGlowSecondary }} />
+            <div className="absolute left-[-3rem] bottom-[-4rem] h-52 w-52 rounded-full blur-3xl" style={{ background: seasonHero.heroGlow }} />
+            {isWinter ? (
+              <div className="absolute inset-0 opacity-30" style={{ background: "linear-gradient(130deg, transparent 0%, rgba(255,255,255,0.10) 42%, transparent 58%)" }} />
+            ) : (
+              <div className="absolute inset-x-0 bottom-0 h-28 opacity-30" style={{ background: "linear-gradient(180deg, transparent, rgba(255,255,255,0.12))" }} />
+            )}
             <div className="relative z-10 flex min-h-[22rem] flex-col justify-between">
               <div>
                 <p className="text-sm font-semibold text-white/80">Čtvrtek, 26. března 2026</p>
@@ -59,7 +69,7 @@ export default function LipnoHomePage() {
 
               <div
                 className="rounded-[1.7rem] px-4 py-3 backdrop-blur-md"
-                style={{ background: "rgba(255,255,255,0.14)", border: "1px solid rgba(255,255,255,0.14)" }}
+                style={{ background: seasonHero.panelBackground, border: seasonHero.panelBorder }}
               >
                 <div className="grid grid-cols-2 gap-3 text-white sm:grid-cols-4">
                   <div>
@@ -71,12 +81,12 @@ export default function LipnoHomePage() {
                     <p className="mt-1 font-headline text-xl font-black">{season === "zima" ? lipnoConditions.snow : "19 °C voda"}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">Lanovky</p>
-                    <p className="mt-1 font-headline text-xl font-black">{lipnoConditions.lifts}</p>
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{isWinter ? "Lanovky" : "Program"}</p>
+                    <p className="mt-1 font-headline text-xl font-black">{isWinter ? lipnoConditions.lifts : "Denní animace"}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">Highlight</p>
-                    <p className="mt-1 text-sm font-semibold">{seasonCopy.featureOne}</p>
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{seasonHero.statThreeLabel}</p>
+                    <p className="mt-1 text-sm font-semibold">{seasonHero.statThreeValue}</p>
                   </div>
                 </div>
               </div>
@@ -85,9 +95,14 @@ export default function LipnoHomePage() {
         </section>
 
         <section className="px-4 pt-6">
-          <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Rychlý přístup</h2>
+          <div className="flex items-end justify-between gap-3">
+            <div>
+              <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Rychlý přístup</h2>
+              <p className="mt-0.5 text-xs" style={{ color: lipnoBrand.muted }}>{seasonHero.quickLabel} · {seasonHero.quickSubtitle}</p>
+            </div>
+          </div>
           <div className="mt-4 grid grid-cols-3 gap-3">
-            {lipnoQuickActions.map((item) => {
+            {seasonQuickActions.map((item) => {
               const external = item.href.startsWith("http");
               const content = (
                 <>
@@ -125,12 +140,12 @@ export default function LipnoHomePage() {
             <Link
               href="/planovat"
               className="rounded-[1.8rem] p-5 block"
-              style={{ background: lipnoBrand.primarySoft, boxShadow: "0 12px 24px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
+              style={{ background: isWinter ? "#e9f2ff" : lipnoBrand.primarySoft, boxShadow: "0 12px 24px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
             >
               <span className="material-symbols-outlined text-2xl" style={{ color: lipnoBrand.primary }}>edit_calendar</span>
               <h2 className="mt-4 font-headline text-lg font-extrabold" style={{ color: lipnoBrand.ink }}>Plánovat den</h2>
               <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-                Kalendář akcí, doporučení na dnes a jednoduchý plán pobytu.
+                {isWinter ? "Kalendář zimního programu, provozu a rychlý plán dne na sněhu." : "Kalendář akcí, doporučení na dnes a jednoduchý plán pobytu."}
               </p>
             </Link>
             <Link
@@ -145,6 +160,22 @@ export default function LipnoHomePage() {
               </p>
             </Link>
           </div>
+        </section>
+
+        <section className="px-4 pt-8">
+          <Link
+            href={seasonHero.spotlightHref}
+            className="block rounded-[2rem] p-6"
+            style={{ background: isWinter ? "linear-gradient(135deg, #001a46 0%, #0b2f6f 64%, #2d85dd 100%)" : "linear-gradient(135deg, #002a73 0%, #0a5ea3 64%, #00a85a 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
+          >
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/72">{seasonHero.spotlightLabel}</p>
+            <h2 className="mt-3 max-w-sm font-headline text-2xl font-extrabold leading-tight text-white">{seasonHero.spotlightTitle}</h2>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-white/82">{seasonHero.spotlightText}</p>
+            <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold" style={{ background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }}>
+              {seasonHero.spotlightCta}
+              <span className="material-symbols-outlined text-base">arrow_forward</span>
+            </div>
+          </Link>
         </section>
 
         <section className="px-4 pt-8">
@@ -164,7 +195,7 @@ export default function LipnoHomePage() {
                 rel="noreferrer"
                 className="block rounded-[1.8rem] p-5"
                 style={{
-                  background: index === 0 ? "linear-gradient(135deg, rgba(0,150,57,0.13), rgba(255,255,255,0.96))" : "#fff",
+                  background: index === 0 ? (isWinter ? "linear-gradient(135deg, rgba(43,128,221,0.16), rgba(255,255,255,0.96))" : "linear-gradient(135deg, rgba(0,150,57,0.13), rgba(255,255,255,0.96))") : "#fff",
                   boxShadow: "0 12px 24px rgba(12,74,110,0.06)",
                   border: "1px solid rgba(12,74,110,0.06)",
                 }}
@@ -221,9 +252,9 @@ export default function LipnoHomePage() {
         <section className="px-4 pt-8">
           <div
             className="rounded-[2rem] p-6"
-            style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
+            style={{ background: isWinter ? "linear-gradient(135deg, #001a46 0%, #0b2f6f 68%, #2d85dd 100%)" : "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Plánovat pobyt</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">{seasonHero.plannerLabel}</p>
             <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight text-white">{featuredEvent.title}</h2>
             <p className="mt-2 text-sm text-white/82">{featuredEvent.summary}</p>
             <div className="mt-4 flex items-center justify-between gap-3">
