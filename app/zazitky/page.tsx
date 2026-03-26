@@ -22,6 +22,25 @@ const filters: { value: Category; label: string }[] = [
 export default function LipnoExperiencesPage() {
   const { season } = useSeason();
   const [active, setActive] = useState<Category>("vše");
+  const isWinter = season === "zima";
+  const seasonIntro = isWinter
+    ? "Zimní provoz, rodinné sjezdovky, indoor jistoty a kratší přesuny v jednom režimu."
+    : "Jezero, rodinné top atrakce, voda i lehký adrenalin v jednom letním přehledu.";
+  const seasonHighlight = isWinter
+    ? {
+        label: "Zimní režim",
+        title: "Dopoledne na sněhu, odpoledne s dětmi v teple",
+        text: "Začni skiareálem, po obědě přepni na Fox tipy, indoor zázemí nebo večerní program v areálu.",
+        href: "/planovat",
+        cta: "Naplánovat zimní den",
+      }
+    : {
+        label: "Letní režim",
+        title: "Stezka, Království lesa a voda bez chaosu",
+        text: "Poskládej den kolem hlavních atrakcí, jezera a půjčoven tak, aby rodina nečekala ve špičce.",
+        href: "/planovat",
+        cta: "Naplánovat letní den",
+      };
 
   const items = useMemo(
     () => lipnoExperiences.filter((item) => item.seasons.includes(season) && (active === "vše" || item.category === active)),
@@ -36,12 +55,19 @@ export default function LipnoExperiencesPage() {
       <LipnoTopBar />
       <main className="pt-20 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
-          <div className="rounded-[2rem] p-5 md:p-6" style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.08) 0%, rgba(0,150,57,0.08) 100%)" }}>
+          <div
+            className="rounded-[2rem] p-5 md:p-6"
+            style={{
+              background: isWinter
+                ? "linear-gradient(135deg, rgba(0,30,96,0.10) 0%, rgba(43,128,221,0.10) 100%)"
+                : "linear-gradient(135deg, rgba(0,30,96,0.08) 0%, rgba(0,150,57,0.08) 100%)",
+            }}
+          >
             <h1 className="font-headline text-3xl font-extrabold tracking-tight md:text-[2.7rem]" style={{ color: lipnoBrand.primary }}>
               Zážitky na Lipně
             </h1>
             <p className="mt-3 max-w-md text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-              Rodinné top atrakce, zimní provoz, voda i lehký adrenalin v jednom přehledu podle aktuální sezóny.
+              {seasonIntro}
             </p>
             <div className="mt-4">
               <SeasonToggle compact />
@@ -82,6 +108,27 @@ export default function LipnoExperiencesPage() {
           ))}
         </div>
 
+        <section className="px-4 pt-4">
+          <Link
+            href={seasonHighlight.href}
+            className="block rounded-[2rem] p-5"
+            style={{
+              background: isWinter
+                ? "linear-gradient(135deg, #001a46 0%, #0b2f6f 62%, #2d85dd 100%)"
+                : "linear-gradient(135deg, #002a73 0%, #0a5ea3 62%, #00a85a 100%)",
+              boxShadow: "0 16px 34px rgba(12,74,110,0.16)",
+            }}
+          >
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/72">{seasonHighlight.label}</p>
+            <h2 className="mt-3 max-w-sm font-headline text-2xl font-extrabold leading-tight text-white">{seasonHighlight.title}</h2>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-white/82">{seasonHighlight.text}</p>
+            <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold" style={{ background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }}>
+              {seasonHighlight.cta}
+              <span className="material-symbols-outlined text-base">arrow_forward</span>
+            </div>
+          </Link>
+        </section>
+
         <section className="px-4 pt-4 space-y-3">
           {items.map((item) => (
             <a
@@ -116,14 +163,20 @@ export default function LipnoExperiencesPage() {
           <Link
             href="/servis"
             className="block rounded-[2rem] p-5"
-            style={{ background: "#fff", boxShadow: "0 14px 30px rgba(12,74,110,0.08)", border: "1px solid rgba(12,74,110,0.08)" }}
+            style={{
+              background: isWinter ? "#eef4ff" : "#fff",
+              boxShadow: "0 14px 30px rgba(12,74,110,0.08)",
+              border: "1px solid rgba(12,74,110,0.08)",
+            }}
           >
             <div className="flex items-center justify-between gap-3">
               <h2 className="font-headline text-3xl font-extrabold" style={{ color: lipnoBrand.primary }}>Servis a vstupenky</h2>
               <span className="material-symbols-outlined text-2xl" style={{ color: lipnoBrand.primary }}>arrow_forward</span>
             </div>
             <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-              Otevírací doby, webkamery, parkování a rychlý vstup do oficiálního prodeje.
+              {isWinter
+                ? "Lanovky, webkamery, otevírací doby a rychlý vstup do skipasů a zimního servisu."
+                : "Otevírací doby, webkamery, parkování a rychlý vstup do oficiálního prodeje."}
             </p>
           </Link>
         </section>
