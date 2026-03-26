@@ -242,33 +242,61 @@ export default function LipnoHomePage() {
           </div>
           <div className="mt-4 space-y-3">
             {featuredExperiences.map((item, index) => (
-              <a
-                key={item.id}
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                className="block rounded-[1.8rem] p-5"
-                style={{
-                  background: index === 0 ? (isWinter ? "linear-gradient(135deg, rgba(43,128,221,0.16), rgba(255,255,255,0.96))" : "linear-gradient(135deg, rgba(0,150,57,0.13), rgba(255,255,255,0.96))") : "#fff",
-                  boxShadow: "0 12px 24px rgba(12,74,110,0.06)",
-                  border: "1px solid rgba(12,74,110,0.06)",
-                }}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <span className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: "rgba(255,255,255,0.72)", color: lipnoBrand.secondary }}>
-                      {item.season}
-                    </span>
-                    <h3 className="mt-3 font-headline text-xl font-extrabold leading-tight" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.summary}</p>
+              item.href.startsWith("http") ? (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block rounded-[1.8rem] p-5"
+                  style={{
+                    background: index === 0 ? (isWinter ? "linear-gradient(135deg, rgba(43,128,221,0.16), rgba(255,255,255,0.96))" : "linear-gradient(135deg, rgba(0,150,57,0.13), rgba(255,255,255,0.96))") : "#fff",
+                    boxShadow: "0 12px 24px rgba(12,74,110,0.06)",
+                    border: "1px solid rgba(12,74,110,0.06)",
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <span className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: "rgba(255,255,255,0.72)", color: lipnoBrand.secondary }}>
+                        {item.season}
+                      </span>
+                      <h3 className="mt-3 font-headline text-xl font-extrabold leading-tight" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.summary}</p>
+                    </div>
+                    <span className="material-symbols-outlined" style={{ color: lipnoBrand.accent }}>arrow_outward</span>
                   </div>
-                  <span className="material-symbols-outlined" style={{ color: lipnoBrand.accent }}>arrow_outward</span>
-                </div>
-                <div className="mt-4 flex gap-2 flex-wrap">
-                  <span className="rounded-full px-3 py-1.5 text-xs font-semibold" style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}>{item.duration}</span>
-                  <span className="rounded-full px-3 py-1.5 text-xs font-semibold" style={{ background: lipnoBrand.accentSoft, color: lipnoBrand.accent }}>{item.highlight}</span>
-                </div>
-              </a>
+                  <div className="mt-4 flex gap-2 flex-wrap">
+                    <span className="rounded-full px-3 py-1.5 text-xs font-semibold" style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}>{item.duration}</span>
+                    <span className="rounded-full px-3 py-1.5 text-xs font-semibold" style={{ background: lipnoBrand.accentSoft, color: lipnoBrand.accent }}>{item.highlight}</span>
+                  </div>
+                </a>
+              ) : (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className="block rounded-[1.8rem] p-5"
+                  style={{
+                    background: index === 0 ? (isWinter ? "linear-gradient(135deg, rgba(43,128,221,0.16), rgba(255,255,255,0.96))" : "linear-gradient(135deg, rgba(0,150,57,0.13), rgba(255,255,255,0.96))") : "#fff",
+                    boxShadow: "0 12px 24px rgba(12,74,110,0.06)",
+                    border: "1px solid rgba(12,74,110,0.06)",
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <span className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: "rgba(255,255,255,0.72)", color: lipnoBrand.secondary }}>
+                        {item.season}
+                      </span>
+                      <h3 className="mt-3 font-headline text-xl font-extrabold leading-tight" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.summary}</p>
+                    </div>
+                    <span className="material-symbols-outlined" style={{ color: lipnoBrand.accent }}>arrow_forward</span>
+                  </div>
+                  <div className="mt-4 flex gap-2 flex-wrap">
+                    <span className="rounded-full px-3 py-1.5 text-xs font-semibold" style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}>{item.duration}</span>
+                    <span className="rounded-full px-3 py-1.5 text-xs font-semibold" style={{ background: lipnoBrand.accentSoft, color: lipnoBrand.accent }}>{item.highlight}</span>
+                  </div>
+                </Link>
+              )
             ))}
           </div>
         </section>

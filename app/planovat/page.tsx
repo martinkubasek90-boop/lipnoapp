@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
 import { useSeason } from "@/components/lipno/SeasonProvider";
+import { lipnoAttractions } from "@/lib/lipno-attractions";
 import { lipnoBrand, lipnoEvents, lipnoPlannerTips, lipnoSeasonCopy, type LipnoEvent } from "@/lib/lipno-data";
 
 type Category = LipnoEvent["category"] | "vše";
@@ -24,6 +26,9 @@ export default function LipnoPlannerPage() {
     [active, season],
   );
   const tipText = season === "leto" ? "Jezero a rodinné aktivity" : "Lanovky a zimní program";
+  const featuredAttractions = (season === "leto"
+    ? lipnoAttractions.filter((item) => item.slug !== "aquaworld-lipno").slice(0, 3)
+    : lipnoAttractions.filter((item) => ["stezka-korunami-stromu", "aquaworld-lipno"].includes(item.slug))).slice(0, 3);
 
   return (
     <>
@@ -95,6 +100,36 @@ export default function LipnoPlannerPage() {
               </div>
             </a>
           ))}
+        </section>
+
+        <section className="px-4 pt-8">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Hlavní atrakce</h2>
+              <p className="mt-0.5 text-xs" style={{ color: lipnoBrand.muted }}>
+                {season === "leto" ? "Stezka, Království lesa a lanovky jako základ letního dne." : "Stezka a Aquaworld jako jistota i mimo hlavní program."}
+              </p>
+            </div>
+            <Link href="/zazitky" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</Link>
+          </div>
+          <div className="mt-4 space-y-3">
+            {featuredAttractions.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/zazitky/${item.slug}`}
+                className="rounded-[1.8rem] p-5 block"
+                style={{ background: "#fff", boxShadow: "0 12px 24px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="font-headline text-lg font-extrabold leading-snug" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.teaser}</p>
+                  </div>
+                  <span className="material-symbols-outlined" style={{ color: lipnoBrand.primary }}>arrow_forward</span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </section>
 
         <section className="px-4 pt-8 pb-4">

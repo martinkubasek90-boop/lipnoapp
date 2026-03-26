@@ -179,31 +179,57 @@ export default function LipnoExperiencesPage() {
 
         <section className="px-4 pt-4 space-y-3">
           {items.map((item) => (
-            <a
-              key={item.id}
-              href={item.href}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-[2rem] p-5 block"
-              style={{ background: "#fff", boxShadow: "0 12px 24px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}>
-                      {item.season}
-                    </span>
-                    <span className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: lipnoBrand.accentSoft, color: lipnoBrand.accent }}>
-                      {item.duration}
-                    </span>
+            item.href.startsWith("http") ? (
+              <a
+                key={item.id}
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-[2rem] p-5 block"
+                style={{ background: "#fff", boxShadow: "0 12px 24px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}>
+                        {item.season}
+                      </span>
+                      <span className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: lipnoBrand.accentSoft, color: lipnoBrand.accent }}>
+                        {item.duration}
+                      </span>
+                    </div>
+                    <h2 className="mt-3 font-headline text-lg font-extrabold leading-snug" style={{ color: lipnoBrand.ink }}>{item.title}</h2>
+                    <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.summary}</p>
                   </div>
-                  <h2 className="mt-3 font-headline text-lg font-extrabold leading-snug" style={{ color: lipnoBrand.ink }}>{item.title}</h2>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.summary}</p>
+                  <span className="material-symbols-outlined" style={{ color: lipnoBrand.primary }}>arrow_outward</span>
                 </div>
-                <span className="material-symbols-outlined" style={{ color: lipnoBrand.primary }}>arrow_outward</span>
-              </div>
-              <p className="mt-3 text-sm font-semibold" style={{ color: lipnoBrand.secondary }}>{item.highlight}</p>
-            </a>
+                <p className="mt-3 text-sm font-semibold" style={{ color: lipnoBrand.secondary }}>{item.highlight}</p>
+              </a>
+            ) : (
+              <Link
+                key={item.id}
+                href={item.href}
+                className="rounded-[2rem] p-5 block"
+                style={{ background: "#fff", boxShadow: "0 12px 24px rgba(12,74,110,0.06)", border: "1px solid rgba(12,74,110,0.06)" }}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}>
+                        {item.season}
+                      </span>
+                      <span className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: lipnoBrand.accentSoft, color: lipnoBrand.accent }}>
+                        {item.duration}
+                      </span>
+                    </div>
+                    <h2 className="mt-3 font-headline text-lg font-extrabold leading-snug" style={{ color: lipnoBrand.ink }}>{item.title}</h2>
+                    <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.summary}</p>
+                  </div>
+                  <span className="material-symbols-outlined" style={{ color: lipnoBrand.primary }}>arrow_forward</span>
+                </div>
+                <p className="mt-3 text-sm font-semibold" style={{ color: lipnoBrand.secondary }}>{item.highlight}</p>
+              </Link>
+            )
           ))}
         </section>
 
