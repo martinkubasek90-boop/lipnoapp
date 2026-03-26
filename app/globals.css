@@ -4,48 +4,48 @@
 
 /* ── MD3 Design Tokens ────────────────────────────────────────── */
 :root {
-  --primary:                #9f1d2f;
-  --primary-container:      #c83846;
+  --primary:                #001E60;
+  --primary-container:      #18377f;
   --on-primary:             #ffffff;
-  --on-primary-container:   #fff4f0;
-  --primary-fixed:          #f7d4cc;
-  --on-primary-fixed:       #431118;
+  --on-primary-container:   #eef3ff;
+  --primary-fixed:          #e8eefc;
+  --on-primary-fixed:       #001E60;
 
-  --secondary:              #2f5b4f;
-  --secondary-container:    #d7e8df;
+  --secondary:              #009639;
+  --secondary-container:    #e2f6ea;
   --on-secondary:           #ffffff;
-  --on-secondary-container: #17362d;
-  --secondary-fixed:        #e4efe9;
-  --on-secondary-fixed:     #10271f;
+  --on-secondary-container: #0d5028;
+  --secondary-fixed:        #eefaf2;
+  --on-secondary-fixed:     #0b4a25;
 
-  --tertiary:               #b96542;
-  --tertiary-container:     #efc4ad;
+  --tertiary:               #009639;
+  --tertiary-container:     #d9f3e4;
   --on-tertiary:            #ffffff;
-  --on-tertiary-container:  #552b18;
-  --tertiary-fixed:         #f6ddd0;
-  --on-tertiary-fixed:      #4b1d10;
+  --on-tertiary-container:  #0d5028;
+  --tertiary-fixed:         #eefaf2;
+  --on-tertiary-fixed:      #0b4a25;
 
-  --error:                  #b43b32;
-  --error-container:        #f7d6d1;
+  --error:                  #c6402d;
+  --error-container:        #f8ddd7;
   --on-error:               #ffffff;
   --on-error-container:     #6a1814;
 
-  --surface:                #f7f1eb;
-  --surface-container-lowest: #fffaf6;
-  --surface-container-low:  #f4ece4;
-  --surface-container:      #ede1d6;
-  --surface-container-high: #e4d5c8;
-  --surface-container-highest: #dbc9bb;
-  --surface-dim:            #d8c8bc;
-  --surface-bright:         #fffaf6;
+  --surface:                #ffffff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low:  #f7f9fc;
+  --surface-container:      #eef3f8;
+  --surface-container-high: #e7edf5;
+  --surface-container-highest: #dde6f0;
+  --surface-dim:            #d6e1ec;
+  --surface-bright:         #ffffff;
 
-  --on-surface:             #241914;
-  --on-surface-variant:     #73584b;
-  --outline:                #9c7865;
-  --outline-variant:        #e7cbb9;
+  --on-surface:             #001E60;
+  --on-surface-variant:     #4f6178;
+  --outline:                #bfcbd8;
+  --outline-variant:        #dbe4ee;
 
-  --inverse-surface:        #32231d;
-  --inverse-on-surface:     #fff5ef;
+  --inverse-surface:        #0f234d;
+  --inverse-on-surface:     #ffffff;
 }
 
 /* ── Material Symbols ─────────────────────────────────────────── */
@@ -69,7 +69,7 @@
 
 /* ── Glass effect ─────────────────────────────────────────────── */
 .glass-header {
-  background: rgba(255, 250, 246, 0.84);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
 }
@@ -84,13 +84,13 @@
   body {
     background: var(--surface);
     color: var(--on-surface);
-    font-family: "Manrope", system-ui, sans-serif;
+    font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
     background-image:
-      radial-gradient(circle at top left, rgba(200, 56, 70, 0.10), transparent 26%),
-      radial-gradient(circle at top right, rgba(47, 91, 79, 0.10), transparent 24%),
-      linear-gradient(180deg, #faf4ef 0%, #f4ede6 100%);
+      radial-gradient(circle at top left, rgba(0, 30, 96, 0.07), transparent 26%),
+      radial-gradient(circle at top right, rgba(0, 150, 57, 0.08), transparent 24%),
+      linear-gradient(180deg, #ffffff 0%, #f6f9fc 100%);
   }
   ::selection {
     background: var(--primary-container);
@@ -102,9 +102,9 @@
   .editorial-shell {
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(159, 29, 47, 0.08);
-    background: linear-gradient(180deg, rgba(255, 248, 243, 0.96), rgba(242, 232, 222, 0.95));
-    box-shadow: 0 14px 36px rgba(50, 24, 18, 0.10);
+    border: 1px solid rgba(0, 30, 96, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 249, 252, 0.96));
+    box-shadow: 0 14px 36px rgba(0, 30, 96, 0.10);
   }
 
   .editorial-shell::before {
@@ -112,8 +112,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 85% 15%, rgba(200, 56, 70, 0.14), transparent 24%),
-      radial-gradient(circle at 10% 100%, rgba(47, 91, 79, 0.12), transparent 20%);
+      radial-gradient(circle at 85% 15%, rgba(0, 150, 57, 0.10), transparent 24%),
+      radial-gradient(circle at 10% 100%, rgba(0, 30, 96, 0.08), transparent 20%);
     pointer-events: none;
   }
 }
@@ -175,6 +175,6 @@
   .ring-secondary-fixed     { --tw-ring-color: var(--secondary-fixed); }
 
   /* Shadows with color */
-  .shadow-primary\/20       { box-shadow: 0 8px 24px rgba(178, 0, 28, 0.20) !important; }
-  .shadow-primary\/30       { box-shadow: 0 8px 32px rgba(178, 0, 28, 0.30) !important; }
+  .shadow-primary\/20       { box-shadow: 0 8px 24px rgba(0, 30, 96, 0.20) !important; }
+  .shadow-primary\/30       { box-shadow: 0 8px 32px rgba(0, 30, 96, 0.30) !important; }
 }

@@ -84,7 +84,7 @@ export default function LipnoAiPage() {
       <LipnoTopBar />
       <div className="pt-[72px] flex flex-col max-w-2xl mx-auto" style={{ height: "100dvh", background: lipnoBrand.sand }}>
         <div className="shrink-0 px-4 pt-4 pb-2">
-          <div className="rounded-[2rem] p-5" style={{ background: "linear-gradient(135deg, #eff6ff 0%, #ecfeff 100%)" }}>
+          <div className="rounded-[2rem] p-5" style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.08) 0%, rgba(0,150,57,0.08) 100%)" }}>
             <div className="flex items-start gap-4">
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0" style={{ background: `linear-gradient(135deg, ${lipnoBrand.primary}, ${lipnoBrand.secondary})` }}>
                 <span className="material-symbols-outlined text-white text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>smart_toy</span>

@@ -30,7 +30,7 @@ export default function LipnoExperiencesPage() {
       <LipnoTopBar />
       <main className="pt-20 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
-          <div className="rounded-[2rem] p-5 md:p-6" style={{ background: "linear-gradient(135deg, #eff6ff 0%, #ecfeff 100%)" }}>
+          <div className="rounded-[2rem] p-5 md:p-6" style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.08) 0%, rgba(0,150,57,0.08) 100%)" }}>
             <h1 className="font-headline text-3xl font-extrabold tracking-tight md:text-[2.7rem]" style={{ color: lipnoBrand.primary }}>
               Zážitky na Lipně
             </h1>

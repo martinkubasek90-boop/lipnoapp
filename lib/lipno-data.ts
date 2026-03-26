@@ -44,16 +44,20 @@ export type LipnoRental = {
 };
 
 export const lipnoBrand = {
-  primary: "#0c4a6e",
-  primarySoft: "#e0f2fe",
-  secondary: "#0f766e",
-  secondarySoft: "#d1fae5",
-  accent: "#f97316",
-  accentSoft: "#ffedd5",
-  sand: "#faf7f2",
+  primary: "#001E60",
+  primarySoft: "#e8eefc",
+  secondary: "#009639",
+  secondarySoft: "#e2f6ea",
+  accent: "#009639",
+  accentSoft: "#e2f6ea",
+  sand: "#ffffff",
   surface: "#ffffff",
-  ink: "#12212f",
-  muted: "#597081",
+  ink: "#001E60",
+  muted: "#4f6178",
+  link: "#009639",
+  logoUrl: "/branding/lipno-logo.svg",
+  logoHref: "https://www.lipno.info/",
+  logoAlt: "Lipno.info - zážitky a ubytování pro rodiny s dětmi",
 };
 
 export const lipnoQuickActions: LipnoQuickAction[] = [
@@ -61,8 +65,8 @@ export const lipnoQuickActions: LipnoQuickAction[] = [
   { id: 2, title: "Webkamery", icon: "videocam", href: "https://www.lipno.info/webkamery-na-lipne.html" },
   { id: 3, title: "Otevírací doby", icon: "schedule", href: "https://www.lipno.info/oteviraci-a-provozni-doby.html" },
   { id: 4, title: "Infocentrum", icon: "info", href: "https://www.lipno.info/infocentrum.html" },
-  { id: 5, title: "Půjčovny", icon: "downhill_skiing", href: "/lipno/servis" },
-  { id: 6, title: "Kalendář", icon: "event", href: "/lipno/kalendar" },
+  { id: 5, title: "Půjčovny", icon: "downhill_skiing", href: "/servis" },
+  { id: 6, title: "Kalendář", icon: "event", href: "/kalendar" },
 ];
 
 export const lipnoServiceLinks: LipnoServiceLink[] = [

@@ -9,7 +9,7 @@ export default function LipnoServicePage() {
       <LipnoTopBar />
       <main className="pt-20 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
-          <div className="rounded-[2rem] p-5 md:p-6" style={{ background: "linear-gradient(135deg, #ecfeff 0%, #eff6ff 100%)" }}>
+          <div className="rounded-[2rem] p-5 md:p-6" style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.08) 0%, rgba(0,150,57,0.08) 100%)" }}>
             <h1 className="font-headline text-3xl font-extrabold tracking-tight md:text-[2.6rem]" style={{ color: lipnoBrand.primary }}>
               Servis na Lipně
             </h1>
@@ -79,7 +79,7 @@ export default function LipnoServicePage() {
             target="_blank"
             rel="noreferrer"
             className="block rounded-[2rem] p-6"
-            style={{ background: "linear-gradient(135deg, #0c4a6e 0%, #0f766e 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
+            style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
           >
             <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Infocentrum</p>
             <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight text-white">{lipnoInfoCenter.title}</h2>
