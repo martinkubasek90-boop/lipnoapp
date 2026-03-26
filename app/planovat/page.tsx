@@ -3,7 +3,9 @@
 import { useMemo, useState } from "react";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
-import { lipnoBrand, lipnoEvents, lipnoPlannerTips, type LipnoEvent } from "@/lib/lipno-data";
+import SeasonToggle from "@/components/lipno/SeasonToggle";
+import { useSeason } from "@/components/lipno/SeasonProvider";
+import { lipnoBrand, lipnoEvents, lipnoPlannerTips, lipnoSeasonCopy, type LipnoEvent } from "@/lib/lipno-data";
 
 type Category = LipnoEvent["category"] | "vše";
 
@@ -16,11 +18,13 @@ const filters: { value: Category; label: string }[] = [
 ];
 
 export default function LipnoPlannerPage() {
+  const { season } = useSeason();
   const [active, setActive] = useState<Category>("vše");
   const items = useMemo(
-    () => lipnoEvents.filter((item) => active === "vše" || item.category === active),
-    [active],
+    () => lipnoEvents.filter((item) => item.seasons.includes(season) && (active === "vše" || item.category === active)),
+    [active, season],
   );
+  const tipText = season === "leto" ? "Jezero a rodinné aktivity" : "Lanovky a zimní program";
 
   return (
     <>
@@ -32,8 +36,11 @@ export default function LipnoPlannerPage() {
               Plánovat pobyt
             </h1>
             <p className="mt-3 max-w-md text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-              Kalendář akcí, doporučení na dnešek a jednoduché tipy, jak poskládat den v resortu bez zbytečných prostojů.
+              Kalendář akcí, doporučení na dnešek a jednoduché tipy, jak poskládat {lipnoSeasonCopy[season].label.toLowerCase()} den v resortu bez zbytečných prostojů.
             </p>
+            <div className="mt-4">
+              <SeasonToggle compact />
+            </div>
             <div className="mt-5 grid grid-cols-3 gap-3">
               <div className="rounded-[1.4rem] p-4" style={{ background: "#fff" }}>
                 <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Akce dnes</p>
@@ -41,7 +48,7 @@ export default function LipnoPlannerPage() {
               </div>
               <div className="rounded-[1.4rem] p-4" style={{ background: lipnoBrand.secondarySoft }}>
                 <p className="text-xs font-semibold" style={{ color: lipnoBrand.secondary }}>Tip na den</p>
-                <p className="mt-2 text-sm font-bold leading-tight" style={{ color: lipnoBrand.secondary }}>Stezka dopoledne</p>
+                <p className="mt-2 text-sm font-bold leading-tight" style={{ color: lipnoBrand.secondary }}>{tipText}</p>
               </div>
               <div className="rounded-[1.4rem] p-4" style={{ background: lipnoBrand.primarySoft }}>
                 <p className="text-xs font-semibold leading-tight" style={{ color: lipnoBrand.primary }}>Uložit si</p>
@@ -98,7 +105,7 @@ export default function LipnoPlannerPage() {
           <div className="rounded-[2rem] p-5" style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}>
             <h2 className="font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Tipper na dnešek</h2>
             <div className="mt-4 space-y-3">
-              {lipnoPlannerTips.map((tip) => (
+              {lipnoPlannerTips[season].map((tip) => (
                 <div key={tip.id} className="rounded-[1.4rem] p-4" style={{ background: lipnoBrand.primarySoft }}>
                   <p className="text-sm font-black" style={{ color: lipnoBrand.primary }}>{tip.title}</p>
                   <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{tip.text}</p>

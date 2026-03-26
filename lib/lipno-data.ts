@@ -4,6 +4,7 @@ export type LipnoExperience = {
   category: "rodiny" | "sport" | "voda" | "adrenalin" | "wellness";
   summary: string;
   season: string;
+  seasons: LipnoSeason[];
   duration: string;
   highlight: string;
   href: string;
@@ -15,6 +16,7 @@ export type LipnoEvent = {
   dateLabel: string;
   category: "rodiny" | "sport" | "festival" | "vecer";
   summary: string;
+  seasons: LipnoSeason[];
   href: string;
 };
 
@@ -25,6 +27,7 @@ export type LipnoServiceLink = {
   icon: string;
   href: string;
   badge?: string;
+  seasons?: LipnoSeason[];
 };
 
 export type LipnoQuickAction = {
@@ -41,6 +44,7 @@ export type LipnoRental = {
   contact: string;
   summary: string;
   href: string;
+  seasons?: LipnoSeason[];
 };
 
 export type LipnoSeason = "leto" | "zima";
@@ -73,7 +77,7 @@ export const lipnoQuickActions: LipnoQuickAction[] = [
   { id: 2, title: "Webkamery", icon: "videocam", href: "https://www.lipno.info/webkamery-na-lipne.html" },
   { id: 3, title: "Otevírací doby", icon: "schedule", href: "https://www.lipno.info/oteviraci-a-provozni-doby.html" },
   { id: 4, title: "Infocentrum", icon: "info", href: "https://www.lipno.info/infocentrum.html" },
-  { id: 5, title: "Půjčovny", icon: "downhill_skiing", href: "/servis" },
+  { id: 5, title: "Servis", icon: "downhill_skiing", href: "/servis" },
   { id: 6, title: "Plánovat", icon: "event", href: "/planovat" },
 ];
 
@@ -85,6 +89,7 @@ export const lipnoServiceLinks: LipnoServiceLink[] = [
     icon: "confirmation_number",
     href: "https://www.lipnocard.cz/",
     badge: "Oficiální prodej",
+    seasons: ["leto", "zima"],
   },
   {
     id: 2,
@@ -92,6 +97,7 @@ export const lipnoServiceLinks: LipnoServiceLink[] = [
     text: "Jezero, Stezka korunami stromů, Království lesa i restaurace U Yettiho.",
     icon: "videocam",
     href: "https://www.lipno.info/webkamery-na-lipne.html",
+    seasons: ["leto", "zima"],
   },
   {
     id: 3,
@@ -99,6 +105,7 @@ export const lipnoServiceLinks: LipnoServiceLink[] = [
     text: "Stezka, Království lesa, lanové dráhy a infocentrum na jednom místě.",
     icon: "schedule",
     href: "https://www.lipno.info/oteviraci-a-provozni-doby.html",
+    seasons: ["leto", "zima"],
   },
   {
     id: 4,
@@ -106,6 +113,7 @@ export const lipnoServiceLinks: LipnoServiceLink[] = [
     text: "Kontakt, mapa, parkování P1, směnárna a pomoc s plánováním pobytu.",
     icon: "travel_explore",
     href: "https://www.lipno.info/infocentrum.html",
+    seasons: ["leto", "zima"],
   },
   {
     id: 5,
@@ -113,6 +121,7 @@ export const lipnoServiceLinks: LipnoServiceLink[] = [
     text: "Denní program, festivaly, animace i rodinné akce v areálu.",
     icon: "event_available",
     href: "https://www.lipno.info/kalendar.html",
+    seasons: ["leto", "zima"],
   },
   {
     id: 6,
@@ -120,6 +129,7 @@ export const lipnoServiceLinks: LipnoServiceLink[] = [
     text: "Klientské informační centrum a tým Lipno Servis.",
     icon: "call",
     href: "https://www.lipno.info/kontakty.html",
+    seasons: ["leto", "zima"],
   },
 ];
 
@@ -130,6 +140,7 @@ export const lipnoExperiences: LipnoExperience[] = [
     category: "rodiny",
     summary: "Celoroční ikonický zážitek s výhledy nad jezerem a večerní světelnou trasou.",
     season: "Celoročně",
+    seasons: ["leto", "zima"],
     duration: "2–3 hod",
     highlight: "Přístup bez bariér",
     href: "https://www.lipno.info/zazitky/stezka-korunami-stromu-lipno.html",
@@ -140,6 +151,7 @@ export const lipnoExperiences: LipnoExperience[] = [
     category: "sport",
     summary: "Rodinné sjezdovky, moderní lanovky a večerní lyžování.",
     season: "Zima",
+    seasons: ["zima"],
     duration: "Půlden až celý den",
     highlight: "Denní lyžování 8:30–16:00",
     href: "https://www.lipno.info/zazitky/skiareal-lipno.html",
@@ -150,6 +162,7 @@ export const lipnoExperiences: LipnoExperience[] = [
     category: "rodiny",
     summary: "Velký lesní park pro děti s celodenním programem a volným pohybem.",
     season: "Jaro až podzim",
+    seasons: ["leto"],
     duration: "3+ hod",
     highlight: "Rodinná top atrakce",
     href: "https://www.lipno.info/oteviraci-a-provozni-doby.html",
@@ -160,6 +173,7 @@ export const lipnoExperiences: LipnoExperience[] = [
     category: "wellness",
     summary: "Vodní relax a vnitřní zázemí jako jistota i při horším počasí.",
     season: "Celoročně",
+    seasons: ["leto", "zima"],
     duration: "1–2 hod",
     highlight: "Za každého počasí",
     href: "https://www.lipno.info/lipno.html",
@@ -170,6 +184,7 @@ export const lipnoExperiences: LipnoExperience[] = [
     category: "adrenalin",
     summary: "Lehce adrenalinový program nad centrálním parkovištěm s kladkou nad vodou.",
     season: "Jaro až podzim",
+    seasons: ["leto"],
     duration: "1 hod+",
     highlight: "Vhodné pro skupiny",
     href: "https://www.lipno.info/zazitky/lanovy-park.html",
@@ -180,6 +195,7 @@ export const lipnoExperiences: LipnoExperience[] = [
     category: "voda",
     summary: "Paddleboardy, šlapadla, veslice a kajaky přímo u jezera.",
     season: "Léto",
+    seasons: ["leto"],
     duration: "1–3 hod",
     highlight: "Beach aréna a Modřín",
     href: "https://www.lipno.info/pujcovny/vodni-plavidla.html",
@@ -193,6 +209,7 @@ export const lipnoEvents: LipnoEvent[] = [
     dateLabel: "až do 28. 2.",
     category: "rodiny",
     summary: "Večerní světelná trasa plná barev, zvířat a atmosféry nad lesem.",
+    seasons: ["zima"],
     href: "https://www.lipno.info/kalendar.html",
   },
   {
@@ -201,6 +218,7 @@ export const lipnoEvents: LipnoEvent[] = [
     dateLabel: "30. 1. 2026",
     category: "rodiny",
     summary: "Program pro děti i rodiče přímo v rodinném areálu Lipno.",
+    seasons: ["zima"],
     href: "https://www.lipno.info/kalendar.html",
   },
   {
@@ -209,6 +227,7 @@ export const lipnoEvents: LipnoEvent[] = [
     dateLabel: "14. 2. 2026",
     category: "sport",
     summary: "Otevřený závod pro malé i větší lyžaře v rodinném skiareálu.",
+    seasons: ["zima"],
     href: "https://www.lipno.info/kalendar.html",
   },
   {
@@ -217,6 +236,25 @@ export const lipnoEvents: LipnoEvent[] = [
     dateLabel: "léto 2026",
     category: "festival",
     summary: "Hudba, jezero, letní program a víkendový ruch v areálu.",
+    seasons: ["leto"],
+    href: "https://www.lipno.info/kalendar.html",
+  },
+  {
+    id: 5,
+    title: "Rodinné léto v Království lesa",
+    dateLabel: "červenec a srpen",
+    category: "rodiny",
+    summary: "Denní program, animace a lehký family itinerář pro celý areál.",
+    seasons: ["leto"],
+    href: "https://www.lipno.info/kalendar.html",
+  },
+  {
+    id: 6,
+    title: "Večerní koncert u jezera",
+    dateLabel: "soboty v létě",
+    category: "vecer",
+    summary: "Hudba, gastro a delší večer přímo v resortu u vody.",
+    seasons: ["leto"],
     href: "https://www.lipno.info/kalendar.html",
   },
 ];
@@ -229,6 +267,7 @@ export const lipnoRentals: LipnoRental[] = [
     contact: "+420 731 410 813",
     summary: "Šlapadla, kajaky, veslice a paddleboardy s poslední výpůjčkou 60 minut před koncem provozu.",
     href: "https://www.lipno.info/pujcovny/vodni-plavidla.html",
+    seasons: ["leto"],
   },
   {
     id: 2,
@@ -237,6 +276,7 @@ export const lipnoRentals: LipnoRental[] = [
     contact: "dle provozní doby",
     summary: "Servisní zázemí, vybavení a sezónní půjčení pro aktivní den v areálu.",
     href: "https://www.lipno.info/oteviraci-a-provozni-doby.html",
+    seasons: ["leto"],
   },
   {
     id: 3,
@@ -245,6 +285,7 @@ export const lipnoRentals: LipnoRental[] = [
     contact: "pokladny a infocentrum",
     summary: "Skipasy, výbava a návazný servis pro denní i večerní lyžování.",
     href: "https://www.lipno.info/oteviraci-a-provozni-doby-zima.html",
+    seasons: ["zima"],
   },
 ];
 
@@ -272,13 +313,22 @@ export const lipnoAiPrompts = [
   "Co dělat s dětmi na Lipně?",
 ];
 
-export const lipnoFoxPrompts = [
-  "Co dělat s pětiletým dítětem při dešti?",
-  "Kam na oběd bez rezervace?",
-  "Co je dnes otevřené?",
-  "Jak naplánovat půlden na Lipně?",
-  "Kde koupím vstupenky a slevy?",
-];
+export const lipnoFoxPrompts: Record<LipnoSeason, string[]> = {
+  leto: [
+    "Co dělat s pětiletým dítětem při dešti?",
+    "Kam na oběd bez rezervace?",
+    "Co je dnes otevřené?",
+    "Jak naplánovat půlden u jezera?",
+    "Kde koupím vstupenky a slevy?",
+  ],
+  zima: [
+    "Kam s dětmi po lyžování?",
+    "Jaký je dnes stav lanovek?",
+    "Co dělat večer na Lipně?",
+    "Jak naplánovat zimní půlden?",
+    "Kde koupím skipasy a slevy?",
+  ],
+};
 
 export const lipnoSeasonCopy: Record<LipnoSeason, {
   label: string;
@@ -309,8 +359,15 @@ export const lipnoSeasonCopy: Record<LipnoSeason, {
   },
 };
 
-export const lipnoPlannerTips: LipnoPlannerTip[] = [
-  { id: 1, title: "Na co čekat", text: "Stezka korunami stromů a Království lesa jsou hlavní taháky. Jdi tam dopoledne nebo později odpoledne." },
-  { id: 2, title: "Sezónní tip", text: "V létě kombinuj Stezku, jezero a půjčovnu. V zimě stav den kolem lanovek, skipasu a večerního programu." },
-  { id: 3, title: "Rodinný plán", text: "Dopoledne atrakce, poledne oběd v centru areálu, odpoledne lehčí program nebo voda." },
-];
+export const lipnoPlannerTips: Record<LipnoSeason, LipnoPlannerTip[]> = {
+  leto: [
+    { id: 1, title: "Na co čekat", text: "Stezka korunami stromů a Království lesa jsou hlavní taháky. Jdi tam dopoledne nebo později odpoledne." },
+    { id: 2, title: "Sezónní tip", text: "Kombinuj Stezku, jezero a půjčovnu. Největší vedro nech na vodu nebo indoor zázemí." },
+    { id: 3, title: "Rodinný plán", text: "Dopoledne atrakce, poledne oběd v centru areálu, odpoledne lehčí program nebo voda." },
+  ],
+  zima: [
+    { id: 4, title: "Na co čekat", text: "Fronty bývají ráno na skipasy a kolem poledne na oběd. Vyplatí se mít nákup i plán dopředu." },
+    { id: 5, title: "Sezónní tip", text: "Stav den kolem lanovek, skipasu a večerního programu. Indoor pauzu nech na odpoledne." },
+    { id: 6, title: "Rodinný plán", text: "Dopoledne sjezdovka, poledne teplý oběd, odpoledne kratší blok na sněhu a večer program s dětmi." },
+  ],
+};

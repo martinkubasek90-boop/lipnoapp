@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { SeasonProvider } from "@/components/lipno/SeasonProvider";
 
 export const metadata: Metadata = {
   title: "Lipno.info - zážitky a ubytování pro rodiny s dětmi",
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className="pb-32" style={{ background: "var(--surface)", color: "var(--on-surface)", fontFamily: "\"Source Sans Pro\", sans-serif" }}>
-        {children}
+        <SeasonProvider>{children}</SeasonProvider>
       </body>
     </html>
   );

@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
-import { lipnoBrand, lipnoFoxPrompts } from "@/lib/lipno-data";
+import SeasonToggle from "@/components/lipno/SeasonToggle";
+import { useSeason } from "@/components/lipno/SeasonProvider";
+import { lipnoBrand, lipnoFoxPrompts, lipnoSeasonCopy } from "@/lib/lipno-data";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -43,10 +45,12 @@ function renderMessage(content: string, isUser: boolean) {
 }
 
 export default function LipnoAiPage() {
+  const { season } = useSeason();
+  const introMessage = `Ahoj, jsem Fox AI průvodce.\nPomohu s dětmi, počasím, vstupenkami, obědem i plánem ${lipnoSeasonCopy[season].label.toLowerCase()} dne na Lipně.`;
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: "assistant",
-      content: "Ahoj, jsem Fox AI průvodce.\nPomohu s dětmi, počasím, vstupenkami, obědem i plánem dne na Lipně.",
+      content: introMessage,
     },
   ]);
   const [input, setInput] = useState("");
@@ -56,6 +60,15 @@ export default function LipnoAiPage() {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    setMessages((current) => {
+      if (current.length === 1 && current[0]?.role === "assistant") {
+        return [{ role: "assistant", content: introMessage }];
+      }
+      return current;
+    });
+  }, [introMessage]);
 
   async function send(text: string) {
     if (!text.trim() || loading) return;
@@ -92,8 +105,11 @@ export default function LipnoAiPage() {
               <div>
                 <h1 className="font-headline font-extrabold text-xl" style={{ color: lipnoBrand.primary }}>AI průvodce Fox</h1>
                 <p className="text-sm mt-1" style={{ color: lipnoBrand.muted }}>
-                  Hlavní differentiator appky: osobnější asistent pro rodiny, počasí a rychlý itinerář.
+                  Osobnější asistent pro rodiny, počasí a rychlý itinerář podle aktuální sezóny.
                 </p>
+                <div className="mt-3">
+                  <SeasonToggle compact />
+                </div>
               </div>
             </div>
           </div>
@@ -132,7 +148,7 @@ export default function LipnoAiPage() {
             <div className="py-3">
               <p className="text-xs font-semibold text-center mb-3 uppercase tracking-wide" style={{ color: lipnoBrand.muted }}>Časté dotazy</p>
               <div className="flex flex-wrap gap-2 justify-center">
-                {lipnoFoxPrompts.map((prompt) => (
+                {lipnoFoxPrompts[season].map((prompt) => (
                   <button
                     key={prompt}
                     onClick={() => send(prompt)}

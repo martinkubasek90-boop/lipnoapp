@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
+import SeasonToggle from "@/components/lipno/SeasonToggle";
+import { useSeason } from "@/components/lipno/SeasonProvider";
 import { lipnoBrand, lipnoExperiences, type LipnoExperience } from "@/lib/lipno-data";
 
 type Category = LipnoExperience["category"] | "vše";
@@ -18,12 +20,16 @@ const filters: { value: Category; label: string }[] = [
 ];
 
 export default function LipnoExperiencesPage() {
+  const { season } = useSeason();
   const [active, setActive] = useState<Category>("vše");
 
   const items = useMemo(
-    () => lipnoExperiences.filter((item) => active === "vše" || item.category === active),
-    [active],
+    () => lipnoExperiences.filter((item) => item.seasons.includes(season) && (active === "vše" || item.category === active)),
+    [active, season],
   );
+  const seasonalItems = lipnoExperiences.filter((item) => item.seasons.includes(season));
+  const allSeasonCount = seasonalItems.filter((item) => item.seasons.length === 2).length;
+  const familyCount = seasonalItems.filter((item) => item.category === "rodiny").length;
 
   return (
     <>
@@ -35,20 +41,23 @@ export default function LipnoExperiencesPage() {
               Zážitky na Lipně
             </h1>
             <p className="mt-3 max-w-md text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-              Rodinné top atrakce, zimní provoz, voda i lehký adrenalin v jednom přehledu podle typu dne.
+              Rodinné top atrakce, zimní provoz, voda i lehký adrenalin v jednom přehledu podle aktuální sezóny.
             </p>
+            <div className="mt-4">
+              <SeasonToggle compact />
+            </div>
             <div className="mt-5 grid grid-cols-3 gap-3">
               <div className="rounded-[1.4rem] p-4" style={{ background: "#fff" }}>
                 <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Celkem tipů</p>
-                <p className="mt-2 font-headline text-2xl font-black" style={{ color: lipnoBrand.primary }}>{lipnoExperiences.length}</p>
+                <p className="mt-2 font-headline text-2xl font-black" style={{ color: lipnoBrand.primary }}>{seasonalItems.length}</p>
               </div>
               <div className="rounded-[1.4rem] p-4" style={{ background: lipnoBrand.secondarySoft }}>
                 <p className="text-xs font-semibold" style={{ color: lipnoBrand.secondary }}>Celoročně</p>
-                <p className="mt-2 font-headline text-2xl font-black" style={{ color: lipnoBrand.secondary }}>3</p>
+                <p className="mt-2 font-headline text-2xl font-black" style={{ color: lipnoBrand.secondary }}>{allSeasonCount}</p>
               </div>
               <div className="rounded-[1.4rem] p-4" style={{ background: lipnoBrand.accentSoft }}>
                 <p className="text-xs font-semibold" style={{ color: lipnoBrand.accent }}>Rodiny</p>
-                <p className="mt-2 font-headline text-2xl font-black" style={{ color: lipnoBrand.accent }}>4</p>
+                <p className="mt-2 font-headline text-2xl font-black" style={{ color: lipnoBrand.accent }}>{familyCount}</p>
               </div>
             </div>
           </div>

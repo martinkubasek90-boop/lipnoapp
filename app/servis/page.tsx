@@ -1,9 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
-import { lipnoBrand, lipnoInfoCenter, lipnoRentals, lipnoServiceLinks } from "@/lib/lipno-data";
+import SeasonToggle from "@/components/lipno/SeasonToggle";
+import { useSeason } from "@/components/lipno/SeasonProvider";
+import { lipnoBrand, lipnoInfoCenter, lipnoRentals, lipnoServiceLinks, lipnoSeasonCopy } from "@/lib/lipno-data";
 
 export default function LipnoServicePage() {
+  const { season } = useSeason();
+  const serviceItems = lipnoServiceLinks.filter((item) => !item.seasons || item.seasons.includes(season));
+  const rentals = lipnoRentals.filter((item) => !item.seasons || item.seasons.includes(season));
+
   return (
     <>
       <LipnoTopBar />
@@ -14,14 +22,17 @@ export default function LipnoServicePage() {
               Servis na Lipně
             </h1>
             <p className="mt-3 max-w-md text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-              Vstupenky, webkamery, otevírací doby, infocentrum, parkování i provozní jistoty na jednom místě.
+              Vstupenky, webkamery, otevírací doby, infocentrum, parkování i provozní jistoty v {lipnoSeasonCopy[season].label.toLowerCase()} na jednom místě.
             </p>
+            <div className="mt-4">
+              <SeasonToggle compact />
+            </div>
           </div>
         </section>
 
         <section className="px-4 pt-5">
           <div className="grid grid-cols-2 gap-3">
-            {lipnoServiceLinks.map((item) => (
+            {serviceItems.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
@@ -55,7 +66,7 @@ export default function LipnoServicePage() {
             <Link href="/zazitky" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Zážitky</Link>
           </div>
           <div className="space-y-3">
-            {lipnoRentals.map((item) => (
+            {rentals.map((item) => (
               <a
                 key={item.id}
                 href={item.href}

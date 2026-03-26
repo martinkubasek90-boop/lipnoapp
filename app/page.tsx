@@ -1,9 +1,10 @@
  "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
+import SeasonToggle from "@/components/lipno/SeasonToggle";
+import { useSeason } from "@/components/lipno/SeasonProvider";
 import {
   lipnoBrand,
   lipnoConditions,
@@ -13,16 +14,15 @@ import {
   lipnoInfoCenter,
   lipnoQuickActions,
   lipnoSeasonCopy,
-  type LipnoSeason,
   lipnoServiceLinks,
 } from "@/lib/lipno-data";
 
 export default function LipnoHomePage() {
-  const [season, setSeason] = useState<LipnoSeason>("leto");
+  const { season } = useSeason();
   const seasonCopy = lipnoSeasonCopy[season];
-  const featuredExperiences = lipnoExperiences.slice(0, 3);
-  const featuredServices = lipnoServiceLinks.slice(0, 4);
-  const [featuredEvent] = lipnoEvents;
+  const featuredExperiences = lipnoExperiences.filter((item) => item.seasons.includes(season)).slice(0, 3);
+  const featuredServices = lipnoServiceLinks.filter((item) => !item.seasons || item.seasons.includes(season)).slice(0, 4);
+  const [featuredEvent] = lipnoEvents.filter((item) => item.seasons.includes(season));
 
   return (
     <>
@@ -41,17 +41,8 @@ export default function LipnoHomePage() {
             <div className="relative z-10 flex min-h-[22rem] flex-col justify-between">
               <div>
                 <p className="text-sm font-semibold text-white/80">Čtvrtek, 26. března 2026</p>
-                <div className="mt-4 inline-flex rounded-full p-1" style={{ background: "rgba(255,255,255,0.14)" }}>
-                  {(["leto", "zima"] as const).map((item) => (
-                    <button
-                      key={item}
-                      onClick={() => setSeason(item)}
-                      className="rounded-full px-3 py-1.5 text-xs font-bold transition-all"
-                      style={season === item ? { background: "#fff", color: lipnoBrand.primary } : { color: "rgba(255,255,255,0.76)" }}
-                    >
-                      {lipnoSeasonCopy[item].label}
-                    </button>
-                  ))}
+                <div className="mt-4">
+                  <SeasonToggle />
                 </div>
                 <h1 className="mt-3 font-headline text-[2.9rem] font-extrabold leading-[0.92] tracking-tight text-white md:text-[3.4rem]">
                   {seasonCopy.heroTitle.split("\n").map((line, index) => (
@@ -255,7 +246,7 @@ export default function LipnoHomePage() {
               <span className="material-symbols-outlined text-3xl" style={{ color: lipnoBrand.accent }}>pets</span>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
-              {lipnoFoxPrompts.slice(0, 4).map((prompt) => (
+              {lipnoFoxPrompts[season].slice(0, 4).map((prompt) => (
                 <Link
                   key={prompt}
                   href="/ai"
