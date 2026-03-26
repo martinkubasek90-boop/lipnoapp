@@ -1,17 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
 import SeasonToggle from "@/components/lipno/SeasonToggle";
 import { useSeason } from "@/components/lipno/SeasonProvider";
-import { lipnoBrand, lipnoInfoCenter, lipnoRentals, lipnoServiceLinks, lipnoSeasonCopy, lipnoServiceModules } from "@/lib/lipno-data";
+import { lipnoBrand, lipnoInfoCenter, lipnoRentals, lipnoServiceLinks, lipnoSeasonCopy, lipnoServiceModules, type LipnoServiceModule } from "@/lib/lipno-data";
 
 export default function LipnoServicePage() {
   const { season } = useSeason();
   const serviceItems = lipnoServiceLinks.filter((item) => !item.seasons || item.seasons.includes(season));
   const rentals = lipnoRentals.filter((item) => !item.seasons || item.seasons.includes(season));
-  const serviceModules = lipnoServiceModules[season];
+  const [serviceModules, setServiceModules] = useState<LipnoServiceModule[]>(lipnoServiceModules[season]);
+  const [updatedAt, setUpdatedAt] = useState<string | null>(null);
   const isWinter = season === "zima";
   const seasonalService = isWinter
     ? {
@@ -38,6 +40,32 @@ export default function LipnoServicePage() {
         spotlightHref: "https://www.lipno.info/oteviraci-a-provozni-doby.html",
         rentalsTitle: "Letní půjčovny a zázemí",
       };
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadLiveModules() {
+      try {
+        const res = await fetch(`/api/service-status?season=${season}`, { cache: "no-store" });
+        const data = await res.json();
+        if (!cancelled) {
+          setServiceModules(data.modules ?? lipnoServiceModules[season]);
+          setUpdatedAt(data.live?.updatedAt ?? null);
+        }
+      } catch {
+        if (!cancelled) {
+          setServiceModules(lipnoServiceModules[season]);
+          setUpdatedAt(null);
+        }
+      }
+    }
+
+    loadLiveModules();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [season]);
 
   return (
     <>
@@ -68,6 +96,12 @@ export default function LipnoServicePage() {
         </section>
 
         <section className="px-4 pt-5">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Dnes v resortu</h2>
+            <p className="text-[11px] font-semibold" style={{ color: lipnoBrand.muted }}>
+              {updatedAt ? "Aktualizováno nyní" : "Oficiální fallback"}
+            </p>
+          </div>
           <div className="grid gap-3 md:grid-cols-3">
             {serviceModules.map((module) => (
               <a
