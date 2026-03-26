@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
-import SeasonToggle from "@/components/lipno/SeasonToggle";
 import { useSeason } from "@/components/lipno/SeasonProvider";
 import { lipnoBrand, lipnoEvents, lipnoPlannerTips, lipnoSeasonCopy, type LipnoEvent } from "@/lib/lipno-data";
 
@@ -29,7 +28,7 @@ export default function LipnoPlannerPage() {
   return (
     <>
       <LipnoTopBar />
-      <main className="pt-20 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
+      <main className="pt-24 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
           <div className="rounded-[2rem] p-5 md:p-6" style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.09) 0%, rgba(0,150,57,0.09) 100%)" }}>
             <h1 className="font-headline text-3xl font-extrabold tracking-tight md:text-[2.6rem]" style={{ color: lipnoBrand.primary }}>
@@ -38,9 +37,6 @@ export default function LipnoPlannerPage() {
             <p className="mt-3 max-w-md text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
               Kalendář akcí, doporučení na dnešek a jednoduché tipy, jak poskládat {lipnoSeasonCopy[season].label.toLowerCase()} den v resortu bez zbytečných prostojů.
             </p>
-            <div className="mt-4">
-              <SeasonToggle compact />
-            </div>
             <div className="mt-5 grid grid-cols-3 gap-3">
               <div className="rounded-[1.4rem] p-4" style={{ background: "#fff" }}>
                 <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Akce dnes</p>

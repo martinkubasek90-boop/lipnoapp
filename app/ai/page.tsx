@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
-import SeasonToggle from "@/components/lipno/SeasonToggle";
 import { useSeason } from "@/components/lipno/SeasonProvider";
 import { lipnoBrand, lipnoFoxPersona, lipnoFoxPrompts, lipnoSeasonCopy } from "@/lib/lipno-data";
 
@@ -95,7 +94,7 @@ export default function LipnoAiPage() {
   return (
     <>
       <LipnoTopBar />
-      <div className="pt-[72px] flex flex-col max-w-2xl mx-auto" style={{ height: "100dvh", background: lipnoBrand.sand }}>
+      <div className="pt-[84px] flex flex-col max-w-2xl mx-auto" style={{ height: "100dvh", background: lipnoBrand.sand }}>
         <div className="shrink-0 px-4 pt-4 pb-2">
           <div className="rounded-[2rem] p-5" style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.08) 0%, rgba(0,150,57,0.08) 100%)" }}>
             <div className="flex items-start gap-4">
@@ -107,9 +106,6 @@ export default function LipnoAiPage() {
                 <p className="text-sm mt-1" style={{ color: lipnoBrand.muted }}>
                   {lipnoFoxPersona.intro} {lipnoFoxPersona.tone}
                 </p>
-                <div className="mt-3">
-                  <SeasonToggle compact />
-                </div>
               </div>
             </div>
           </div>

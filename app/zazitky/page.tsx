@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
-import SeasonToggle from "@/components/lipno/SeasonToggle";
 import { useSeason } from "@/components/lipno/SeasonProvider";
 import { lipnoBrand, lipnoExperiences, lipnoRentals, type LipnoExperience } from "@/lib/lipno-data";
 
@@ -54,7 +53,7 @@ export default function LipnoExperiencesPage() {
   return (
     <>
       <LipnoTopBar />
-      <main className="pt-20 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
+      <main className="pt-24 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
           <div
             className="rounded-[2rem] p-5 md:p-6"
@@ -70,9 +69,6 @@ export default function LipnoExperiencesPage() {
             <p className="mt-3 max-w-md text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
               {seasonIntro}
             </p>
-            <div className="mt-4">
-              <SeasonToggle compact />
-            </div>
             <div className="mt-5 grid grid-cols-3 gap-3">
               <div className="rounded-[1.4rem] p-4" style={{ background: "#fff" }}>
                 <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Celkem tipů</p>

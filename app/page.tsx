@@ -3,7 +3,6 @@
 import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
-import SeasonToggle from "@/components/lipno/SeasonToggle";
 import { useSeason } from "@/components/lipno/SeasonProvider";
 import {
   lipnoBrand,
@@ -33,7 +32,7 @@ export default function LipnoHomePage() {
   return (
     <>
       <LipnoTopBar />
-      <main className="pt-20 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
+      <main className="pt-24 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
           <div
             className="relative overflow-hidden rounded-[2rem] min-h-[25rem] p-5 md:p-6"
@@ -53,10 +52,7 @@ export default function LipnoHomePage() {
             <div className="relative z-10 flex min-h-[22rem] flex-col justify-between">
               <div>
                 <p className="text-sm font-semibold text-white/80">Čtvrtek, 26. března 2026</p>
-                <div className="mt-4">
-                  <SeasonToggle />
-                </div>
-                <h1 className="mt-3 font-headline text-[2.9rem] font-extrabold leading-[0.92] tracking-tight text-white md:text-[3.4rem]">
+                <h1 className="mt-5 font-headline text-[2.9rem] font-extrabold leading-[0.92] tracking-tight text-white md:text-[3.4rem]">
                   {seasonCopy.heroTitle.split("\n").map((line, index) => (
                     <span key={line}>
                       {index > 0 && <br />}
