@@ -189,7 +189,11 @@ export default function LipnoServicePage() {
         <section className="px-4 pt-8">
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>{seasonalService.rentalsTitle}</h2>
-            <Link href="/zazitky" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Zážitky</Link>
+            {isWinter ? (
+              <Link href="/zazitky" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Zážitky</Link>
+            ) : (
+              <a href="https://www.lipno.info/pujcovny.html" target="_blank" rel="noreferrer" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Všechny půjčovny</a>
+            )}
           </div>
           <div className="space-y-3">
             {rentals.map((item) => (

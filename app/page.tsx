@@ -13,6 +13,7 @@ import {
   lipnoFoxPrompts,
   lipnoInfoCenter,
   lipnoQuickActions,
+  lipnoRentals,
   lipnoSeasonCopy,
   lipnoSeasonHero,
   lipnoServiceLinks,
@@ -24,6 +25,7 @@ export default function LipnoHomePage() {
   const seasonHero = lipnoSeasonHero[season];
   const featuredExperiences = lipnoExperiences.filter((item) => item.seasons.includes(season)).slice(0, 3);
   const featuredServices = lipnoServiceLinks.filter((item) => !item.seasons || item.seasons.includes(season)).slice(0, 4);
+  const featuredRentals = lipnoRentals.filter((item) => !item.seasons || item.seasons.includes(season)).slice(0, 3);
   const [featuredEvent] = lipnoEvents.filter((item) => item.seasons.includes(season));
   const seasonQuickActions = lipnoQuickActions.filter((item) => !item.seasons || item.seasons.includes(season)).slice(0, 6);
   const isWinter = season === "zima";
@@ -161,6 +163,47 @@ export default function LipnoHomePage() {
             </Link>
           </div>
         </section>
+
+        {isWinter ? null : (
+          <section className="px-4 pt-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Top půjčovny</h2>
+                <p className="text-xs mt-0.5" style={{ color: lipnoBrand.muted }}>Vodní plavidla, kola a letní vybavení z oficiální nabídky Lipna.</p>
+              </div>
+              <a href="https://www.lipno.info/pujcovny.html" target="_blank" rel="noreferrer" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</a>
+            </div>
+            <div className="mt-4 space-y-3">
+              {featuredRentals.map((item, index) => (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block rounded-[1.8rem] p-5"
+                  style={{
+                    background: index === 0 ? "linear-gradient(135deg, rgba(0,150,57,0.13), rgba(255,255,255,0.96))" : "#fff",
+                    boxShadow: "0 12px 24px rgba(12,74,110,0.06)",
+                    border: "1px solid rgba(12,74,110,0.06)",
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <span className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: lipnoBrand.accentSoft, color: lipnoBrand.accent }}>
+                        Půjčovna
+                      </span>
+                      <h3 className="mt-3 font-headline text-xl font-extrabold leading-tight" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
+                      <p className="mt-1 text-sm font-semibold" style={{ color: lipnoBrand.secondary }}>{item.area}</p>
+                      <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.summary}</p>
+                    </div>
+                    <span className="material-symbols-outlined" style={{ color: lipnoBrand.accent }}>arrow_outward</span>
+                  </div>
+                  <p className="mt-4 text-sm font-semibold" style={{ color: lipnoBrand.primary }}>{item.contact}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="px-4 pt-8">
           <Link
