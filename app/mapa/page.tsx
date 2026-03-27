@@ -130,6 +130,16 @@ export default function LipnoMapPage() {
                         {activePoint.phone ? <p style={{ color: lipnoBrand.primary }}>{activePoint.phone}</p> : <p style={{ color: lipnoBrand.muted }}>Přes infocentrum / oficiální detail</p>}
                         {activePoint.email ? <p className="break-all" style={{ color: lipnoBrand.primary }}>{activePoint.email}</p> : null}
                       </div>
+                      {activePoint.phone ? (
+                        <a
+                          href={`tel:${activePoint.phone.replace(/\s+/g, "")}`}
+                          className="mt-4 inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold"
+                          style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}
+                        >
+                          <span className="material-symbols-outlined text-base">call</span>
+                          Zavolat
+                        </a>
+                      ) : null}
                     </div>
                   </div>
 
