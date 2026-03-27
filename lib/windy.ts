@@ -1,3 +1,5 @@
+import { unstable_cache } from "next/cache";
+
 const WINDY_POINT_FORECAST_URL = "https://api.windy.com/api/point-forecast/v2";
 const LIPNO_TIMEZONE = "Europe/Prague";
 
@@ -264,7 +266,7 @@ async function fetchWindyPointForecast(): Promise<WindyResponse | null> {
       levels: ["surface"],
       key,
     }),
-    cache: "no-store",
+    next: { revalidate: 600 },
   });
 
   if (!response.ok) {
@@ -357,7 +359,7 @@ function buildWeatherSnapshot(data: WindyResponse): LipnoWeatherSnapshot {
   };
 }
 
-export async function getLipnoWeatherSnapshot(): Promise<LipnoWeatherSnapshot> {
+async function buildLiveWeatherSnapshot(): Promise<LipnoWeatherSnapshot> {
   try {
     const data = await fetchWindyPointForecast();
     if (!data?.ts?.length) {
@@ -374,4 +376,14 @@ export async function getLipnoWeatherSnapshot(): Promise<LipnoWeatherSnapshot> {
       waterTempLabel: getMonthlyWaterTempLabel(new Date()),
     };
   }
+}
+
+const getCachedLipnoWeatherSnapshot = unstable_cache(
+  async () => buildLiveWeatherSnapshot(),
+  ["lipno-weather-snapshot-v1"],
+  { revalidate: 600 },
+);
+
+export async function getLipnoWeatherSnapshot(): Promise<LipnoWeatherSnapshot> {
+  return getCachedLipnoWeatherSnapshot();
 }

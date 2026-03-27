@@ -27,7 +27,7 @@ export default function HomeWeatherPanel() {
   useEffect(() => {
     let active = true;
 
-    fetch("/api/weather", { cache: "no-store" })
+    fetch("/api/weather")
       .then((response) => (response.ok ? response.json() : null))
       .then((snapshot: LipnoWeatherSnapshot | null) => {
         if (active && snapshot) {
