@@ -86,11 +86,11 @@ export default function LipnoWeatherPage() {
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/60">Voda</p>
-                  <p className="mt-2 text-lg font-black">{lipnoConditions.lake}</p>
+                  <p className="mt-2 text-lg font-black">19 °C</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/60">Kamery</p>
-                  <p className="mt-2 text-lg font-black">{lipnoConditions.webcams}</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/60">Webkamery</p>
+                  <p className="mt-2 text-lg font-black">5</p>
                 </div>
               </div>
             </div>
@@ -121,54 +121,6 @@ export default function LipnoWeatherPage() {
                 <span className="text-lg font-black">{item.temp}</span>
               </div>
             ))}
-          </div>
-        </section>
-
-        <section className="px-4 pt-8">
-          <div
-            className="overflow-hidden rounded-[2rem] bg-white"
-            style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
-          >
-            <div className="flex items-center justify-between gap-3 p-5 pb-4">
-              <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Radar</p>
-                <h2 className="mt-2 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Srážková mapa</h2>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-                  Rychlý přehled oblačnosti a srážek nad Lipnem přímo z In-počasí.
-                </p>
-              </div>
-              <a
-                href="https://mapy.in-pocasi.cz/"
-                target="_blank"
-                rel="noreferrer"
-                className="hidden shrink-0 rounded-2xl px-4 py-3 text-sm font-bold sm:inline-flex sm:items-center sm:gap-2"
-                style={{ background: lipnoBrand.primary, color: "#fff" }}
-              >
-                Otevřít venku
-                <span className="material-symbols-outlined text-base">open_in_new</span>
-              </a>
-            </div>
-            <div className="aspect-[4/3] w-full border-y" style={{ borderColor: "rgba(12,74,110,0.08)" }}>
-              <iframe
-                className="h-full w-full"
-                src="https://mapy.in-pocasi.cz/"
-                title="Radar In-počasí"
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
-            </div>
-            <div className="p-4 sm:hidden">
-              <a
-                href="https://mapy.in-pocasi.cz/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold"
-                style={{ background: lipnoBrand.primary, color: "#fff" }}
-              >
-                Otevřít radar In-počasí
-                <span className="material-symbols-outlined text-base">open_in_new</span>
-              </a>
-            </div>
           </div>
         </section>
 
@@ -229,6 +181,32 @@ export default function LipnoWeatherPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="px-4 pt-4 pb-4">
+          <div
+            className="overflow-hidden rounded-[2rem] bg-white"
+            style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+          >
+            <div className="p-5 pb-4">
+              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Radar</p>
+              <h2 className="mt-2 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Windy mapa</h2>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
+                Vítr a aktuální model nad Lipnem v interaktivním embed pohledu.
+              </p>
+            </div>
+            <div className="aspect-[13/9] w-full border-y" style={{ borderColor: "rgba(12,74,110,0.08)" }}>
+              <iframe
+                className="h-full w-full"
+                width="650"
+                height="450"
+                src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=%C2%B0C&metricWind=m/s&zoom=11&overlay=wind&product=ecmwf&level=surface&lat=48.599&lon=14.221&detailLat=48.64&detailLon=14.221&detail=true"
+                title="Windy Lipno"
+                frameBorder="0"
+                loading="lazy"
+              />
+            </div>
           </div>
         </section>
       </main>
