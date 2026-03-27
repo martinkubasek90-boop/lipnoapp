@@ -47,44 +47,7 @@ export default function LipnoHomePage() {
         { time: "18:00", temp: "23°", icon: "rainy" },
         { time: "19:00", temp: "21°", icon: "wb_twilight" },
       ];
-  const rentalCards = [
-    {
-      slug: "vodni-plavidla",
-      title: "Vodní plavidla",
-      teaser: "Paddleboardy, šlapadla, veslice a kajaky přímo u lipenské pláže.",
-      phone: "+420 731 410 813",
-      openingHours: ["Denně 10:00–19:00"],
-      heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-16790497742499-171-img-174.jpg",
-      imageAlt: "Vodní plavidla Lipno",
-    },
-    {
-      slug: "bikepark-pujcovna",
-      title: "Bikepark půjčovna",
-      teaser: "Celoodpružená sjezdová kola, ochranné prvky a návaznost na bikepark i lanovku.",
-      phone: "+420 731 656 154",
-      openingHours: ["Denně 9:00–19:00"],
-      heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-16789575176249-171-lipno-kola-3.jpg",
-      imageAlt: "Bikepark půjčovna Lipno",
-    },
-    {
-      slug: "kola-a-prislusenstvi",
-      title: "Kola a příslušenství",
-      teaser: "TREK, MTB, dětská kola, elektrokola i vozíky, sedačky a helmy.",
-      phone: "+420 731 656 154",
-      openingHours: ["Denně 9:00–17:00"],
-      heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-17194803846979-171-dsd-4850.jpg",
-      imageAlt: "Kola a příslušenství Lipno",
-    },
-    {
-      slug: "sjezdove-kolobezky",
-      title: "Sjezdové koloběžky",
-      teaser: "Rodinná letní klasika z Kramolína dolů s helmou a jednoduchým nástupem.",
-      phone: "+420 731 410 812",
-      openingHours: ["Denně 10:00–18:00"],
-      heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-16783619593406-171-sjezdove-kolobezky-1.jpg",
-      imageAlt: "Sjezdové koloběžky Lipno",
-    },
-  ];
+  const rentalCards = lipnoRentalDetails;
   const gastroCards = lipnoGastroDetails.slice(0, 4);
   const activityCards = lipnoAttractions
     .filter((item) => (isWinter ? item.slug !== "kralovstvi-lesa" && item.slug !== "bikepark-lipno" : true))
@@ -233,7 +196,7 @@ export default function LipnoHomePage() {
 
         <section className="px-4 pt-8">
           <div
-            className="rounded-[2rem] p-5"
+            className="rounded-[2rem] p-5 text-center"
             style={{ background: "linear-gradient(180deg, rgba(0,30,96,0.96), rgba(0,54,120,0.92) 58%, rgba(0,150,57,0.82) 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.16)" }}
           >
             <h2 className="font-headline text-2xl font-extrabold text-white">Aktuální předpověď</h2>
@@ -265,6 +228,80 @@ export default function LipnoHomePage() {
                 </div>
               ))}
               </div>
+            </div>
+            <div className="mt-5">
+              <Link
+                href="/pocasi"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-bold"
+                style={{ background: "rgba(255,255,255,0.94)", color: lipnoBrand.primary }}
+              >
+                Detailní předpověď
+                <span className="material-symbols-outlined text-base">arrow_forward</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="px-4 pt-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Aktivity</h2>
+              <p className="text-xs mt-0.5" style={{ color: lipnoBrand.muted }}>Největší zážitky resortu s rychlým detailem a kontaktem.</p>
+            </div>
+            <Link href="/zazitky" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</Link>
+          </div>
+          <div className="mt-4 -mx-4 overflow-x-auto px-4 pb-2 hide-scrollbar">
+            <div className="flex gap-4">
+              {activityCards.map((item) => {
+                const openState = getOpenState(item.openingHours);
+                return (
+                  <article
+                    key={item.slug}
+                    className="w-[18.5rem] shrink-0 overflow-hidden rounded-[1.9rem] bg-white"
+                    style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+                  >
+                    <div className="relative h-44 w-full">
+                      <Image src={item.heroImage} alt={item.imageAlt} fill className="object-cover" unoptimized />
+                      <div className="absolute inset-x-0 bottom-0 h-20" style={{ background: "linear-gradient(180deg, transparent, rgba(5,21,54,0.72))" }} />
+                      <div className="absolute left-4 top-4">
+                        <span
+                          className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]"
+                          style={
+                            openState.open === true
+                              ? { background: "rgba(220,252,231,0.96)", color: "#15803d" }
+                              : openState.open === false
+                                ? { background: "rgba(254,226,226,0.96)", color: "#b91c1c" }
+                                : { background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }
+                          }
+                        >
+                          {openState.label}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-headline text-xl font-extrabold" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.teaser}</p>
+                      <div className="mt-4 flex items-center gap-3">
+                        <Link
+                          href={`/zazitky/${item.slug}`}
+                          className="inline-flex flex-1 items-center justify-center rounded-2xl px-4 py-3 text-sm font-bold"
+                          style={{ background: lipnoBrand.primary, color: "#fff" }}
+                        >
+                          Detail
+                        </Link>
+                        <a
+                          href={`tel:${item.phone.replace(/\s+/g, "")}`}
+                          className="inline-flex min-w-[5.5rem] items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold"
+                          style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}
+                          aria-label={`Zavolat ${item.title}`}
+                        >
+                          <span className="material-symbols-outlined">call</span>
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -375,70 +412,6 @@ export default function LipnoHomePage() {
                       <div className="mt-4 flex items-center gap-3">
                         <Link
                           href={`/gastro/${item.slug}`}
-                          className="inline-flex flex-1 items-center justify-center rounded-2xl px-4 py-3 text-sm font-bold"
-                          style={{ background: lipnoBrand.primary, color: "#fff" }}
-                        >
-                          Detail
-                        </Link>
-                        <a
-                          href={`tel:${item.phone.replace(/\s+/g, "")}`}
-                          className="inline-flex min-w-[5.5rem] items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold"
-                          style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}
-                          aria-label={`Zavolat ${item.title}`}
-                        >
-                          <span className="material-symbols-outlined">call</span>
-                        </a>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-4 pt-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Aktivity</h2>
-              <p className="text-xs mt-0.5" style={{ color: lipnoBrand.muted }}>Největší zážitky resortu s rychlým detailem a kontaktem.</p>
-            </div>
-            <Link href="/zazitky" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</Link>
-          </div>
-          <div className="mt-4 -mx-4 overflow-x-auto px-4 pb-2 hide-scrollbar">
-            <div className="flex gap-4">
-              {activityCards.map((item) => {
-                const openState = getOpenState(item.openingHours);
-                return (
-                  <article
-                    key={item.slug}
-                    className="w-[18.5rem] shrink-0 overflow-hidden rounded-[1.9rem] bg-white"
-                    style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
-                  >
-                    <div className="relative h-44 w-full">
-                      <Image src={item.heroImage} alt={item.imageAlt} fill className="object-cover" unoptimized />
-                      <div className="absolute inset-x-0 bottom-0 h-20" style={{ background: "linear-gradient(180deg, transparent, rgba(5,21,54,0.72))" }} />
-                      <div className="absolute left-4 top-4">
-                        <span
-                          className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]"
-                          style={
-                            openState.open === true
-                              ? { background: "rgba(220,252,231,0.96)", color: "#15803d" }
-                              : openState.open === false
-                                ? { background: "rgba(254,226,226,0.96)", color: "#b91c1c" }
-                                : { background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }
-                          }
-                        >
-                          {openState.label}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-headline text-xl font-extrabold" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.teaser}</p>
-                      <div className="mt-4 flex items-center gap-3">
-                        <Link
-                          href={`/zazitky/${item.slug}`}
                           className="inline-flex flex-1 items-center justify-center rounded-2xl px-4 py-3 text-sm font-bold"
                           style={{ background: lipnoBrand.primary, color: "#fff" }}
                         >
