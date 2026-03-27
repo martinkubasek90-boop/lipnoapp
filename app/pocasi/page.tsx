@@ -125,31 +125,50 @@ export default function LipnoWeatherPage() {
         </section>
 
         <section className="px-4 pt-8">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <a
-              href="https://www.lipno.info/webkamery-na-lipne.html"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-[1.8rem] p-5 block"
-              style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 12px 24px rgba(12,74,110,0.06)" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Live</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Meteoradar a kamery</h2>
-              <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-                Zkontrolujte oblohu, jezero a dění v resortu ještě před odjezdem.
-              </p>
-            </a>
-            <Link
-              href="/mapa"
-              className="rounded-[1.8rem] p-5 block"
-              style={{ background: lipnoBrand.primarySoft, border: "1px solid rgba(12,74,110,0.06)" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.primary }}>Plán dne</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Mapa a orientace</h2>
-              <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-                Počasí sedí. Teď už jen vybrat zónu, parkování a kudy vyrazit.
-              </p>
-            </Link>
+          <div
+            className="overflow-hidden rounded-[2rem] bg-white"
+            style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+          >
+            <div className="flex items-center justify-between gap-3 p-5 pb-4">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Radar</p>
+                <h2 className="mt-2 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Srážková mapa</h2>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
+                  Rychlý přehled oblačnosti a srážek nad Lipnem přímo z In-počasí.
+                </p>
+              </div>
+              <a
+                href="https://mapy.in-pocasi.cz/"
+                target="_blank"
+                rel="noreferrer"
+                className="hidden shrink-0 rounded-2xl px-4 py-3 text-sm font-bold sm:inline-flex sm:items-center sm:gap-2"
+                style={{ background: lipnoBrand.primary, color: "#fff" }}
+              >
+                Otevřít venku
+                <span className="material-symbols-outlined text-base">open_in_new</span>
+              </a>
+            </div>
+            <div className="aspect-[4/3] w-full border-y" style={{ borderColor: "rgba(12,74,110,0.08)" }}>
+              <iframe
+                className="h-full w-full"
+                src="https://mapy.in-pocasi.cz/"
+                title="Radar In-počasí"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
+            <div className="p-4 sm:hidden">
+              <a
+                href="https://mapy.in-pocasi.cz/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold"
+                style={{ background: lipnoBrand.primary, color: "#fff" }}
+              >
+                Otevřít radar In-počasí
+                <span className="material-symbols-outlined text-base">open_in_new</span>
+              </a>
+            </div>
           </div>
         </section>
 

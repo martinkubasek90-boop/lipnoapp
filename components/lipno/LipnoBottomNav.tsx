@@ -9,7 +9,7 @@ const items = [
   { href: "/zazitky", icon: "explore", label: "Aktivity" },
   { href: "/mapa", icon: "map", label: "Mapa" },
   { href: "/lipnocard", icon: "person", label: "Moje Lipno" },
-  { href: "/vice", icon: "menu", label: "Více" },
+  { href: "/ai", icon: "pets", label: "FOX AI" },
 ];
 
 export default function LipnoBottomNav() {
