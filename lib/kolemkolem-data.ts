@@ -1,7 +1,7 @@
 export const kolemkolemPage = {
   title: "KolemKolem",
   sourceUrl: "https://www.kolemkolem.info/cz",
-  heroImage: "https://www.kolemkolem.info/files/kolemkolem/images/upoutavky/n-17425618510986-302-kolemkolem-00036-1.jpg",
+  heroImage: "/uploads/kolemkolem-banner.jpg",
   heroAlt: "KolemKolem Lipensko",
   intro:
     "Jedna stopa, desítky tras, stovky příběhů. Vyhledej, naplánuj a projeď nejlepší cyklo trasy po Lipensku.",

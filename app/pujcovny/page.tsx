@@ -215,7 +215,7 @@ export default function LipnoRentalsPage() {
             style={{ boxShadow: "0 14px 30px rgba(12,74,110,0.16)" }}
           >
             <div className="relative h-56 w-full">
-              <Image src="https://www.kolemkolem.info/files/kolemkolem/images/upoutavky/n-17425618510986-302-kolemkolem-00036-1.jpg" alt="KolemKolem" fill className="object-cover" unoptimized />
+              <Image src="/uploads/kolemkolem-banner.jpg" alt="KolemKolem" fill className="object-cover" unoptimized />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,16,45,0.12),rgba(0,16,45,0.50),rgba(0,16,45,0.82))]" />
               <div className="absolute inset-x-0 top-0 p-5">
                 <h2 className="max-w-sm font-headline text-3xl font-extrabold leading-tight text-white" style={{ textShadow: "0 10px 28px rgba(0,0,0,0.38)" }}>Cyklo trasy a plánování po Lipensku</h2>
