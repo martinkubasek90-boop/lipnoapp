@@ -116,52 +116,45 @@ export default function LipnoHomePage() {
 
               <div
                 className="rounded-[1.9rem] p-4 md:p-5 backdrop-blur-xl"
-                style={{ background: "rgba(255,255,255,0.14)", border: "1px solid rgba(255,255,255,0.18)", boxShadow: "0 18px 34px rgba(0,0,0,0.10)" }}
+                style={{ background: "rgba(52,63,84,0.48)", border: "1px solid rgba(255,255,255,0.18)", boxShadow: "0 18px 34px rgba(0,0,0,0.10)" }}
               >
-                <div className="grid gap-4 md:grid-cols-[1.15fr_1fr]">
-                  <div className="grid grid-cols-2 gap-3 text-white">
-                    <div className="rounded-[1.4rem] p-4" style={{ background: "rgba(255,255,255,0.10)" }}>
-                      <p className="text-[11px] uppercase tracking-[0.18em] text-white/62">Teplota</p>
-                      <p className="mt-2 font-headline text-3xl font-black">{lipnoConditions.weather}</p>
-                    </div>
-                    <div className="rounded-[1.4rem] p-4" style={{ background: "rgba(255,255,255,0.10)" }}>
-                      <p className="text-[11px] uppercase tracking-[0.18em] text-white/62">{isWinter ? "Výška sněhu" : "Teplota vody"}</p>
-                      <p className="mt-2 font-headline text-3xl font-black">{isWinter ? lipnoConditions.snow : lipnoConditions.lake}</p>
-                    </div>
-                    <div className="col-span-2 rounded-[1.4rem] p-4" style={{ background: "rgba(255,255,255,0.10)" }}>
-                      <div className="flex items-center justify-between gap-3">
-                        <div>
-                          <p className="text-[11px] uppercase tracking-[0.18em] text-white/62">Přehled dne</p>
-                          <p className="mt-2 text-base font-semibold text-white/92">
-                            {isWinter ? "Sníh, provoz areálu a podmínky na svahu." : "Jezero, rodinné zážitky a den bez zdržení."}
-                          </p>
-                        </div>
-                        <span className="material-symbols-outlined text-3xl text-white/90" style={{ fontVariationSettings: "'FILL' 1" }}>
-                          {isWinter ? "ac_unit" : "wb_sunny"}
-                        </span>
-                      </div>
-                    </div>
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-black uppercase tracking-[0.22em] text-white/70">Předpověď</p>
+                    <p className="mt-1 text-sm font-semibold text-white/80">
+                      {isWinter ? `${lipnoConditions.weather} · ${lipnoConditions.snow}` : `${lipnoConditions.weather} · ${lipnoConditions.lake}`}
+                    </p>
                   </div>
-
-                  <div className="rounded-[1.5rem] bg-white px-4 py-4 text-slate-900 md:px-5">
-                    <div className="flex items-center justify-between gap-3">
-                      <p className="text-sm font-black uppercase tracking-[0.22em] text-slate-500">Předpověď</p>
-                      <Link href="/pocasi" className="text-xs font-bold uppercase tracking-[0.16em]" style={{ color: lipnoBrand.primary }}>
-                        Detail
-                      </Link>
+                  <Link href="/pocasi" className="text-xs font-bold uppercase tracking-[0.16em] text-white">
+                    Detail
+                  </Link>
+                </div>
+                <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-6">
+                  {hourlyForecast.map((item) => (
+                    <div
+                      key={item.time}
+                      className="rounded-[1.1rem] px-2 py-3 text-center"
+                      style={{ background: "rgba(255,255,255,0.10)" }}
+                    >
+                      <p className="text-xs font-bold text-white/72">{item.time}</p>
+                      <span
+                        className="material-symbols-outlined mt-2 text-[2rem]"
+                        style={{
+                          color:
+                            item.icon === "wb_sunny"
+                              ? "#fbbf24"
+                              : item.icon === "rainy"
+                                ? "#60a5fa"
+                                : item.icon === "cloudy_snowing" || item.icon === "ac_unit"
+                                  ? "#93c5fd"
+                                  : "#ffffff",
+                        }}
+                      >
+                        {item.icon}
+                      </span>
+                      <p className="mt-2 text-xl font-black text-white">{item.temp}</p>
                     </div>
-                    <div className="mt-4 grid grid-cols-3 gap-3">
-                      {hourlyForecast.map((item) => (
-                        <div key={item.time} className="rounded-[1.1rem] px-2 py-3 text-center" style={{ background: "rgba(0,30,96,0.04)" }}>
-                          <p className="text-xs font-bold text-slate-500">{item.time}</p>
-                          <span className="material-symbols-outlined mt-2 text-[2rem]" style={{ color: item.icon === "wb_sunny" ? "#f59e0b" : item.icon === "rainy" ? "#2563eb" : item.icon === "cloudy_snowing" || item.icon === "ac_unit" ? "#1d4ed8" : "#374151" }}>
-                            {item.icon}
-                          </span>
-                          <p className="mt-2 text-xl font-black text-slate-900">{item.temp}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
