@@ -17,7 +17,7 @@ const categoryLabels = {
 
 export default function LipnoActivitiesPage() {
   const activityPoints = lipnoMapPoints.filter((point) =>
-    ["stezka", "kralovstvi", "aquaworld", "lanovka-express", "marina"].includes(point.id),
+    ["stezka", "kralovstvi", "aquaworld", "lanovka-express", "lanovy-park", "bobova-draha", "marina"].includes(point.id),
   );
 
   return (

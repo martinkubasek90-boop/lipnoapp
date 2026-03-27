@@ -9,6 +9,7 @@ import { lipnoAttractions } from "@/lib/lipno-attractions";
 import { lipnoRentalDetails } from "@/lib/lipno-catalog";
 import { lipnoCalendarEvents } from "@/lib/lipno-calendar";
 import { lipnoGastroDetails } from "@/lib/lipno-gastro";
+import { lipnoAccommodationDetails } from "@/lib/lipno-accommodation";
 import { lipnoBrand } from "@/lib/lipno-data";
 import { getLipnoOpenState } from "@/lib/lipno-schedule";
 
@@ -22,6 +23,7 @@ export default function LipnoExperiencesPage() {
     .slice(0, 4);
   const rentalCards = lipnoRentalDetails.slice(0, 6);
   const gastroCards = lipnoGastroDetails.slice(0, 4);
+  const accommodationCards = lipnoAccommodationDetails.slice(0, 3);
 
   return (
     <>
@@ -297,6 +299,55 @@ export default function LipnoExperiencesPage() {
                   </article>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-4 pt-8 pb-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Ubytování</h2>
+              <p className="text-xs mt-0.5" style={{ color: lipnoBrand.muted }}>Hotel, kemp a apartmány přímo v resortu.</p>
+            </div>
+            <Link href="/ubytovani" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</Link>
+          </div>
+          <div className="mt-4 -mx-4 overflow-x-auto px-4 pb-2 hide-scrollbar">
+            <div className="flex gap-4">
+              {accommodationCards.map((item) => (
+                <article
+                  key={item.slug}
+                  className="w-[18.5rem] shrink-0 overflow-hidden rounded-[1.9rem] bg-white"
+                  style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+                >
+                  <div className="relative h-44 w-full">
+                    <Image src={item.heroImage} alt={item.imageAlt} fill className="object-cover" unoptimized />
+                    <div className="absolute inset-x-0 bottom-0 h-20" style={{ background: "linear-gradient(180deg, transparent, rgba(5,21,54,0.72))" }} />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-headline text-xl font-extrabold" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.teaser}</p>
+                    <div className="mt-4 flex items-center gap-3">
+                      <Link
+                        href="/ubytovani"
+                        className="inline-flex flex-1 items-center justify-center rounded-2xl px-4 py-3 text-sm font-bold"
+                        style={{ background: lipnoBrand.primary, color: "#fff" }}
+                      >
+                        Detail
+                      </Link>
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex min-w-[6.25rem] items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold"
+                        style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}
+                      >
+                        <span className="material-symbols-outlined">open_in_new</span>
+                        Web
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>

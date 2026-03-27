@@ -95,6 +95,43 @@ export const lipnoAttractions: LipnoAttractionDetail[] = [
       "Zdroj: oficiální detail Království lesa na Lipno.info. Přesný ceník si drží oficiální prodej Lipno.card.",
   },
   {
+    slug: "lanovy-park",
+    title: "Lanový park",
+    category: "sport",
+    teaser:
+      "Lehce adrenalinová aktivita nad centrálním parkovištěm s nízkým i vysokým okruhem a závěrečnou fly kladkou nad rybníkem.",
+    location: "Lipno nad Vltavou 307, nad centrálním parkovištěm",
+    phone: "+420 607 426 502",
+    email: "lanovypark@lipnoservis.cz",
+    heroImage:
+      "https://www.lipno.info/files/lipno/images/zazitek/size5-16782583913264-171-lanovy-park.jpg",
+    imageAlt: "Lanový park Lipno",
+    sourceUrl: "https://www.lipno.info/zazitky/lanovy-park.html",
+    bookingUrl: "https://www.lipnocard.cz/shopping/eshop",
+    openingHours: [
+      "1. 5. 2026 – 28. 6. 2026: Po–Pá 12:30–17:00",
+      "1. 5. 2026 – 28. 6. 2026: So–Ne 10:00–17:00",
+      "29. 6. 2026 – 31. 8. 2026: denně 10:00–18:00",
+      "1. 9. 2026 – 1. 11. 2026: Po–Pá 12:30–17:00",
+      "1. 9. 2026 – 1. 11. 2026: So–Ne 10:00–17:00",
+    ],
+    highlights: [
+      "Několik druhů lanových cest v celkové délce zhruba 500 metrů.",
+      "Nízký i vysoký okruh pro děti, dospělé i skupiny.",
+      "Zakončovací fly kladka nad hladinou rybníka.",
+      "Instruktáž a podpora od vyškolených instruktorů.",
+      "Doporučená je pevná obuv, pro citlivější ruce i rukavice.",
+    ],
+    priceHighlights: [
+      { label: "Nízký okruh + 1x kladka", price: "350 Kč", detail: "s registrací Lipno.card" },
+      { label: "Vysoký okruh krátký", price: "490 Kč", detail: "14 překážek + 1x kladka" },
+      { label: "Vysoký okruh dlouhý", price: "590 Kč", detail: "25 překážek + 1x kladka" },
+      { label: "Rodina 4 osoby", price: "1 890 Kč", detail: "vysoký okruh + 1x kladka" },
+    ],
+    note:
+      "Oficiální stránka uvádí i další ceny bez registrace Lipno.card a samostatné jízdy na kladce.",
+  },
+  {
     slug: "aquaworld-lipno",
     title: "Aquaworld Lipno",
     category: "wellness",
@@ -161,6 +198,38 @@ export const lipnoAttractions: LipnoAttractionDetail[] = [
     ],
     note:
       "Oficiální detail Bikeparku na Lipno.info je přesměrovaný a část obsahu se mění sezónně. Pro konkrétní vybavení a ceny je navázaná i oficiální bikepark půjčovna.",
+  },
+  {
+    slug: "bobova-draha",
+    title: "Bobová dráha",
+    category: "rodiny",
+    teaser:
+      "Celoroční bobová dráha pro rodiny i skupiny, která funguje za každého počasí a je jednoduchou jistotou programu v areálu.",
+    location: "Lipno nad Vltavou, centrální část areálu",
+    phone: "+420 602 780 726",
+    email: "info@slideland.cz",
+    heroImage:
+      "https://www.lipno.info/files/lipno/images/zazitek/size5-16782588931859-171-bobovadraha-2.jpg",
+    imageAlt: "Bobová dráha Lipno",
+    sourceUrl: "https://www.lipno.info/zazitky/bobova-draha.html",
+    extraUrl: "http://www.slideland.cz/",
+    extraLabel: "Aktuální otevírací doba",
+    openingHours: [
+      "Otevřeno každý den, 365 dní v roce.",
+      "Aktuální denní režim drží provozovatel Slideland.",
+    ],
+    highlights: [
+      "Provoz za každého počasí po celý rok.",
+      "Dobrá volba pro rychlý rodinný program i skupiny.",
+      "Restaurace v areálu a bezbariérový přístup.",
+      "Lipno.card dává zvýhodnění formou bonusových jízd zdarma.",
+    ],
+    priceHighlights: [
+      { label: "Leden–červen, září–prosinec", price: "6+1 zdarma", detail: "nebo 10+2 jízdy zdarma s Lipno.card" },
+      { label: "Červenec–srpen", price: "10+1 zdarma", detail: "výhoda s Lipno.card" },
+    ],
+    note:
+      "Oficiální detail drží konkrétní denní provoz na webu Slideland. V appce proto nechávám přímý odkaz na provozovatele.",
   },
   {
     slug: "lanove-drahy",
