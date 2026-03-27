@@ -33,8 +33,8 @@ export default function LipnoCalendarPage() {
             className="overflow-hidden rounded-[1.9rem] bg-white"
             style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
           >
-            <div className="relative h-64 w-full bg-slate-100">
-              <Image src={featured.image} alt={featured.imageAlt} fill className="object-contain" unoptimized />
+            <div className="relative h-64 w-full">
+              <Image src={featured.image} alt={featured.imageAlt} fill className="object-cover" unoptimized />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(5,21,54,0.82))]" />
               <div className="absolute left-5 top-5">
                 <span className="inline-flex rounded-full bg-white/92 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.primary }}>
@@ -79,8 +79,8 @@ export default function LipnoCalendarPage() {
                 className="overflow-hidden rounded-[1.9rem] bg-white"
                 style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
               >
-                <div className="relative h-52 w-full bg-slate-100">
-                  <Image src={event.image} alt={event.imageAlt} fill className="object-contain" unoptimized />
+                <div className="relative h-52 w-full">
+                  <Image src={event.image} alt={event.imageAlt} fill className="object-cover" unoptimized />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(5,21,54,0.72))]" />
                   {event.endLabel ? (
                     <div className="absolute left-4 top-4">
