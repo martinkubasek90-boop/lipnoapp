@@ -46,8 +46,7 @@ export default function LipnoMapPage() {
             className="rounded-[2rem] p-6"
             style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.10) 0%, rgba(0,150,57,0.08) 100%)" }}
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Rodinný areál Lipno</p>
-            <h1 className="mt-3 font-headline text-3xl font-extrabold tracking-tight" style={{ color: lipnoBrand.primary }}>
+            <h1 className="font-headline text-3xl font-extrabold tracking-tight" style={{ color: lipnoBrand.primary }}>
               Interaktivní mapa areálu
             </h1>
             <p className="mt-3 max-w-lg text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>

@@ -137,9 +137,9 @@ export default async function AttractionDetailPage({ params }: AttractionDetailP
                 className="rounded-[1.8rem] p-5 block"
                 style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
               >
-                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Rezervace</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white">Rezervace</p>
                 <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight text-white">Koupit nebo rezervovat online</h2>
-                <p className="mt-3 text-sm leading-relaxed text-white/82">Přímý vstup do oficiálního nákupu na Lipno.card nebo e-shopu atrakce.</p>
+                <p className="mt-3 text-sm leading-relaxed text-white">Přímý vstup do oficiálního nákupu na Lipno.card nebo e-shopu atrakce.</p>
               </a>
             ) : null}
             {attraction.extraUrl ? (

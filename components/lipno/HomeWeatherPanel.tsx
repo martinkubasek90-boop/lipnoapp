@@ -48,7 +48,7 @@ export default function HomeWeatherPanel() {
         style={{ background: "linear-gradient(180deg, rgba(0,30,96,0.96), rgba(0,54,120,0.92) 58%, rgba(0,150,57,0.82) 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.16)" }}
       >
         <h2 className="font-headline text-2xl font-extrabold text-white">Aktuální předpověď</h2>
-        <p className="mt-2 text-sm text-white/76">{weather.summary}</p>
+        <p className="mt-2 text-sm text-white">{weather.summary}</p>
         <div className="mt-5 -mx-1 overflow-x-auto pb-1 hide-scrollbar">
           <div className="flex min-w-max gap-3 px-1">
             {weather.hourlyForecast.map((item) => (
@@ -57,7 +57,7 @@ export default function HomeWeatherPanel() {
                 className="w-[6.6rem] shrink-0 rounded-[1.2rem] px-2 py-4 text-center"
                 style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.10)" }}
               >
-                <p className="text-xs font-bold text-white/72">{item.time}</p>
+                <p className="text-xs font-bold text-white">{item.time}</p>
                 <span className="material-symbols-outlined mt-2 text-[2rem]" style={{ color: getIconColor(item.icon) }}>
                   {item.icon}
                 </span>

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import BackStepButton from "@/components/lipno/BackStepButton";
 import { SeasonProvider } from "@/components/lipno/SeasonProvider";
 
 export const metadata: Metadata = {
@@ -40,7 +41,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className="pb-32" style={{ background: "var(--surface)", color: "var(--on-surface)", fontFamily: "\"Source Sans Pro\", sans-serif" }}>
-        <SeasonProvider>{children}</SeasonProvider>
+        <SeasonProvider>
+          {children}
+          <BackStepButton />
+        </SeasonProvider>
       </body>
     </html>
   );
