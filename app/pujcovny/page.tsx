@@ -30,7 +30,7 @@ export default function LipnoRentalsPage() {
                 className="inline-flex w-fit rounded-full px-3 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-white/84"
                 style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", textShadow: "0 4px 12px rgba(0,0,0,0.28)" }}
               >
-                Oficiální půjčovny
+                Půjčovny v areálu
               </p>
               <h1
                 className="mt-3 max-w-lg font-headline text-3xl font-extrabold tracking-tight text-white md:text-[2.8rem]"
@@ -51,9 +51,6 @@ export default function LipnoRentalsPage() {
               <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Přehled půjčoven</h2>
               <p className="mt-0.5 text-xs" style={{ color: lipnoBrand.muted }}>Aktuální stav beru z interních hodin a oficiálních detailů na Lipno.info.</p>
             </div>
-            <a href="https://www.lipno.info/pujcovny.html" target="_blank" rel="noreferrer" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>
-              Zdroj →
-            </a>
           </div>
           <div className="mt-4 space-y-4">
             {lipnoRentalDetails.map((item) => {

@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
+import LocationMapCard from "@/components/lipno/LocationMapCard";
 import { lipnoBrand } from "@/lib/lipno-data";
 import { getLipnoRentalBySlug, lipnoRentalDetails } from "@/lib/lipno-catalog";
+import { rentalMapPointBySlug } from "@/lib/lipno-location-links";
 
 type RentalDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -28,21 +31,34 @@ export default async function RentalDetailPage({ params }: RentalDetailPageProps
       <LipnoTopBar />
       <main className="pt-24 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
-          <div className="rounded-[2rem] p-5 md:p-6" style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.08) 0%, rgba(0,150,57,0.10) 100%)" }}>
-            <Link href="/pujcovny" className="inline-flex items-center gap-2 text-sm font-bold" style={{ color: lipnoBrand.primary }}>
-              <span className="material-symbols-outlined text-base">arrow_back</span>
-              Všechny půjčovny
-            </Link>
-            <p className="mt-4 text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Oficiální detail</p>
-            <h1 className="mt-3 font-headline text-3xl font-extrabold tracking-tight md:text-[2.7rem]" style={{ color: lipnoBrand.primary }}>
-              {rental.title}
-            </h1>
-            <p className="mt-3 max-w-lg text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-              {rental.teaser}
-            </p>
+          <div
+            className="overflow-hidden rounded-[2rem] bg-white"
+            style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 16px 34px rgba(12,74,110,0.10)" }}
+          >
+            <div className="relative aspect-[16/10] w-full">
+              <Image src={rental.heroImage} alt={rental.imageAlt} fill className="object-cover" unoptimized />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#001E60]/78 via-[#001E60]/24 to-transparent" />
+              <div className="absolute left-4 top-4">
+                <Link
+                  href="/pujcovny"
+                  className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-bold text-white"
+                  style={{ background: "rgba(255,255,255,0.14)", backdropFilter: "blur(8px)" }}
+                >
+                  <span className="material-symbols-outlined text-base">arrow_back</span>
+                  Všechny půjčovny
+                </Link>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">{rental.category}</p>
+                <h1 className="mt-3 max-w-xl font-headline text-3xl font-extrabold tracking-tight text-white md:text-[2.8rem]">
+                  {rental.title}
+                </h1>
+                <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/82">{rental.teaser}</p>
+              </div>
+            </div>
 
-            <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="rounded-[1.4rem] p-4" style={{ background: "#fff" }}>
+            <div className="grid gap-3 p-5 md:grid-cols-3 md:p-6">
+              <div className="rounded-[1.4rem] p-4" style={{ background: lipnoBrand.primarySoft }}>
                 <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Místo</p>
                 <p className="mt-2 text-sm font-bold leading-tight" style={{ color: lipnoBrand.primary }}>{rental.location}</p>
               </div>
@@ -120,6 +136,8 @@ export default async function RentalDetailPage({ params }: RentalDetailPageProps
           ) : null}
         </section>
 
+        <LocationMapCard pointId={rentalMapPointBySlug[rental.slug] ?? "element"} />
+
         <section className="px-4 pt-8">
           <div className="grid gap-3 sm:grid-cols-2">
             {rental.bookingUrl ? (
@@ -135,17 +153,15 @@ export default async function RentalDetailPage({ params }: RentalDetailPageProps
                 <p className="mt-3 text-sm leading-relaxed text-white/82">Přímý vstup do oficiální online rezervace Lipna.</p>
               </a>
             ) : null}
-            <a
-              href={rental.sourceUrl}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              href="/mapa"
               className="rounded-[1.8rem] p-5 block"
-              style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+              style={{ background: lipnoBrand.primarySoft, border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
             >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Zdroj</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight" style={{ color: lipnoBrand.primary }}>Oficiální stránka</h2>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Detail půjčovny na Lipno.info včetně plného ceníku a případných aktualizací.</p>
-            </a>
+              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.primary }}>Orientační bod</p>
+              <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight" style={{ color: lipnoBrand.primary }}>Otevřít resort mapu</h2>
+              <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Přesná poloha půjčovny v mapě areálu včetně dalších služeb a gastro bodů.</p>
+            </Link>
           </div>
         </section>
 

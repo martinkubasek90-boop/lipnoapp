@@ -3,8 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
+import LocationMapCard from "@/components/lipno/LocationMapCard";
 import { lipnoBrand } from "@/lib/lipno-data";
 import { getLipnoGastroBySlug, lipnoGastroDetails } from "@/lib/lipno-gastro";
+import { gastroMapPointBySlug } from "@/lib/lipno-location-links";
 
 type GastroDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -95,6 +97,8 @@ export default async function GastroDetailPage({ params }: GastroDetailPageProps
           </div>
         </section>
 
+        <LocationMapCard pointId={gastroMapPointBySlug[gastro.slug] ?? "molo"} />
+
         <section className="px-4 pt-8">
           <div className="grid gap-3 sm:grid-cols-2">
             {gastro.websiteUrl ? (
@@ -110,17 +114,15 @@ export default async function GastroDetailPage({ params }: GastroDetailPageProps
                 <p className="mt-3 text-sm leading-relaxed text-white/82">Přímý vstup na web podniku nebo jeho provozovatele.</p>
               </a>
             ) : null}
-            <a
-              href={gastro.sourceUrl}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              href="/mapa"
               className="rounded-[1.8rem] p-5 block"
-              style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+              style={{ background: lipnoBrand.primarySoft, border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
             >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Zdroj</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight" style={{ color: lipnoBrand.primary }}>Oficiální detail na Lipno.info</h2>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Originální detail podniku se sezónními aktualizacemi.</p>
-            </a>
+              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.primary }}>Poloha v resortu</p>
+              <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight" style={{ color: lipnoBrand.primary }}>Zobrazit v mapě areálu</h2>
+              <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Rychlý přechod na interaktivní mapu s bodem vybraného podniku.</p>
+            </Link>
           </div>
         </section>
 

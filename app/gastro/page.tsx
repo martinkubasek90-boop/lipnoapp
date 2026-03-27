@@ -4,88 +4,100 @@ import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
 import { lipnoBrand } from "@/lib/lipno-data";
 import { lipnoGastroDetails } from "@/lib/lipno-gastro";
+import { getLipnoOpenState } from "@/lib/lipno-schedule";
 
 export default function LipnoGastroPage() {
-  const [featured, ...rest] = lipnoGastroDetails;
-
   return (
     <>
       <LipnoTopBar />
       <main className="pt-24 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
-          <div className="rounded-[2rem] p-6" style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.10) 0%, rgba(234,88,12,0.10) 100%)" }}>
-            <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: "#c2410c" }}>Podle oficiálního gastro přehledu</p>
-            <h1 className="mt-3 font-headline text-3xl font-extrabold tracking-tight" style={{ color: lipnoBrand.primary }}>
-              Gastro na Lipně
+          <div
+            className="rounded-[2rem] p-6"
+            style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 62%, #ea580c 100%)", boxShadow: "0 18px 40px rgba(12,74,110,0.18)" }}
+          >
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Gastro na Lipně</p>
+            <h1 className="mt-3 font-headline text-3xl font-extrabold tracking-tight text-white md:text-[2.8rem]">
+              Restaurace, kavárny a podniky v areálu
             </h1>
-            <p className="mt-3 max-w-lg text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-              Přehled podniků z oficiální sekce gastro. Každý podnik má vlastní detail s kontaktem, provozem a přímým odkazem na zdroj.
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/84">
+              Stejný přehledový styl jako půjčovny. Fotka, otevřeno nebo zavřeno, otevírací doba, detail a přímé zavolání.
             </p>
           </div>
         </section>
 
         <section className="px-4 pt-6">
-          <Link
-            href={`/gastro/${featured.slug}`}
-            className="block overflow-hidden rounded-[2rem]"
-            style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 16px 34px rgba(12,74,110,0.10)" }}
-          >
-            <div className="relative aspect-[16/10] w-full">
-              <Image src={featured.heroImage} alt={featured.imageAlt} fill className="object-cover" unoptimized />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#001E60]/78 via-[#001E60]/18 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/72">Doporučený podnik</p>
-                <h2 className="mt-3 font-headline text-3xl font-extrabold text-white">{featured.title}</h2>
-                <p className="mt-2 max-w-lg text-sm text-white/82">{featured.tagline ?? featured.teaser}</p>
-              </div>
-            </div>
-          </Link>
-        </section>
-
-        <section className="px-4 pt-6">
-          <div className="grid gap-3">
-            {rest.map((item) => (
-              <Link
-                key={item.slug}
-                href={`/gastro/${item.slug}`}
-                className="block rounded-[1.8rem] p-5"
-                style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 12px 24px rgba(12,74,110,0.06)" }}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="font-headline text-xl font-extrabold" style={{ color: lipnoBrand.ink }}>{item.title}</h2>
-                    <p className="mt-2 text-sm font-semibold" style={{ color: "#c2410c" }}>{item.tagline ?? item.location}</p>
-                    <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.teaser}</p>
+          <div className="space-y-4">
+            {lipnoGastroDetails.map((item) => {
+              const openState = getLipnoOpenState(item.openingHours);
+              return (
+                <article
+                  key={item.slug}
+                  className="overflow-hidden rounded-[1.9rem] bg-white"
+                  style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+                >
+                  <div className="relative h-52 w-full">
+                    <Image src={item.heroImage} alt={item.imageAlt} fill className="object-cover" unoptimized />
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(5,21,54,0.74))]" />
+                    <div className="absolute left-4 top-4">
+                      <span
+                        className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]"
+                        style={
+                          openState.open === true
+                            ? { background: "rgba(220,252,231,0.96)", color: "#15803d" }
+                            : openState.open === false
+                              ? { background: "rgba(254,226,226,0.96)", color: "#b91c1c" }
+                              : { background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }
+                        }
+                      >
+                        {openState.label}
+                      </span>
+                    </div>
                   </div>
-                  <span className="material-symbols-outlined" style={{ color: lipnoBrand.primary }}>arrow_forward</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="px-4 pt-8 pb-4">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <a
-              href="https://www.lipno.info/zazitky.html?gastro=1"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-[1.8rem] p-5 block"
-              style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Zdroj</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Oficiální gastro přehled</h2>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Původní seznam podniků na Lipno.info.</p>
-            </a>
-            <Link
-              href="/mapa"
-              className="rounded-[1.8rem] p-5 block"
-              style={{ background: lipnoBrand.primarySoft, border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.primary }}>Mapa</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Zobrazit na mapě</h2>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Gastro body jsou napojené i do nové interaktivní mapy areálu.</p>
-            </Link>
+                  <div className="p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <span className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: "rgba(234,88,12,0.10)", color: "#c2410c" }}>
+                          Gastro
+                        </span>
+                        <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.ink }}>{item.title}</h2>
+                        <p className="mt-1 text-sm font-semibold" style={{ color: "#c2410c" }}>{item.location}</p>
+                      </div>
+                    </div>
+                    <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.teaser}</p>
+                    <div className="mt-4 rounded-[1.4rem] p-4" style={{ background: "rgba(0,30,96,0.03)" }}>
+                      <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Otevírací doba</p>
+                      <ul className="mt-2 space-y-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
+                        {item.openingHours.slice(0, 2).map((hour) => (
+                          <li key={hour} className="flex gap-2">
+                            <span style={{ color: lipnoBrand.secondary }}>•</span>
+                            <span>{hour}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="mt-4 flex items-center gap-3">
+                      <Link
+                        href={`/gastro/${item.slug}`}
+                        className="inline-flex flex-1 items-center justify-center rounded-2xl px-4 py-3 text-sm font-bold"
+                        style={{ background: lipnoBrand.primary, color: "#fff" }}
+                      >
+                        Detail
+                      </Link>
+                      <a
+                        href={`tel:${item.phone.replace(/\s+/g, "")}`}
+                        className="inline-flex min-w-[6.25rem] items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold"
+                        style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}
+                        aria-label={`Zavolat ${item.title}`}
+                      >
+                        <span className="material-symbols-outlined">call</span>
+                        Zavolat
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       </main>

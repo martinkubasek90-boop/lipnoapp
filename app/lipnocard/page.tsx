@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
@@ -20,27 +21,16 @@ export default function LipnoCardLandingPage() {
       <LipnoTopBar />
       <main className="pt-24 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
-          <div className="flex items-end justify-between gap-3">
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Osobní zóna</p>
-              <h1 className="mt-3 font-headline text-3xl font-extrabold tracking-tight" style={{ color: lipnoBrand.primary }}>
-                Moje Lipno
-              </h1>
-              <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-                Digitální karta, výhody a rychlý přístup k benefitům v resortu.
-              </p>
-            </div>
-          </div>
-
           <div
-            className="relative mt-5 overflow-hidden rounded-[2rem] p-6 text-white"
-            style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 18px 40px rgba(12,74,110,0.18)" }}
+            className="relative overflow-hidden rounded-[2rem] p-6 text-white"
+            style={{ boxShadow: "0 18px 40px rgba(12,74,110,0.18)" }}
           >
-            <div className="absolute right-[-2rem] top-[-2rem] h-40 w-40 rounded-full blur-3xl" style={{ background: "rgba(255,255,255,0.10)" }} />
+            <Image src="https://www.lipno.info/templates/lipno/images/layout/lipnocard-leto.jpg" alt="Lipno.card" fill className="object-cover" unoptimized />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,21,66,0.40),rgba(3,14,38,0.88))]" />
             <div className="relative z-10">
               <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/72">Lipno.card</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold">{lipnoCardPage.title}</h2>
-              <p className="mt-1 text-sm text-white/74">Petr Novák</p>
+              <h1 className="mt-3 font-headline text-3xl font-extrabold md:text-[2.8rem]">{lipnoCardPage.title}</h1>
+              <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/84">{lipnoCardPage.summary}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <a
                   href={lipnoCardPage.shopUrl}
@@ -228,30 +218,17 @@ export default function LipnoCardLandingPage() {
         </section>
 
         <section className="px-4 pt-8 pb-4">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <a
-              href={lipnoCardPage.shopUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-[2rem] p-6 block"
-              style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Online nákup</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight text-white">Přejít na Lipno.card shop</h2>
-              <p className="mt-3 text-sm leading-relaxed text-white/82">Registrace, přiřazení karty a nákup online na oficiálním webu.</p>
-            </a>
-            <a
-              href={lipnoCardPage.sourceUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-[2rem] p-6 block"
-              style={{ background: "#fff", boxShadow: "0 14px 30px rgba(12,74,110,0.08)", border: "1px solid rgba(12,74,110,0.08)" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Zdroj</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight" style={{ color: lipnoBrand.primary }}>Otevřít oficiální stránku</h2>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Původní přehled benefitů, vracení karty a podmínek na Lipno.info.</p>
-            </a>
-          </div>
+          <a
+            href={lipnoCardPage.shopUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-[2rem] p-6 block"
+            style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
+          >
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Online nákup</p>
+            <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight text-white">Přejít na Lipno.card shop</h2>
+            <p className="mt-3 text-sm leading-relaxed text-white/82">Registrace, přiřazení karty a nákup online na oficiálním webu.</p>
+          </a>
         </section>
       </main>
       <LipnoBottomNav />

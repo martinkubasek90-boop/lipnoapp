@@ -172,6 +172,47 @@ export default function LipnoHomePage() {
         </section>
 
         <section className="px-4 pt-8">
+          <Link
+            href="/lipnocard"
+            className="block overflow-hidden rounded-[2rem]"
+            style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
+          >
+            <div className="relative min-h-[13rem] p-6">
+              <div className="absolute right-[-1rem] top-[-1rem] h-28 w-28 rounded-full blur-3xl" style={{ background: "rgba(255,255,255,0.12)" }} />
+              <p className="relative z-10 text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Lipno.card</p>
+              <h2 className="relative z-10 mt-3 max-w-sm font-headline text-3xl font-extrabold text-white">Výhody, karta a nákup online</h2>
+              <p className="relative z-10 mt-3 max-w-md text-sm leading-relaxed text-white/82">
+                Jedno místo pro registraci, přidání karty k účtu, slevy v areálu a rychlý vstup do oficiálního nákupu.
+              </p>
+              <div className="relative z-10 mt-5 inline-flex items-center gap-2 rounded-2xl bg-white/94 px-4 py-3 text-sm font-bold" style={{ color: lipnoBrand.primary }}>
+                Otevřít Lipno.card
+                <span className="material-symbols-outlined text-base">arrow_forward</span>
+              </div>
+            </div>
+          </Link>
+        </section>
+
+        <section className="px-4 pt-6">
+          <Link
+            href="/kolemkolem"
+            className="block overflow-hidden rounded-[2rem] bg-white"
+            style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+          >
+            <div className="relative h-52 w-full">
+              <Image src="https://www.kolemkolem.info/files/kolemkolem/images/upoutavky/n-17425618510986-302-kolemkolem-00036-1.jpg" alt="KolemKolem" fill className="object-cover" unoptimized />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(5,21,54,0.80))]" />
+              <div className="absolute inset-x-0 bottom-0 p-5">
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">KolemKolem</p>
+                <h2 className="mt-3 max-w-sm font-headline text-2xl font-extrabold text-white">Cyklo trasy a plánování po Lipensku</h2>
+                <p className="mt-2 max-w-md text-sm leading-relaxed text-white/82">
+                  Trasy, plánovač, eventy a cyklo inspirace na jednom místě.
+                </p>
+              </div>
+            </div>
+          </Link>
+        </section>
+
+        <section className="px-4 pt-8">
           <div
             className="rounded-[2rem] p-5 text-center"
             style={{ background: "linear-gradient(180deg, rgba(0,30,96,0.96), rgba(0,54,120,0.92) 58%, rgba(0,150,57,0.82) 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.16)" }}

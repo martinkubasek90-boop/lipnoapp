@@ -15,7 +15,6 @@ export default function LipnoOpeningHoursPage() {
             className="rounded-[2rem] p-6"
             style={{ background: "linear-gradient(135deg, rgba(0,30,96,0.10) 0%, rgba(0,150,57,0.08) 100%)" }}
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Oficiální přehled</p>
             <h1 className="mt-3 font-headline text-3xl font-extrabold tracking-tight" style={{ color: lipnoBrand.primary }}>
               Otevírací doby
             </h1>
@@ -110,28 +109,15 @@ export default function LipnoOpeningHoursPage() {
         </section>
 
         <section className="px-4 pt-8 pb-4">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <a
-              href="https://www.lipno.info/oteviraci-a-provozni-doby.html"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-[2rem] p-6 block"
-              style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Zdroj</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight text-white">Otevřít oficiální rozpis</h2>
-              <p className="mt-3 text-sm leading-relaxed text-white/82">Přímý vstup na Lipno.info pro ověření posledních změn nebo mimořádných provozů.</p>
-            </a>
-            <Link
-              href="/mapa"
-              className="rounded-[2rem] p-6 block"
-              style={{ background: "#fff", boxShadow: "0 14px 30px rgba(12,74,110,0.08)", border: "1px solid rgba(12,74,110,0.08)" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Další krok</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight" style={{ color: lipnoBrand.primary }}>Přejít na mapu areálu</h2>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Navazující orientace v areálu se službami, gastrem a detaily míst.</p>
-            </Link>
-          </div>
+          <Link
+            href="/mapa"
+            className="rounded-[2rem] p-6 block"
+            style={{ background: "#fff", boxShadow: "0 14px 30px rgba(12,74,110,0.08)", border: "1px solid rgba(12,74,110,0.08)" }}
+          >
+            <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Další krok</p>
+            <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight" style={{ color: lipnoBrand.primary }}>Přejít na mapu areálu</h2>
+            <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Navazující orientace v areálu se službami, gastrem a detaily míst.</p>
+          </Link>
         </section>
       </main>
       <LipnoBottomNav />

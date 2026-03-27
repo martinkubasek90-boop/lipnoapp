@@ -166,30 +166,17 @@ export default async function AttractionDetailPage({ params }: AttractionDetailP
                 </a>
               )
             ) : (
-              <a
-                href={attraction.sourceUrl}
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                href="/mapa"
                 className="rounded-[1.8rem] p-5 block"
-                style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+                style={{ background: lipnoBrand.primarySoft, border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
               >
-                <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Zdroj</p>
-                <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight" style={{ color: lipnoBrand.primary }}>Oficiální stránka</h2>
-                <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Plný detail atrakce na Lipno.info včetně případných sezónních aktualizací.</p>
-              </a>
+                <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.primary }}>V areálu</p>
+                <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight" style={{ color: lipnoBrand.primary }}>Zobrazit v mapě</h2>
+                <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Napojení na interaktivní mapu a další body v okolí.</p>
+              </Link>
             )}
           </div>
-          <a
-            href={attraction.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-3 rounded-[1.8rem] p-5 block"
-            style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
-          >
-            <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Zdroj</p>
-            <h2 className="mt-3 font-headline text-2xl font-extrabold leading-tight" style={{ color: lipnoBrand.primary }}>Otevřít oficiální detail</h2>
-            <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Originální detail na Lipno.info s plnými provozními informacemi a poslední aktualizací.</p>
-          </a>
         </section>
 
         {related.length > 0 ? (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
@@ -19,6 +19,15 @@ const categoryMeta: Record<LipnoMapPointCategory | "vse", { label: string; bg: s
 export default function LipnoMapPage() {
   const [activeCategory, setActiveCategory] = useState<LipnoMapPointCategory | "vse">("vse");
   const [activeId, setActiveId] = useState<string>(lipnoMapPoints[0]?.id ?? "");
+
+  useEffect(() => {
+    const point = new URLSearchParams(window.location.search).get("point");
+    if (!point) return;
+    const selectedPoint = lipnoMapPoints.find((item) => item.id === point);
+    if (!selectedPoint) return;
+    setActiveCategory(selectedPoint.category);
+    setActiveId(selectedPoint.id);
+  }, []);
 
   const visiblePoints = useMemo(
     () => lipnoMapPoints.filter((item) => activeCategory === "vse" || item.category === activeCategory),
@@ -224,28 +233,15 @@ export default function LipnoMapPage() {
         </section>
 
         <section className="px-4 pt-8 pb-4">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <a
-              href="https://www.lipno.info/lipno.html#rodinny-areal-lipno"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-[1.8rem] p-5 block"
-              style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Zdroj mapy</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Oficiální mapa areálu</h2>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Původní rozcestník Rodinného areálu Lipno na Lipno.info.</p>
-            </a>
-            <Link
-              href="/gastro"
-              className="rounded-[1.8rem] p-5 block"
-              style={{ background: lipnoBrand.secondarySoft, border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
-            >
-              <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Nové gastro</p>
-              <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Restaurace a kavárny</h2>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Samostatný přehled gastro podniků a jejich detailových stránek.</p>
-            </Link>
-          </div>
+          <Link
+            href="/gastro"
+            className="rounded-[1.8rem] p-5 block"
+            style={{ background: lipnoBrand.secondarySoft, border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+          >
+            <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Gastro v mapě</p>
+            <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Restaurace a kavárny</h2>
+            <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>Samostatný přehled gastro podniků a jejich detailových stránek.</p>
+          </Link>
         </section>
       </main>
       <LipnoBottomNav />
