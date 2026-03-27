@@ -69,8 +69,17 @@ export default function LipnoMapPage() {
 
         <section className="px-4 pt-4">
           <div className="overflow-hidden rounded-[2rem] bg-white" style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 16px 34px rgba(12,74,110,0.10)" }}>
-            <div className="relative aspect-[16/11] w-full bg-slate-100">
-              <Image src={lipnoMapImage.src} alt={lipnoMapImage.alt} fill className="object-cover" unoptimized />
+            <div
+              className="relative w-full bg-slate-100"
+              style={{ aspectRatio: `${lipnoMapImage.width} / ${lipnoMapImage.height}` }}
+            >
+              <Image
+                src={lipnoMapImage.src}
+                alt={lipnoMapImage.alt}
+                fill
+                className="object-contain"
+                unoptimized
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-[#001E60]/10 via-transparent to-transparent" />
               {visiblePoints.map((point) => {
                 const meta = categoryMeta[point.category];

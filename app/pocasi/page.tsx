@@ -20,6 +20,36 @@ const weeklyForecast = [
   { day: "Út", icon: "wb_sunny", rain: "0 %", low: "14°", high: "25°" },
 ];
 
+const webcams = [
+  {
+    title: "Jezerní",
+    type: "video" as const,
+    poster: "https://exports.holidayinfo.cz/loc_cams_lastimage.php?dc=c5f9fb8c52d57ce4&camid=2176",
+    src: "https://exports.holidayinfo.cz/loc_cams_expvideo_lastvideofile.php?account=lipnoservis:dCekB2egUE9KE&camid=2176&ext=mp4&size=1280x720",
+    href: "https://www.lipno.info/webkamery-na-lipne/15-jezerni.html",
+  },
+  {
+    title: "Restaurant U Yettiho",
+    type: "video" as const,
+    poster: "https://exports.holidayinfo.cz/loc_cams_lastimage.php?dc=c5f9fb8c52d57ce4&camid=2115",
+    src: "https://exports.holidayinfo.cz/loc_cams_expvideo_lastvideofile.php?account=lipnoservis:dCekB2egUE9KE&camid=2115&ext=mp4&size=1280x720",
+    href: "https://www.lipno.info/webkamery-na-lipne/14-restaurant-u-yettiho.html",
+  },
+  {
+    title: "Stezka korunami stromů",
+    type: "video" as const,
+    poster: "https://exports.holidayinfo.cz/loc_cams_lastimage.php?dc=c5f9fb8c52d57ce4&camid=2100",
+    src: "https://exports.holidayinfo.cz/loc_cams_expvideo_lastvideofile.php?account=lipnoservis:dCekB2egUE9KE&camid=2100&ext=mp4&size=1280x720",
+    href: "https://www.lipno.info/webkamery-na-lipne/5-stezka-korunami-stromu.html",
+  },
+  {
+    title: "Království lesa",
+    type: "iframe" as const,
+    src: "https://g0.ipcamlive.com/player/player.php?alias=5afd345fa07a3",
+    href: "https://www.lipno.info/webkamery-na-lipne/13-kralovstvi-lesa.html",
+  },
+];
+
 export default function LipnoWeatherPage() {
   return (
     <>
@@ -141,6 +171,45 @@ export default function LipnoWeatherPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="px-4 pt-8 pb-4">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h2 className="font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Webkamery</h2>
+              <p className="mt-1 text-sm" style={{ color: lipnoBrand.muted }}>Živý pohled z hlavních míst v areálu podle oficiální stránky Lipno.info.</p>
+            </div>
+            <a href="https://www.lipno.info/webkamery-na-lipne.html" target="_blank" rel="noreferrer" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>
+              Všechny →
+            </a>
+          </div>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {webcams.map((camera) => (
+              <div
+                key={camera.title}
+                className="overflow-hidden rounded-[1.8rem] bg-white"
+                style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 12px 24px rgba(12,74,110,0.06)" }}
+              >
+                <div className="relative aspect-video w-full bg-slate-100">
+                  {camera.type === "video" ? (
+                    <video className="h-full w-full object-cover" preload="none" poster={camera.poster} controls playsInline>
+                      <source src={camera.src} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <iframe className="h-full w-full" src={camera.src} title={camera.title} loading="lazy" />
+                  )}
+                </div>
+                <div className="p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="font-headline text-lg font-extrabold" style={{ color: lipnoBrand.ink }}>{camera.title}</h3>
+                    <a href={camera.href} target="_blank" rel="noreferrer" className="text-xs font-bold uppercase tracking-[0.12em]" style={{ color: lipnoBrand.primary }}>
+                      Detail
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       </main>
