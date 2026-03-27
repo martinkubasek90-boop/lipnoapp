@@ -201,7 +201,7 @@ export default function LipnoRentalsPage() {
                   </div>
                 </div>
                 <div className="relative hidden h-56 w-[15.5rem] shrink-0 md:block">
-                  <Image src="/uploads/lipnocard-cards-transparent.png" alt="Grafika karet Lipno.card" fill className="object-contain drop-shadow-[0_20px_36px_rgba(0,0,0,0.22)]" unoptimized />
+                  <Image src="/uploads/lipnocard-cards-clean.png" alt="Grafika karet Lipno.card" fill className="object-contain drop-shadow-[0_20px_36px_rgba(0,0,0,0.22)]" unoptimized />
                 </div>
               </div>
             </div>
