@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
+import HomeWeatherPanel from "@/components/lipno/HomeWeatherPanel";
 import { useSeason } from "@/components/lipno/SeasonProvider";
 import { lipnoCalendarEvents } from "@/lib/lipno-calendar";
 import {
@@ -28,23 +29,6 @@ export default function LipnoHomePage() {
     { id: "calendar", title: "Kalendář", icon: "event", href: "/kalendar", description: "Aktuální akce a program resortu." },
     { id: "gastro", title: "Gastro", icon: "restaurant", href: "/gastro", description: "Restaurace, kavárny a podniky." },
   ];
-  const hourlyForecast = isWinter
-    ? [
-        { time: "14:00", temp: "-2°", icon: "ac_unit" },
-        { time: "15:00", temp: "-3°", icon: "cloud" },
-        { time: "16:00", temp: "-3°", icon: "weather_mix" },
-        { time: "17:00", temp: "-4°", icon: "cloudy_snowing" },
-        { time: "18:00", temp: "-5°", icon: "nights_stay" },
-        { time: "19:00", temp: "-5°", icon: "nights_stay" },
-      ]
-    : [
-        { time: "14:00", temp: "27°", icon: "wb_sunny" },
-        { time: "15:00", temp: "28°", icon: "wb_sunny" },
-        { time: "16:00", temp: "26°", icon: "partly_cloudy_day" },
-        { time: "17:00", temp: "24°", icon: "cloud" },
-        { time: "18:00", temp: "23°", icon: "rainy" },
-        { time: "19:00", temp: "21°", icon: "wb_twilight" },
-      ];
   const calendarCards = lipnoCalendarEvents.slice(0, 4);
 
   return (
@@ -162,53 +146,7 @@ export default function LipnoHomePage() {
           </div>
         </section>
 
-        <section className="px-4 pt-8">
-          <div
-            className="rounded-[2rem] p-5 text-center"
-            style={{ background: "linear-gradient(180deg, rgba(0,30,96,0.96), rgba(0,54,120,0.92) 58%, rgba(0,150,57,0.82) 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.16)" }}
-          >
-            <h2 className="font-headline text-2xl font-extrabold text-white">Aktuální předpověď</h2>
-            <div className="mt-5 -mx-1 overflow-x-auto pb-1 hide-scrollbar">
-              <div className="flex min-w-max gap-3 px-1">
-              {hourlyForecast.map((item) => (
-                <div
-                  key={item.time}
-                  className="w-[6.6rem] shrink-0 rounded-[1.2rem] px-2 py-4 text-center"
-                  style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.10)" }}
-                >
-                  <p className="text-xs font-bold text-white/72">{item.time}</p>
-                  <span
-                    className="material-symbols-outlined mt-2 text-[2rem]"
-                    style={{
-                      color:
-                        item.icon === "wb_sunny"
-                          ? "#fbbf24"
-                          : item.icon === "rainy"
-                            ? "#60a5fa"
-                            : item.icon === "cloudy_snowing" || item.icon === "ac_unit"
-                              ? "#93c5fd"
-                              : "#ffffff",
-                    }}
-                  >
-                    {item.icon}
-                  </span>
-                  <p className="mt-2 text-xl font-black text-white">{item.temp}</p>
-                </div>
-              ))}
-              </div>
-            </div>
-            <div className="mt-5">
-              <Link
-                href="/pocasi"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-bold"
-                style={{ background: "rgba(255,255,255,0.94)", color: lipnoBrand.primary }}
-              >
-                Detailní předpověď
-                <span className="material-symbols-outlined text-base">arrow_forward</span>
-              </Link>
-            </div>
-          </div>
-        </section>
+        <HomeWeatherPanel />
 
         <section className="px-4 pt-8">
           <div className="flex items-center justify-between">

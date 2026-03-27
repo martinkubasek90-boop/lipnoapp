@@ -1,24 +1,8 @@
 import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
-import { lipnoBrand, lipnoConditions } from "@/lib/lipno-data";
-
-const hourlyForecast = [
-  { time: "Teď", temp: "24°", icon: "wb_sunny", active: true },
-  { time: "14:00", temp: "25°", icon: "wb_sunny" },
-  { time: "15:00", temp: "26°", icon: "partly_cloudy_day" },
-  { time: "16:00", temp: "24°", icon: "cloud" },
-  { time: "17:00", temp: "22°", icon: "rainy" },
-  { time: "18:00", temp: "21°", icon: "cloud" },
-];
-
-const weeklyForecast = [
-  { day: "Dnes", icon: "wb_sunny", rain: "0 %", low: "14°", high: "24°" },
-  { day: "So", icon: "partly_cloudy_day", rain: "10 %", low: "15°", high: "26°" },
-  { day: "Ne", icon: "rainy", rain: "60 %", low: "12°", high: "19°" },
-  { day: "Po", icon: "cloud", rain: "20 %", low: "13°", high: "21°" },
-  { day: "Út", icon: "wb_sunny", rain: "0 %", low: "14°", high: "25°" },
-];
+import { lipnoBrand } from "@/lib/lipno-data";
+import { getLipnoWeatherSnapshot } from "@/lib/windy";
 
 const webcams = [
   {
@@ -50,7 +34,9 @@ const webcams = [
   },
 ];
 
-export default function LipnoWeatherPage() {
+export default async function LipnoWeatherPage() {
+  const weather = await getLipnoWeatherSnapshot();
+
   return (
     <>
       <LipnoTopBar />
@@ -65,32 +51,32 @@ export default function LipnoWeatherPage() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <span className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: "rgba(255,255,255,0.12)" }}>
-                    Aktuálně
+                    {weather.source === "windy" ? `Windy · ${weather.updatedAt}` : "Aktuálně"}
                   </span>
                   <h1 className="mt-4 font-headline text-3xl font-extrabold tracking-tight">Počasí na Lipně</h1>
-                  <p className="mt-2 text-sm text-white/78">Lipno nad Vltavou · jasno a dobré podmínky pro den u jezera.</p>
+                  <p className="mt-2 text-sm text-white/78">{weather.summary}</p>
                 </div>
-                <span className="material-symbols-outlined text-6xl" style={{ fontVariationSettings: "'FILL' 1" }}>wb_sunny</span>
+                <span className="material-symbols-outlined text-6xl" style={{ fontVariationSettings: "'FILL' 1" }}>{weather.currentIcon}</span>
               </div>
               <div className="mt-8 flex items-end gap-3">
-                <span className="font-headline text-7xl font-black leading-none">24°</span>
+                <span className="font-headline text-7xl font-black leading-none">{weather.currentTemp}</span>
                 <div className="pb-2 text-sm font-bold text-white/80">
-                  <p>↑ 26°</p>
-                  <p>↓ 14°</p>
+                  <p>↑ {weather.highTemp}</p>
+                  <p>↓ {weather.lowTemp}</p>
                 </div>
               </div>
               <div className="mt-6 grid grid-cols-3 gap-3 rounded-[1.5rem] p-4" style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.12)" }}>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/60">Vítr</p>
-                  <p className="mt-2 text-lg font-black">{lipnoConditions.wind}</p>
+                  <p className="mt-2 text-lg font-black">{weather.windLabel}</p>
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/60">Voda</p>
-                  <p className="mt-2 text-lg font-black">19 °C</p>
+                  <p className="mt-2 text-lg font-black">{weather.waterTempLabel}</p>
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/60">Webkamery</p>
-                  <p className="mt-2 text-lg font-black">5</p>
+                  <p className="mt-2 text-lg font-black">{weather.webcamCountLabel}</p>
                 </div>
               </div>
             </div>
@@ -108,7 +94,7 @@ export default function LipnoWeatherPage() {
             </a>
           </div>
           <div className="mt-4 flex gap-3 overflow-x-auto hide-scrollbar pb-2">
-            {hourlyForecast.map((item) => (
+            {weather.hourlyForecast.map((item) => (
               <div
                 key={item.time}
                 className="flex w-20 shrink-0 flex-col items-center gap-3 rounded-[1.6rem] px-3 py-4"
@@ -128,7 +114,7 @@ export default function LipnoWeatherPage() {
           <div className="rounded-[2rem] bg-white p-5" style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}>
             <h2 className="font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Předpověď na 5 dní</h2>
             <div className="mt-4 space-y-3">
-              {weeklyForecast.map((item) => (
+              {weather.weeklyForecast.map((item) => (
                 <div key={item.day} className="flex items-center justify-between rounded-[1.4rem] px-4 py-3" style={{ background: "rgba(0,30,96,0.03)" }}>
                   <span className="w-12 text-sm font-bold" style={{ color: lipnoBrand.ink }}>{item.day}</span>
                   <div className="flex items-center gap-2 text-sm" style={{ color: lipnoBrand.muted }}>
