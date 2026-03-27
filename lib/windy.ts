@@ -1,4 +1,5 @@
 const WINDY_POINT_FORECAST_URL = "https://api.windy.com/api/point-forecast/v2";
+const LIPNO_TIMEZONE = "Europe/Prague";
 
 const LIPNO_LAT = 48.6396;
 const LIPNO_LON = 14.2294;
@@ -115,6 +116,14 @@ function getMonthlyWaterTempLabel(date: Date) {
   return `${average} °C`;
 }
 
+function precipMetersToMillimeters(value: number | null | undefined) {
+  if (typeof value !== "number" || Number.isNaN(value)) {
+    return 0;
+  }
+
+  return value * 1000;
+}
+
 function formatPrecipLabel(totalPrecipMm: number) {
   if (totalPrecipMm < 0.2) {
     return "0 mm";
@@ -136,7 +145,7 @@ function getCloudCover(data: WindyResponse, index: number) {
 }
 
 function getWeatherIcon(data: WindyResponse, index: number) {
-  const precip = data["past3hprecip-surface"]?.[index] ?? 0;
+  const precip = precipMetersToMillimeters(data["past3hprecip-surface"]?.[index]);
   const ptype = data["ptype-surface"]?.[index] ?? 0;
   const cloudCover = getCloudCover(data, index);
   const temp = celsius(data["temp-surface"]?.[index]);
@@ -188,7 +197,7 @@ function getDayLabel(date: Date, isFirst: boolean) {
     return "Dnes";
   }
 
-  return new Intl.DateTimeFormat("cs-CZ", { weekday: "short" })
+  return new Intl.DateTimeFormat("cs-CZ", { weekday: "short", timeZone: LIPNO_TIMEZONE })
     .format(date)
     .replace(".", "");
 }
@@ -202,6 +211,7 @@ function getHourLabel(date: Date, isFirst: boolean) {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
+    timeZone: LIPNO_TIMEZONE,
   }).format(date);
 }
 
@@ -243,6 +253,7 @@ function buildWeatherSnapshot(data: WindyResponse): LipnoWeatherSnapshot {
     month: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: LIPNO_TIMEZONE,
   }).format(todayDate);
 
   const currentIcon = getWeatherIcon(data, nowIndex);
@@ -257,7 +268,7 @@ function buildWeatherSnapshot(data: WindyResponse): LipnoWeatherSnapshot {
     .map((timestamp, index) => ({
       date: new Date(timestamp),
       temp: celsius(data["temp-surface"]?.[index]),
-      precip: data["past3hprecip-surface"]?.[index] ?? 0,
+      precip: precipMetersToMillimeters(data["past3hprecip-surface"]?.[index]),
       index,
     }))
     .filter(({ date }) => date.toDateString() === todayDate.toDateString());
@@ -288,7 +299,7 @@ function buildWeatherSnapshot(data: WindyResponse): LipnoWeatherSnapshot {
       const temps = bucket.indices
         .map((index) => celsius(data["temp-surface"]?.[index]))
         .filter((value): value is number => typeof value === "number");
-      const precipTotal = bucket.indices.reduce((sum, index) => sum + (data["past3hprecip-surface"]?.[index] ?? 0), 0);
+      const precipTotal = bucket.indices.reduce((sum, index) => sum + precipMetersToMillimeters(data["past3hprecip-surface"]?.[index]), 0);
       const midpointIndex = bucket.indices[Math.floor(bucket.indices.length / 2)] ?? bucket.indices[0];
 
       return {
