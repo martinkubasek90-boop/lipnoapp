@@ -187,7 +187,7 @@ export default async function LipnoWeatherPage() {
                 className="h-full w-full"
                 width="650"
                 height="450"
-                src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=%C2%B0C&metricWind=m/s&zoom=11&overlay=wind&product=ecmwf&level=surface&lat=48.599&lon=14.221&detailLat=48.64&detailLon=14.221&detail=true"
+                src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=11&overlay=radar&product=radar&level=surface&lat=48.616&lon=14.242&detailLat=48.63790003903614&detailLon=14.225234985351564&marker=true"
                 title="Windy Lipno"
                 frameBorder="0"
                 loading="lazy"

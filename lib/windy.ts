@@ -150,11 +150,27 @@ function getWeatherIcon(data: WindyResponse, index: number) {
   const cloudCover = getCloudCover(data, index);
   const temp = celsius(data["temp-surface"]?.[index]);
 
-  if (ptype === 5 || (precip > 0.3 && typeof temp === "number" && temp <= 1)) {
+  switch (ptype) {
+    case 5:
+      return "cloudy_snowing";
+    case 7:
+      return "weather_mix";
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 6:
+    case 8:
+      return "rainy";
+    default:
+      break;
+  }
+
+  if (precip > 0.3 && typeof temp === "number" && temp <= 1) {
     return "cloudy_snowing";
   }
 
-  if (ptype === 7 || precip >= 4) {
+  if (precip >= 4) {
     return "rainy";
   }
 
@@ -183,6 +199,8 @@ function getSummaryFromIcon(icon: string) {
       return "proměnlivo a místy přeháňky";
     case "cloudy_snowing":
       return "sněhové přeháňky";
+    case "weather_mix":
+      return "smíšené srážky a proměnlivé podmínky";
     case "cloud":
       return "oblačno";
     case "partly_cloudy_day":

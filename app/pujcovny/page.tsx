@@ -200,8 +200,8 @@ export default function LipnoRentalsPage() {
                     <span className="material-symbols-outlined text-base">arrow_forward</span>
                   </div>
                 </div>
-                <div className="relative hidden h-40 w-44 shrink-0 md:block">
-                  <Image src="/uploads/lipnocard-cards.jpg" alt="Grafika karet Lipno.card" fill className="object-contain drop-shadow-[0_18px_32px_rgba(0,0,0,0.24)]" unoptimized />
+                <div className="relative hidden h-56 w-[15.5rem] shrink-0 md:block">
+                  <Image src="/uploads/lipnocard-cards-transparent.png" alt="Grafika karet Lipno.card" fill className="object-contain drop-shadow-[0_20px_36px_rgba(0,0,0,0.22)]" unoptimized />
                 </div>
               </div>
             </div>

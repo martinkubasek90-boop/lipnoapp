@@ -498,7 +498,7 @@ export const lipnoSeasonCopy: Record<LipnoSeason, {
 }> = {
   leto: {
     label: "Léto",
-    heroTitle: "Lipno,\nCelý den\nplný zážitků.",
+    heroTitle: "Lipno.\nCelý den\nplný zážitků.",
     heroText: "Sport, půjčovny, dobrý oběd a akce v areálu — přehledně na jednom místě.",
     weatherLabel: "Počasí",
     conditionsLabel: "Voda",
@@ -507,7 +507,7 @@ export const lipnoSeasonCopy: Record<LipnoSeason, {
   },
   zima: {
     label: "Zima",
-    heroTitle: "Lipno,\nCelý den\nplný zážitků.",
+    heroTitle: "Lipno.\nCelý den\nplný zážitků.",
     heroText: "Sport, půjčovny, dobrý oběd a akce v areálu — přehledně na jednom místě.",
     weatherLabel: "Počasí",
     conditionsLabel: "Sníh",
