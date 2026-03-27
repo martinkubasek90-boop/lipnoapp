@@ -112,7 +112,7 @@ export default function LipnoExperiencesPage() {
               <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Aktivity</h2>
               <p className="text-xs mt-0.5" style={{ color: lipnoBrand.muted }}>Největší zážitky resortu s rychlým detailem a kontaktem.</p>
             </div>
-            <Link href="/zazitky" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</Link>
+            <Link href="/aktivity" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</Link>
           </div>
           <div className="mt-4 -mx-4 overflow-x-auto px-4 pb-2 hide-scrollbar">
             <div className="flex gap-4">

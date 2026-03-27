@@ -6,7 +6,7 @@ import { lipnoBrand } from "@/lib/lipno-data";
 
 const items = [
   { href: "/", icon: "home", label: "Domů" },
-  { href: "/zazitky", icon: "explore", label: "Aktivity" },
+  { href: "/zazitky", icon: "explore", label: "Zážitky" },
   { href: "/mapa", icon: "map", label: "Mapa" },
   { href: "/lipnocard", icon: "person", label: "Moje Lipno" },
   { href: "/ai", icon: "pets", label: "FOX AI" },
