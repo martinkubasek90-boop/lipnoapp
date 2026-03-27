@@ -95,7 +95,7 @@ export default function LipnoHomePage() {
                   Čtvrtek, 26. března 2026
                 </div>
                 <h1
-                  className="mt-4 font-headline text-[2.7rem] font-extrabold leading-[0.9] tracking-tight text-white md:text-[3.5rem]"
+                  className="mt-4 font-headline text-[2.45rem] font-extrabold leading-[0.9] tracking-tight text-white md:text-[3.15rem]"
                   style={{ textShadow: "0 10px 28px rgba(0,0,0,0.24)" }}
                 >
                   {seasonCopy.heroTitle.split("\n").map((line, index) => (
