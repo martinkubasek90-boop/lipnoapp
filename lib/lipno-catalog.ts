@@ -14,6 +14,8 @@ export type LipnoRentalDetail = {
   location: string;
   phone: string;
   email: string;
+  heroImage: string;
+  imageAlt: string;
   sourceUrl: string;
   bookingUrl?: string;
   season: "leto";
@@ -48,6 +50,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "Půjčovna pláž, Beach aréna, pláž pod bazénem a Camping Lipno Modřín",
     phone: "+420 731 410 813",
     email: "rent@lipnoservis.cz",
+    heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-16790497742499-171-img-174.jpg",
+    imageAlt: "Vodní plavidla Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/vodni-plavidla.html",
     teaser: "Nejsilnější letní půjčovna pro rodiny u vody. Jednoduchý start, rychlá výpůjčka a jasný ceník po hodinách.",
     season: "leto",
@@ -77,6 +81,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "Půjčovna INTERSPORT Element u centrálního parkoviště",
     phone: "+420 731 656 154",
     email: "bike@lipnoservis.cz",
+    heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-16789575176249-171-lipno-kola-3.jpg",
+    imageAlt: "Bikepark půjčovna Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/bikepark-pujcovna.html",
     bookingUrl: "https://lipno.onlineshop.ws/cs/",
     teaser: "Silná landing page pro letní adrenalin. Kolo, komplet s chrániči i online rezervace se slevou na jednom místě.",
@@ -108,6 +114,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "Intersport Rent Lipno, Kapitanát",
     phone: "+420 731 410 813",
     email: "rent@lipnoservis.cz",
+    heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-16790497742499-171-img-174.jpg",
+    imageAlt: "Elektročluny Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/elektrocluny.html",
     bookingUrl: "https://lipno.onlineshop.ws/cs/",
     teaser: "Prémiová vodní půjčovna pro delší projížďku po jezeře. Dobrá volba pro rodiny i malé skupiny.",
@@ -138,6 +146,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "Intersport Rent Lipno, Kapitanát",
     phone: "+420 731 410 813",
     email: "rent@lipnoservis.cz",
+    heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-16790497742499-171-img-174.jpg",
+    imageAlt: "Motorové čluny Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/motorove-cluny.html",
     bookingUrl: "https://lipno.onlineshop.ws/cs/",
     teaser: "Pro hosty, kteří chtějí delší čas na vodě a komfortní člun s online rezervací.",
@@ -166,6 +176,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "Intersport Rent Element",
     phone: "+420 731 656 154",
     email: "rent@lipnoservis.cz",
+    heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-17194803846979-171-dsd-4850.jpg",
+    imageAlt: "Kola a příslušenství Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/kola-a-prislusenstvi.html",
     bookingUrl: "https://lipno.onlineshop.ws/cs/",
     teaser: "Nejdůležitější cyklo landing pro léto. Pokrývá běžná kola, e-biky i rodinné příslušenství pro celý pobyt.",
@@ -196,6 +208,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "Intersport Rent Element",
     phone: "+420 731 656 154",
     email: "rent@lipnoservis.cz",
+    heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-17194803846979-171-dsd-4850.jpg",
+    imageAlt: "Elektrokola Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/elektrokola.html",
     bookingUrl: "https://lipno.onlineshop.ws/cs/",
     teaser: "Specializovaná stránka pro hosty, kteří chtějí rovnou e-bike bez procházení celé cyklo nabídky.",
@@ -223,6 +237,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "INTERSPORT Element",
     phone: "+420 731 656 154",
     email: "bike@lipnoservis.cz",
+    heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-16789575176249-171-lipno-kola-3.jpg",
+    imageAlt: "Singletrack půjčovna Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/singletrack-pujcovna.html",
     bookingUrl: "https://lipno.onlineshop.ws/cs/",
     teaser: "Dobrá vstupní stránka pro hosty, kteří chtějí rovnou na trail bez zdržení u obecné nabídky.",
@@ -251,6 +267,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "Intersport Rent u Stezky korunami stromů",
     phone: "+420 731 410 812",
     email: "rent@lipnoservis.cz",
+    heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-16783619593406-171-sjezdove-kolobezky-1.jpg",
+    imageAlt: "Sjezdové koloběžky Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/sjezdove-kolobezky.html",
     bookingUrl: "https://lipno.onlineshop.ws/cs/",
     teaser: "Silná rodinná atrakce na půlden. Má velký marketingový potenciál přímo na homepage i v zážitcích.",
@@ -277,6 +295,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "Intersport Rent Element",
     phone: "+420 731 410 813",
     email: "rent@lipnoservis.cz",
+    heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-16783619593406-171-sjezdove-kolobezky-1.jpg",
+    imageAlt: "Silniční koloběžky Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/silnicni-kolobezky.html",
     bookingUrl: "https://lipno.onlineshop.ws/cs/",
     teaser: "Dobrá alternativní půjčovna pro kratší výlet a odlehčenou aktivitu bez bikeparku.",
@@ -304,6 +324,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "Intersport Rent Lipno, Element u Restaurace Stodola",
     phone: "+420 731 410 813",
     email: "rent@lipnoservis.cz",
+    heroImage: "https://www.lipno.info/files/lipno/images/pujcovna/size2-17194803846979-171-dsd-4850.jpg",
+    imageAlt: "In-line brusle Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/in-line-brusle.html",
     bookingUrl: "https://lipno.onlineshop.ws/cs/shop/detail-1/article/inline-brusle/",
     teaser: "Přímá půjčovna pro jezero, rodiny a aktivní odpoledne bez potřeby kola.",
@@ -332,6 +354,8 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
     location: "Půjčovna INTERSPORT Element",
     phone: "+420 720 471 267",
     email: "rent@lipnoservis.cz",
+    heroImage: "/uploads/rentals-hero.jpg",
+    imageAlt: "Servis a oprava kol Lipno",
     sourceUrl: "https://www.lipno.info/pujcovny/servis-a-oprava-kol.html",
     teaser: "Praktická servisní landing page, která má velkou hodnotu během reálného pobytu v resortu.",
     season: "leto",
@@ -353,6 +377,7 @@ export const lipnoRentalDetails: LipnoRentalDetail[] = [
 export const lipnoCardPage = {
   sourceUrl: "https://www.lipno.info/lipnocard.html",
   shopUrl: "https://www.lipnocard.cz/",
+  accountUrl: "/lipnocard#nakup",
   title: "Lipno.card",
   teaser: "Věrnostní karta plná výhod a tipů, která zrychlí nákup i pobyt v areálu.",
   summary:

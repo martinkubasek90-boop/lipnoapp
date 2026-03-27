@@ -25,7 +25,7 @@ export default function LipnoHomePage() {
   const homeTiles = [
     { id: "tickets", title: "Vstupenky", icon: "confirmation_number", href: "/lipnocard", description: "Lipno.card, výhody a vstupy." },
     { id: "rentals", title: "Půjčovny", icon: "pedal_bike", href: "/pujcovny", description: "Kola, lodě i další vybavení." },
-    { id: "hours", title: "Otevírací doby", icon: "schedule", href: "https://www.lipno.info/provoz.html", description: "Rychlý provoz areálu a služeb." },
+    { id: "hours", title: "Otevírací doby", icon: "schedule", href: "/oteviraci-doby", description: "Rychlý provoz areálu a služeb." },
     { id: "map", title: "Mapy", icon: "map", href: "/mapa", description: "Interaktivní orientace v resortu." },
     { id: "weather", title: "Počasí", icon: isWinter ? "ac_unit" : "wb_sunny", href: "/pocasi", description: "Předpověď, voda a webkamery." },
     { id: "gastro", title: "Gastro", icon: "restaurant", href: "/gastro", description: "Restaurace, kavárny a podniky." },
