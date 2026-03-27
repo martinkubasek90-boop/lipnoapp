@@ -37,14 +37,11 @@ export default function LipnoExperiencesPage() {
               boxShadow: "0 14px 30px rgba(12,74,110,0.08)",
             }}
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: isWinter ? "#1d4ed8" : lipnoBrand.secondary }}>
-              Zážitky na Lipně
-            </p>
             <h1 className="mt-3 max-w-lg font-headline text-3xl font-extrabold tracking-tight md:text-[2.7rem]" style={{ color: lipnoBrand.primary }}>
-              Všechny hlavní zážitky a služby v jednom přehledu
+              Zážitky na Lipně
             </h1>
             <p className="mt-3 max-w-xl text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-              Tady nechávám jen čtyři silné bloky, které už fungují na homepage: kalendář, aktivity, půjčovny a gastro.
+              Všechno, co dnes v areálu zažijete — kalendář akcí, aktivity, půjčovny i dobré jídlo.
             </p>
           </div>
         </section>
@@ -313,13 +310,13 @@ export default function LipnoExperiencesPage() {
             <div className="relative min-h-[13rem] p-6">
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,18,58,0.10),rgba(0,18,58,0.34),rgba(0,18,58,0.52))]" />
               <div className="relative z-10 max-w-[24rem]">
-                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/84" style={{ textShadow: "0 4px 14px rgba(0,0,0,0.28)" }}>
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white" style={{ textShadow: "0 4px 14px rgba(0,0,0,0.28)" }}>
                   Orientace v areálu
                 </p>
                 <h2 className="mt-3 font-headline text-3xl font-extrabold leading-tight text-white" style={{ textShadow: "0 10px 28px rgba(0,0,0,0.36)" }}>
                   Kde jednotlivá místa najdeš v mapě
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-white/94" style={{ textShadow: "0 6px 18px rgba(0,0,0,0.28)" }}>
+                <p className="mt-3 text-sm leading-relaxed text-white" style={{ textShadow: "0 6px 18px rgba(0,0,0,0.28)" }}>
                   Otevři interaktivní mapu a přepínej mezi atrakcemi, gastrem, službami a dopravou podle konkrétní lokality.
                 </p>
                 <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black shadow-lg" style={{ background: "#ffffff", color: lipnoBrand.primary, boxShadow: "0 14px 30px rgba(0,0,0,0.16)" }}>

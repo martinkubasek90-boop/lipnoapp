@@ -22,9 +22,11 @@ export default function LipnoHomePage() {
   const heroVideoUrl = "https://www.lipno.info/files/lipno/uploads/files/video/leto/172121452141-171-lipno-leto-2024.mp4";
   const homeTiles = [
     { id: "tickets", title: "Vstupenky", icon: "confirmation_number", href: "/lipnocard", description: "Lipno.card, výhody a vstupy." },
+    { id: "rentals", title: "Půjčovny", icon: "pedal_bike", href: "/pujcovny", description: "Kola, lodě i další vybavení." },
     { id: "hours", title: "Otevírací doby", icon: "schedule", href: "/oteviraci-doby", description: "Rychlý provoz areálu a služeb." },
     { id: "map", title: "Mapy", icon: "map", href: "/mapa", description: "Interaktivní orientace v resortu." },
     { id: "calendar", title: "Kalendář", icon: "event", href: "/kalendar", description: "Aktuální akce a program resortu." },
+    { id: "gastro", title: "Gastro", icon: "restaurant", href: "/gastro", description: "Restaurace, kavárny a podniky." },
   ];
   const hourlyForecast = isWinter
     ? [
@@ -269,30 +271,6 @@ export default function LipnoHomePage() {
         </section>
 
         <section className="px-4 pt-8">
-          <div className="rounded-[2rem] p-5" style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}>
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>AI průvodce</p>
-                <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Fox doporučuje</h2>
-              </div>
-              <span className="material-symbols-outlined text-3xl" style={{ color: lipnoBrand.accent }}>pets</span>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {lipnoFoxPrompts[season].slice(0, 4).map((prompt) => (
-                <Link
-                  key={prompt}
-                  href="/ai"
-                  className="rounded-full px-3 py-2 text-xs font-semibold"
-                  style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}
-                >
-                  {prompt}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-4 pt-8">
           <Link
             href="/lipnocard"
             className="block overflow-hidden rounded-[2rem]"
@@ -329,15 +307,39 @@ export default function LipnoHomePage() {
             <div className="relative h-56 w-full">
               <Image src="https://www.kolemkolem.info/files/kolemkolem/images/upoutavky/n-17425618510986-302-kolemkolem-00036-1.jpg" alt="KolemKolem" fill className="object-cover" unoptimized />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,16,45,0.12),rgba(0,16,45,0.50),rgba(0,16,45,0.82))]" />
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <h2 className="mt-3 max-w-sm font-headline text-3xl font-extrabold leading-tight text-white" style={{ textShadow: "0 10px 28px rgba(0,0,0,0.38)" }}>Cyklo trasy a plánování po Lipensku</h2>
-                <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black shadow-lg" style={{ background: "#ffffff", color: lipnoBrand.primary, boxShadow: "0 14px 30px rgba(0,0,0,0.18)" }}>
+              <div className="absolute inset-x-0 top-0 p-5">
+                <h2 className="max-w-sm font-headline text-3xl font-extrabold leading-tight text-white" style={{ textShadow: "0 10px 28px rgba(0,0,0,0.38)" }}>Cyklo trasy a plánování po Lipensku</h2>
+                <div className="mt-6 inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black shadow-lg" style={{ background: "#ffffff", color: lipnoBrand.primary, boxShadow: "0 14px 30px rgba(0,0,0,0.18)" }}>
                   Otevřít KolemKolem
                   <span className="material-symbols-outlined text-base">arrow_forward</span>
                 </div>
               </div>
             </div>
           </Link>
+        </section>
+
+        <section className="px-4 pt-8">
+          <div className="rounded-[2rem] p-5" style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}>
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>AI průvodce</p>
+                <h2 className="mt-3 font-headline text-2xl font-extrabold" style={{ color: lipnoBrand.primary }}>Fox doporučuje</h2>
+              </div>
+              <span className="material-symbols-outlined text-3xl" style={{ color: lipnoBrand.accent }}>pets</span>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {lipnoFoxPrompts[season].slice(0, 4).map((prompt) => (
+                <Link
+                  key={prompt}
+                  href="/ai"
+                  className="rounded-full px-3 py-2 text-xs font-semibold"
+                  style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}
+                >
+                  {prompt}
+                </Link>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="px-4 pt-8 pb-4">
