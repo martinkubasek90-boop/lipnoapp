@@ -21,13 +21,13 @@ export default function LipnoInfoCenterPage() {
             style={{ boxShadow: "0 18px 40px rgba(12,74,110,0.18)" }}
           >
             <Image src={lipnoInfocentrumPage.heroImage} alt={lipnoInfocentrumPage.heroAlt} fill className="object-cover" unoptimized />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,30,96,0.28),rgba(5,21,54,0.84))]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,30,96,0.22),rgba(5,21,54,0.54),rgba(5,21,54,0.88))]" />
             <div className="relative z-10 flex min-h-[17rem] flex-col justify-end">
-              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Infocentrum</p>
-              <h1 className="mt-3 max-w-lg font-headline text-3xl font-extrabold tracking-tight text-white md:text-[2.8rem]">
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/84" style={{ textShadow: "0 4px 14px rgba(0,0,0,0.32)" }}>Infocentrum</p>
+              <h1 className="mt-3 max-w-lg font-headline text-3xl font-extrabold tracking-tight text-white md:text-[2.8rem]" style={{ textShadow: "0 10px 28px rgba(0,0,0,0.40)" }}>
                 Praktické zázemí pro celý pobyt na Lipně
               </h1>
-              <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/84">
+              <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/94" style={{ textShadow: "0 6px 18px rgba(0,0,0,0.32)" }}>
                 {lipnoInfocentrumPage.intro}
               </p>
             </div>

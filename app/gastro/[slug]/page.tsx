@@ -34,21 +34,22 @@ export default async function GastroDetailPage({ params }: GastroDetailPageProps
           <div className="overflow-hidden rounded-[2rem]" style={{ background: "#fff", border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 16px 34px rgba(12,74,110,0.10)" }}>
             <div className="relative aspect-[16/10] w-full">
               <Image src={gastro.heroImage} alt={gastro.imageAlt} fill className="object-cover" unoptimized />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#001E60]/78 via-[#001E60]/24 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#00142f]/92 via-[#001e60]/54 to rgba(0,30,96,0.22)" />
+              <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(0,0,0,0.18),transparent)]" />
               <div className="absolute left-4 top-4">
                 <Link
                   href="/gastro"
                   className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-bold text-white"
-                  style={{ background: "rgba(255,255,255,0.14)", backdropFilter: "blur(8px)" }}
+                  style={{ background: "rgba(0,20,52,0.46)", backdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.16)", textShadow: "0 4px 14px rgba(0,0,0,0.34)" }}
                 >
                   <span className="material-symbols-outlined text-base">arrow_back</span>
                   Zpět na gastro
                 </Link>
               </div>
               <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
-                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Gastro podnik</p>
-                <h1 className="mt-3 max-w-xl font-headline text-3xl font-extrabold tracking-tight text-white md:text-[2.8rem]">{gastro.title}</h1>
-                <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/82">{gastro.tagline ?? gastro.teaser}</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/86" style={{ textShadow: "0 4px 14px rgba(0,0,0,0.34)" }}>Gastro podnik</p>
+                <h1 className="mt-3 max-w-xl font-headline text-3xl font-extrabold tracking-tight text-white md:text-[2.8rem]" style={{ textShadow: "0 10px 28px rgba(0,0,0,0.42)" }}>{gastro.title}</h1>
+                <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/94" style={{ textShadow: "0 6px 18px rgba(0,0,0,0.34)" }}>{gastro.tagline ?? gastro.teaser}</p>
               </div>
             </div>
 

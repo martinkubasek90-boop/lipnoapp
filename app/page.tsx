@@ -132,7 +132,7 @@ export default function LipnoHomePage() {
               <p className="mt-0.5 text-xs" style={{ color: lipnoBrand.muted }}>Hlavní vstupy do aplikace a nejdůležitější informace na jednom místě.</p>
             </div>
           </div>
-          <div className="mt-4 grid grid-cols-3 gap-3">
+          <div className="mt-4 grid grid-cols-2 gap-3">
             {homeTiles.map((item) => {
               const external = item.href.startsWith("http");
               const content = (
@@ -502,15 +502,15 @@ export default function LipnoHomePage() {
             style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
           >
             <div className="relative min-h-[14rem] p-6">
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,18,58,0.18),rgba(0,18,58,0.28))]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,18,58,0.12),rgba(0,18,58,0.36),rgba(0,18,58,0.54))]" />
               <div className="absolute right-[-1rem] top-[-1rem] h-28 w-28 rounded-full blur-3xl" style={{ background: "rgba(255,255,255,0.16)" }} />
               <div className="relative z-10">
-                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/76">Lipno.card</p>
-                <h2 className="mt-3 max-w-sm font-headline text-3xl font-extrabold leading-tight text-white">Výhody, karta a nákup online</h2>
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-white/88">
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/84" style={{ textShadow: "0 4px 14px rgba(0,0,0,0.28)" }}>Lipno.card</p>
+                <h2 className="mt-3 max-w-sm font-headline text-3xl font-extrabold leading-tight text-white" style={{ textShadow: "0 10px 28px rgba(0,0,0,0.36)" }}>Výhody, karta a nákup online</h2>
+                <p className="mt-3 max-w-md text-sm leading-relaxed text-white/94" style={{ textShadow: "0 6px 18px rgba(0,0,0,0.28)" }}>
                   Jedno místo pro registraci, přidání karty k účtu, slevy v areálu a rychlý vstup do oficiálního nákupu.
                 </p>
-                <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black shadow-lg" style={{ background: "#ffffff", color: lipnoBrand.primary }}>
+                <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black shadow-lg" style={{ background: "#ffffff", color: lipnoBrand.primary, boxShadow: "0 14px 30px rgba(0,0,0,0.16)" }}>
                   Otevřít Lipno.card
                   <span className="material-symbols-outlined text-base">arrow_forward</span>
                 </div>
@@ -527,14 +527,14 @@ export default function LipnoHomePage() {
           >
             <div className="relative h-56 w-full">
               <Image src="https://www.kolemkolem.info/files/kolemkolem/images/upoutavky/n-17425618510986-302-kolemkolem-00036-1.jpg" alt="KolemKolem" fill className="object-cover" unoptimized />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,16,45,0.18),rgba(0,16,45,0.74))]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,16,45,0.12),rgba(0,16,45,0.50),rgba(0,16,45,0.82))]" />
               <div className="absolute inset-x-0 bottom-0 p-5">
-                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/80">KolemKolem</p>
-                <h2 className="mt-3 max-w-sm font-headline text-3xl font-extrabold leading-tight text-white">Cyklo trasy a plánování po Lipensku</h2>
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-white/88">
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/86" style={{ textShadow: "0 4px 14px rgba(0,0,0,0.30)" }}>KolemKolem</p>
+                <h2 className="mt-3 max-w-sm font-headline text-3xl font-extrabold leading-tight text-white" style={{ textShadow: "0 10px 28px rgba(0,0,0,0.38)" }}>Cyklo trasy a plánování po Lipensku</h2>
+                <p className="mt-3 max-w-md text-sm leading-relaxed text-white/94" style={{ textShadow: "0 6px 18px rgba(0,0,0,0.30)" }}>
                   Trasy, plánovač, eventy a cyklo inspirace na jednom místě.
                 </p>
-                <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black shadow-lg" style={{ background: "#ffffff", color: lipnoBrand.primary }}>
+                <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black shadow-lg" style={{ background: "#ffffff", color: lipnoBrand.primary, boxShadow: "0 14px 30px rgba(0,0,0,0.18)" }}>
                   Otevřít KolemKolem
                   <span className="material-symbols-outlined text-base">arrow_forward</span>
                 </div>

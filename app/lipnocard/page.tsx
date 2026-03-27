@@ -26,11 +26,11 @@ export default function LipnoCardLandingPage() {
             style={{ boxShadow: "0 18px 40px rgba(12,74,110,0.18)" }}
           >
             <Image src="https://www.lipno.info/templates/lipno/images/layout/lipnocard-leto.jpg" alt="Lipno.card" fill className="object-cover" unoptimized />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,21,66,0.40),rgba(3,14,38,0.88))]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,21,66,0.22),rgba(3,14,38,0.54),rgba(3,14,38,0.88))]" />
             <div className="relative z-10">
-              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/72">Lipno.card</p>
-              <h1 className="mt-3 font-headline text-3xl font-extrabold md:text-[2.8rem]">{lipnoCardPage.title}</h1>
-              <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/84">{lipnoCardPage.summary}</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/84" style={{ textShadow: "0 4px 14px rgba(0,0,0,0.32)" }}>Lipno.card</p>
+              <h1 className="mt-3 font-headline text-3xl font-extrabold md:text-[2.8rem]" style={{ textShadow: "0 10px 28px rgba(0,0,0,0.40)" }}>{lipnoCardPage.title}</h1>
+              <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/94" style={{ textShadow: "0 6px 18px rgba(0,0,0,0.32)" }}>{lipnoCardPage.summary}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <a
                   href={lipnoCardPage.shopUrl}

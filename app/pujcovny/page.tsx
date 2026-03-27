@@ -23,22 +23,22 @@ export default function LipnoRentalsPage() {
               className="object-cover"
               unoptimized
             />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,21,66,0.44),rgba(3,14,38,0.88))]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,21,66,0.28),rgba(3,14,38,0.56),rgba(3,14,38,0.88))]" />
             <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent)]" />
             <div className="relative z-10 flex min-h-[16rem] flex-col justify-end">
               <p
                 className="inline-flex w-fit rounded-full px-3 py-2 text-[10px] font-black uppercase tracking-[0.16em] text-white/84"
-                style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", textShadow: "0 4px 12px rgba(0,0,0,0.28)" }}
+                style={{ background: "rgba(0,20,52,0.42)", backdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.16)", textShadow: "0 4px 12px rgba(0,0,0,0.32)" }}
               >
                 Půjčovny v areálu
               </p>
               <h1
                 className="mt-3 max-w-lg font-headline text-3xl font-extrabold tracking-tight text-white md:text-[2.8rem]"
-                style={{ textShadow: "0 10px 30px rgba(0,0,0,0.38)" }}
+                style={{ textShadow: "0 12px 32px rgba(0,0,0,0.44)" }}
               >
                 Půjčovny a servis na Lipně
               </h1>
-              <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/92" style={{ textShadow: "0 8px 24px rgba(0,0,0,0.34)" }}>
+              <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/96" style={{ textShadow: "0 8px 24px rgba(0,0,0,0.38)" }}>
                 Kola, voda, koloběžky i servis v jednom přehledu. Každá karta drží fotku, provoz, detail a přímé zavolání.
               </p>
             </div>
