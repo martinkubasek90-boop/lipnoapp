@@ -7,6 +7,7 @@ import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
 import { useSeason } from "@/components/lipno/SeasonProvider";
 import { lipnoAttractions } from "@/lib/lipno-attractions";
 import { lipnoRentalDetails } from "@/lib/lipno-catalog";
+import { lipnoCalendarEvents } from "@/lib/lipno-calendar";
 import { lipnoGastroDetails } from "@/lib/lipno-gastro";
 import {
   lipnoBrand,
@@ -15,6 +16,7 @@ import {
   lipnoSeasonCopy,
   lipnoSeasonHero,
 } from "@/lib/lipno-data";
+import { getLipnoOpenState } from "@/lib/lipno-schedule";
 
 export default function LipnoHomePage() {
   const { season } = useSeason();
@@ -27,7 +29,7 @@ export default function LipnoHomePage() {
     { id: "rentals", title: "Půjčovny", icon: "pedal_bike", href: "/pujcovny", description: "Kola, lodě i další vybavení." },
     { id: "hours", title: "Otevírací doby", icon: "schedule", href: "/oteviraci-doby", description: "Rychlý provoz areálu a služeb." },
     { id: "map", title: "Mapy", icon: "map", href: "/mapa", description: "Interaktivní orientace v resortu." },
-    { id: "weather", title: "Počasí", icon: isWinter ? "ac_unit" : "wb_sunny", href: "/pocasi", description: "Předpověď, voda a webkamery." },
+    { id: "calendar", title: "Kalendář", icon: "event", href: "/kalendar", description: "Aktuální akce a program resortu." },
     { id: "gastro", title: "Gastro", icon: "restaurant", href: "/gastro", description: "Restaurace, kavárny a podniky." },
   ];
   const hourlyForecast = isWinter
@@ -49,35 +51,10 @@ export default function LipnoHomePage() {
       ];
   const rentalCards = lipnoRentalDetails;
   const gastroCards = lipnoGastroDetails.slice(0, 4);
+  const calendarCards = lipnoCalendarEvents.slice(0, 4);
   const activityCards = lipnoAttractions
     .filter((item) => (isWinter ? item.slug !== "kralovstvi-lesa" && item.slug !== "bikepark-lipno" : true))
     .slice(0, 4);
-
-  function getOpenState(openingHours: string[]) {
-    const now = new Date();
-    const currentMinutes = now.getHours() * 60 + now.getMinutes();
-    const candidate = openingHours.find((item) => /\d{1,2}:\d{2}\s*[–-]\s*\d{1,2}:\d{2}/.test(item));
-
-    if (!candidate) {
-      return { label: "Ověřit provoz", open: null as boolean | null };
-    }
-
-    const match = candidate.match(/(\d{1,2}:\d{2})\s*[–-]\s*(\d{1,2}:\d{2})/);
-    if (!match) {
-      return { label: "Ověřit provoz", open: null as boolean | null };
-    }
-
-    const toMinutes = (value: string) => {
-      const [hours, minutes] = value.split(":").map(Number);
-      return hours * 60 + minutes;
-    };
-
-    const openMinutes = toMinutes(match[1]);
-    const closeMinutes = toMinutes(match[2]);
-    const isOpen = currentMinutes >= openMinutes && currentMinutes <= closeMinutes;
-
-    return { label: isOpen ? "Otevřeno" : "Zavřeno", open: isOpen };
-  }
 
   return (
     <>
@@ -245,6 +222,66 @@ export default function LipnoHomePage() {
         <section className="px-4 pt-8">
           <div className="flex items-center justify-between">
             <div>
+              <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Kalendář</h2>
+              <p className="text-xs mt-0.5" style={{ color: lipnoBrand.muted }}>Aktuální akce převzaté z oficiálního kalendáře Lipno.info.</p>
+            </div>
+            <Link href="/kalendar" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</Link>
+          </div>
+          <div className="mt-4 -mx-4 overflow-x-auto px-4 pb-2 hide-scrollbar">
+            <div className="flex gap-4">
+              {calendarCards.map((item) => (
+                <article
+                  key={item.slug}
+                  className="w-[18.5rem] shrink-0 overflow-hidden rounded-[1.9rem] bg-white"
+                  style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+                >
+                  <div className="relative h-44 w-full">
+                    <Image src={item.image} alt={item.imageAlt} fill className="object-cover" unoptimized />
+                    <div className="absolute inset-x-0 bottom-0 h-20" style={{ background: "linear-gradient(180deg, transparent, rgba(5,21,54,0.72))" }} />
+                    {item.endLabel ? (
+                      <div className="absolute left-4 top-4">
+                        <span
+                          className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]"
+                          style={{ background: "rgba(254,240,138,0.96)", color: "#854d0e" }}
+                        >
+                          {item.endLabel}
+                        </span>
+                      </div>
+                    ) : null}
+                  </div>
+                  <div className="p-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}>
+                        {item.dateLabel}
+                      </span>
+                      {item.timeLabel ? (
+                        <span className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]" style={{ background: lipnoBrand.secondarySoft, color: lipnoBrand.secondary }}>
+                          {item.timeLabel}
+                        </span>
+                      ) : null}
+                    </div>
+                    <h3 className="mt-3 font-headline text-xl font-extrabold" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.teaser}</p>
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold"
+                      style={{ background: lipnoBrand.primary, color: "#fff" }}
+                    >
+                      Detail akce
+                      <span className="material-symbols-outlined">open_in_new</span>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-4 pt-8">
+          <div className="flex items-center justify-between">
+            <div>
               <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Aktivity</h2>
               <p className="text-xs mt-0.5" style={{ color: lipnoBrand.muted }}>Největší zážitky resortu s rychlým detailem a kontaktem.</p>
             </div>
@@ -253,7 +290,7 @@ export default function LipnoHomePage() {
           <div className="mt-4 -mx-4 overflow-x-auto px-4 pb-2 hide-scrollbar">
             <div className="flex gap-4">
               {activityCards.map((item) => {
-                const openState = getOpenState(item.openingHours);
+                const openState = getLipnoOpenState(item.openingHours);
                 return (
                   <article
                     key={item.slug}
@@ -317,7 +354,7 @@ export default function LipnoHomePage() {
           <div className="mt-4 -mx-4 overflow-x-auto px-4 pb-2 hide-scrollbar">
             <div className="flex gap-4">
               {rentalCards.map((item) => {
-                const openState = getOpenState(item.openingHours);
+                const openState = getLipnoOpenState(item.openingHours);
                 return (
                   <article
                     key={item.slug}
@@ -381,7 +418,7 @@ export default function LipnoHomePage() {
           <div className="mt-4 -mx-4 overflow-x-auto px-4 pb-2 hide-scrollbar">
             <div className="flex gap-4">
               {gastroCards.map((item) => {
-                const openState = getOpenState(item.openingHours);
+                const openState = getLipnoOpenState(item.openingHours);
                 return (
                   <article
                     key={item.slug}
@@ -475,11 +512,8 @@ export default function LipnoHomePage() {
         </section>
 
         <section className="px-4 pt-8 pb-4">
-          <a
-            href="https://www.lipno.info/infocentrum.html"
-            target="_blank"
-            rel="noreferrer"
-            className="block rounded-[2rem] p-5"
+          <div
+            className="rounded-[2rem] p-5"
             style={{ background: "#fff", boxShadow: "0 14px 30px rgba(12,74,110,0.08)", border: "1px solid rgba(12,74,110,0.08)" }}
           >
             <div className="flex items-center justify-between gap-3">
@@ -487,12 +521,23 @@ export default function LipnoHomePage() {
                 <p className="text-[10px] font-black uppercase tracking-[0.16em]" style={{ color: lipnoBrand.secondary }}>Infocentrum</p>
                 <h2 className="mt-3 font-headline text-3xl font-extrabold" style={{ color: lipnoBrand.primary }}>Kontaktujte nás</h2>
               </div>
-              <span className="material-symbols-outlined text-2xl" style={{ color: lipnoBrand.primary }}>arrow_forward</span>
+              <Link href="/infocentrum" className="inline-flex h-12 w-12 items-center justify-center rounded-full" style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}>
+                <span className="material-symbols-outlined text-2xl">arrow_forward</span>
+              </Link>
             </div>
-            <p className="mt-3 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
-              {lipnoInfoCenter.phone} · {lipnoInfoCenter.email} · {lipnoInfoCenter.address}
-            </p>
-          </a>
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>
+              <a
+                href={`tel:${lipnoInfoCenter.phone.replace(/\s+/g, "")}`}
+                className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-bold"
+                style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}
+              >
+                <span className="material-symbols-outlined text-base">call</span>
+                {lipnoInfoCenter.phone}
+              </a>
+              <span>· {lipnoInfoCenter.email}</span>
+              <span>· {lipnoInfoCenter.address}</span>
+            </div>
+          </div>
         </section>
       </main>
       <LipnoBottomNav />
