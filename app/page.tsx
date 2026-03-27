@@ -30,6 +30,23 @@ export default function LipnoHomePage() {
   const seasonQuickActions = lipnoQuickActions.filter((item) => !item.seasons || item.seasons.includes(season)).slice(0, 6);
   const isWinter = season === "zima";
   const heroVideoUrl = "https://www.lipno.info/files/lipno/uploads/files/video/leto/172121452141-171-lipno-leto-2024.mp4";
+  const hourlyForecast = isWinter
+    ? [
+        { time: "14:00", temp: "-2°", icon: "ac_unit" },
+        { time: "15:00", temp: "-3°", icon: "cloud" },
+        { time: "16:00", temp: "-3°", icon: "weather_mix" },
+        { time: "17:00", temp: "-4°", icon: "cloudy_snowing" },
+        { time: "18:00", temp: "-5°", icon: "nights_stay" },
+        { time: "19:00", temp: "-5°", icon: "nights_stay" },
+      ]
+    : [
+        { time: "14:00", temp: "27°", icon: "wb_sunny" },
+        { time: "15:00", temp: "28°", icon: "wb_sunny" },
+        { time: "16:00", temp: "26°", icon: "partly_cloudy_day" },
+        { time: "17:00", temp: "24°", icon: "cloud" },
+        { time: "18:00", temp: "23°", icon: "rainy" },
+        { time: "19:00", temp: "21°", icon: "wb_twilight" },
+      ];
 
   return (
     <>
@@ -37,7 +54,7 @@ export default function LipnoHomePage() {
       <main className="pt-24 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
           <div
-            className="relative overflow-hidden rounded-[2rem] min-h-[25rem] p-5 md:p-6"
+            className="relative overflow-hidden rounded-[2rem] min-h-[30rem] p-5 md:p-7"
             style={{
               background: seasonHero.heroBackground,
               boxShadow: "0 18px 40px rgba(12,74,110,0.18)",
@@ -58,11 +75,11 @@ export default function LipnoHomePage() {
               className="absolute inset-0"
               style={{
                 background: isWinter
-                  ? "linear-gradient(180deg, rgba(0,22,63,0.52) 0%, rgba(11,47,111,0.62) 45%, rgba(22,44,101,0.82) 100%)"
-                  : "linear-gradient(180deg, rgba(0,30,96,0.46) 0%, rgba(0,48,131,0.42) 38%, rgba(0,150,57,0.56) 100%)",
+                  ? "linear-gradient(180deg, rgba(2,18,45,0.28) 0%, rgba(2,18,45,0.50) 28%, rgba(2,18,45,0.78) 62%, rgba(5,21,54,0.92) 100%)"
+                  : "linear-gradient(180deg, rgba(0,30,96,0.22) 0%, rgba(0,30,96,0.42) 30%, rgba(6,24,58,0.72) 64%, rgba(5,21,54,0.90) 100%)",
               }}
             />
-            <div className="absolute inset-x-0 top-0 h-32 opacity-70" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.18), transparent)" }} />
+            <div className="absolute inset-x-0 top-0 h-32 opacity-50" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.14), transparent)" }} />
             <div className="absolute right-[-2rem] top-[-2rem] h-40 w-40 rounded-full blur-2xl" style={{ background: seasonHero.heroGlowSecondary }} />
             <div className="absolute left-[-3rem] bottom-[-4rem] h-52 w-52 rounded-full blur-3xl" style={{ background: seasonHero.heroGlow }} />
             {isWinter ? (
@@ -70,10 +87,18 @@ export default function LipnoHomePage() {
             ) : (
               <div className="absolute inset-x-0 bottom-0 h-28 opacity-30" style={{ background: "linear-gradient(180deg, transparent, rgba(255,255,255,0.12))" }} />
             )}
-            <div className="relative z-10 flex min-h-[22rem] flex-col justify-between">
+            <div className="relative z-10 flex min-h-[26rem] flex-col justify-between">
               <div>
-                <p className="text-sm font-semibold text-white/80">Čtvrtek, 26. března 2026</p>
-                <h1 className="mt-5 font-headline text-[2.9rem] font-extrabold leading-[0.92] tracking-tight text-white md:text-[3.4rem]">
+                <div
+                  className="inline-flex rounded-full px-4 py-2 text-sm font-semibold"
+                  style={{ background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)" }}
+                >
+                  Čtvrtek, 26. března 2026
+                </div>
+                <h1
+                  className="mt-6 font-headline text-[3.2rem] font-extrabold leading-[0.9] tracking-tight text-white md:text-[4.4rem]"
+                  style={{ textShadow: "0 10px 28px rgba(0,0,0,0.24)" }}
+                >
                   {seasonCopy.heroTitle.split("\n").map((line, index) => (
                     <span key={line}>
                       {index > 0 && <br />}
@@ -81,31 +106,61 @@ export default function LipnoHomePage() {
                     </span>
                   ))}
                 </h1>
-                <p className="mt-3 max-w-[18rem] text-sm leading-relaxed text-white/78">
+                <p
+                  className="mt-4 max-w-[26rem] text-base leading-relaxed md:text-lg"
+                  style={{ color: "rgba(255,255,255,0.88)", textShadow: "0 6px 18px rgba(0,0,0,0.18)" }}
+                >
                   {seasonCopy.heroText}
                 </p>
               </div>
 
               <div
-                className="rounded-[1.7rem] px-4 py-3 backdrop-blur-md"
-                style={{ background: seasonHero.panelBackground, border: seasonHero.panelBorder }}
+                className="rounded-[1.9rem] p-4 md:p-5 backdrop-blur-xl"
+                style={{ background: "rgba(255,255,255,0.14)", border: "1px solid rgba(255,255,255,0.18)", boxShadow: "0 18px 34px rgba(0,0,0,0.10)" }}
               >
-                <div className="grid grid-cols-2 gap-3 text-white sm:grid-cols-4">
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">Teplota</p>
-                    <p className="mt-1 font-headline text-xl font-black">{lipnoConditions.weather}</p>
+                <div className="grid gap-4 md:grid-cols-[1.15fr_1fr]">
+                  <div className="grid grid-cols-2 gap-3 text-white">
+                    <div className="rounded-[1.4rem] p-4" style={{ background: "rgba(255,255,255,0.10)" }}>
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-white/62">Teplota</p>
+                      <p className="mt-2 font-headline text-3xl font-black">{lipnoConditions.weather}</p>
+                    </div>
+                    <div className="rounded-[1.4rem] p-4" style={{ background: "rgba(255,255,255,0.10)" }}>
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-white/62">{isWinter ? "Výška sněhu" : "Teplota vody"}</p>
+                      <p className="mt-2 font-headline text-3xl font-black">{isWinter ? lipnoConditions.snow : lipnoConditions.lake}</p>
+                    </div>
+                    <div className="col-span-2 rounded-[1.4rem] p-4" style={{ background: "rgba(255,255,255,0.10)" }}>
+                      <div className="flex items-center justify-between gap-3">
+                        <div>
+                          <p className="text-[11px] uppercase tracking-[0.18em] text-white/62">Přehled dne</p>
+                          <p className="mt-2 text-base font-semibold text-white/92">
+                            {isWinter ? "Sníh, provoz areálu a podmínky na svahu." : "Jezero, rodinné zážitky a den bez zdržení."}
+                          </p>
+                        </div>
+                        <span className="material-symbols-outlined text-3xl text-white/90" style={{ fontVariationSettings: "'FILL' 1" }}>
+                          {isWinter ? "ac_unit" : "wb_sunny"}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{isWinter ? "Výška sněhu" : "Teplota vody"}</p>
-                    <p className="mt-1 font-headline text-xl font-black">{isWinter ? lipnoConditions.snow : lipnoConditions.lake}</p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{isWinter ? "Lanovky" : "Program"}</p>
-                    <p className="mt-1 font-headline text-xl font-black">{isWinter ? lipnoConditions.lifts : "Denní animace"}</p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{seasonHero.statThreeLabel}</p>
-                    <p className="mt-1 text-sm font-semibold">{seasonHero.statThreeValue}</p>
+
+                  <div className="rounded-[1.5rem] bg-white px-4 py-4 text-slate-900 md:px-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-sm font-black uppercase tracking-[0.22em] text-slate-500">Předpověď</p>
+                      <Link href="/pocasi" className="text-xs font-bold uppercase tracking-[0.16em]" style={{ color: lipnoBrand.primary }}>
+                        Detail
+                      </Link>
+                    </div>
+                    <div className="mt-4 grid grid-cols-3 gap-3">
+                      {hourlyForecast.map((item) => (
+                        <div key={item.time} className="rounded-[1.1rem] px-2 py-3 text-center" style={{ background: "rgba(0,30,96,0.04)" }}>
+                          <p className="text-xs font-bold text-slate-500">{item.time}</p>
+                          <span className="material-symbols-outlined mt-2 text-[2rem]" style={{ color: item.icon === "wb_sunny" ? "#f59e0b" : item.icon === "rainy" ? "#2563eb" : item.icon === "cloudy_snowing" || item.icon === "ac_unit" ? "#1d4ed8" : "#374151" }}>
+                            {item.icon}
+                          </span>
+                          <p className="mt-2 text-xl font-black text-slate-900">{item.temp}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
