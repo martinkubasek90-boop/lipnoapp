@@ -144,42 +144,52 @@ function getCloudCover(data: WindyResponse, index: number) {
   return Math.max(low ?? 0, mid ?? 0, high ?? 0);
 }
 
-function getWeatherIcon(data: WindyResponse, index: number) {
+function isDayTime(date: Date) {
+  const localHour = Number(new Intl.DateTimeFormat("en-GB", {
+    hour: "2-digit",
+    hour12: false,
+    timeZone: LIPNO_TIMEZONE,
+  }).format(date));
+
+  return localHour >= 6 && localHour < 19;
+}
+
+function getWeatherIcon(data: WindyResponse, index: number, timestamp?: number) {
   const precip = precipMetersToMillimeters(data["past3hprecip-surface"]?.[index]);
   const ptype = data["ptype-surface"]?.[index] ?? 0;
   const cloudCover = getCloudCover(data, index);
   const temp = celsius(data["temp-surface"]?.[index]);
+  const isDay = isDayTime(new Date(timestamp ?? data.ts?.[index] ?? Date.now()));
+  const hasLightPrecip = precip >= 0.15;
+  const hasMeaningfulPrecip = precip >= 0.6;
 
-  switch (ptype) {
-    case 5:
+  if (hasMeaningfulPrecip) {
+    if (ptype === 5 || (typeof temp === "number" && temp <= 0)) {
       return "cloudy_snowing";
-    case 7:
-      return "weather_mix";
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 6:
-    case 8:
+    }
+
+    switch (ptype) {
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 6:
+      case 7:
+      case 8:
+        return "rainy";
+      default:
+        break;
+    }
+  }
+
+  if (hasLightPrecip) {
+    if (typeof temp === "number" && temp <= 0) {
+      return "cloudy_snowing";
+    }
+
+    if (cloudCover >= 55) {
       return "rainy";
-    default:
-      break;
-  }
-
-  if (precip > 0.3 && typeof temp === "number" && temp <= 1) {
-    return "cloudy_snowing";
-  }
-
-  if (precip >= 4) {
-    return "rainy";
-  }
-
-  if (precip >= 1) {
-    return "rainy";
-  }
-
-  if (precip > 0.15 && cloudCover >= 35) {
-    return "rainy";
+    }
   }
 
   if (cloudCover >= 85) {
@@ -187,10 +197,10 @@ function getWeatherIcon(data: WindyResponse, index: number) {
   }
 
   if (cloudCover >= 45) {
-    return "partly_cloudy_day";
+    return isDay ? "partly_cloudy_day" : "partly_cloudy_night";
   }
 
-  return "wb_sunny";
+  return isDay ? "wb_sunny" : "nights_stay";
 }
 
 function getSummaryFromIcon(icon: string) {
@@ -199,12 +209,13 @@ function getSummaryFromIcon(icon: string) {
       return "proměnlivo a místy přeháňky";
     case "cloudy_snowing":
       return "sněhové přeháňky";
-    case "weather_mix":
-      return "smíšené srážky a proměnlivé podmínky";
     case "cloud":
       return "oblačno";
     case "partly_cloudy_day":
+    case "partly_cloudy_night":
       return "polojasno";
+    case "nights_stay":
+      return "spíše jasno";
     default:
       return "jasno a dobré podmínky";
   }
@@ -274,11 +285,11 @@ function buildWeatherSnapshot(data: WindyResponse): LipnoWeatherSnapshot {
     timeZone: LIPNO_TIMEZONE,
   }).format(todayDate);
 
-  const currentIcon = getWeatherIcon(data, nowIndex);
+  const currentIcon = getWeatherIcon(data, nowIndex, data.ts?.[nowIndex]);
   const hourlyForecast = (data.ts ?? []).slice(0, 6).map((timestamp, index) => ({
     time: getHourLabel(new Date(timestamp), index === 0),
     temp: formatTemp(data["temp-surface"]?.[index]),
-    icon: getWeatherIcon(data, index),
+    icon: getWeatherIcon(data, index, timestamp),
     active: index === 0,
   }));
 
@@ -322,7 +333,7 @@ function buildWeatherSnapshot(data: WindyResponse): LipnoWeatherSnapshot {
 
       return {
         day: getDayLabel(bucket.date, bucketIndex === 0),
-        icon: getWeatherIcon(data, midpointIndex),
+        icon: getWeatherIcon(data, midpointIndex, data.ts?.[midpointIndex]),
         rain: formatPrecipLabel(precipTotal),
         low: `${Math.round(Math.min(...temps))}°`,
         high: `${Math.round(Math.max(...temps))}°`,
