@@ -77,31 +77,36 @@ export default function LipnoOpeningHoursPage() {
                     </div>
                   </div>
 
-                  <div className="mt-5 space-y-3">
-                    {section.periods.map((period) => (
-                      <div
-                        key={`${section.id}-${period.dateLabel}-${period.days}`}
-                        className="rounded-[1.4rem] p-4"
-                        style={{ background: "rgba(0,30,96,0.03)" }}
-                      >
-                        <div className="grid gap-2 md:grid-cols-[1.1fr_0.7fr_1fr] md:items-start">
-                          <div>
-                            <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Období</p>
-                            <p className="mt-1 text-sm font-bold" style={{ color: lipnoBrand.ink }}>{period.dateLabel}</p>
-                          </div>
-                          <div>
-                            <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Dny</p>
-                            <p className="mt-1 text-sm font-bold" style={{ color: lipnoBrand.ink }}>{period.days}</p>
-                          </div>
-                          <div>
-                            <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Čas</p>
-                            <p className="mt-1 text-sm font-bold" style={{ color: lipnoBrand.ink }}>{period.time}</p>
-                            {period.note ? <p className="mt-1 text-xs leading-relaxed" style={{ color: lipnoBrand.muted }}>{period.note}</p> : null}
+                  <details className="mt-5 rounded-[1.4rem] p-4" style={{ background: "rgba(0,30,96,0.03)" }}>
+                    <summary className="cursor-pointer list-none text-sm font-bold" style={{ color: lipnoBrand.primary }}>
+                      Zobrazit celé otevírací doby
+                    </summary>
+                    <div className="mt-4 space-y-3">
+                      {section.periods.map((period) => (
+                        <div
+                          key={`${section.id}-${period.dateLabel}-${period.days}`}
+                          className="rounded-[1.4rem] p-4"
+                          style={{ background: "#fff" }}
+                        >
+                          <div className="grid gap-2 md:grid-cols-[1.1fr_0.7fr_1fr] md:items-start">
+                            <div>
+                              <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Období</p>
+                              <p className="mt-1 text-sm font-bold" style={{ color: lipnoBrand.ink }}>{period.dateLabel}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Dny</p>
+                              <p className="mt-1 text-sm font-bold" style={{ color: lipnoBrand.ink }}>{period.days}</p>
+                            </div>
+                            <div>
+                              <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>Čas</p>
+                              <p className="mt-1 text-sm font-bold" style={{ color: lipnoBrand.ink }}>{period.time}</p>
+                              {period.note ? <p className="mt-1 text-xs leading-relaxed" style={{ color: lipnoBrand.muted }}>{period.note}</p> : null}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  </details>
                 </article>
               );
             })}

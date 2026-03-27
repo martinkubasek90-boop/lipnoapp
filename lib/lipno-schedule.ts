@@ -101,11 +101,15 @@ export function getLipnoOpenState(openingHours: string[], now = new Date()): Lip
     return range ? now >= range.start && now <= range.end : false;
   });
 
+  if (datedRows.length > 0 && !activeRow) {
+    return { label: "Zavřeno", open: false };
+  }
+
   const fallbackRow = normalizedRows.find((item) => extractTimeRange(item) || /\bzavřeno\b/i.test(item));
   const row = activeRow ?? fallbackRow;
 
   if (!row) {
-    return { label: "Ověřit provoz", open: null };
+    return { label: "Zavřeno", open: false };
   }
 
   if (/zavřeno/i.test(row)) {
@@ -122,11 +126,7 @@ export function getLipnoOpenState(openingHours: string[], now = new Date()): Lip
 
   const timeRange = extractTimeRange(row);
   if (!timeRange) {
-    if (datedRows.length > 0 && !activeRow) {
-      return { label: "Mimo provoz", open: false };
-    }
-
-    return { label: "Ověřit provoz", open: null };
+    return { label: "Zavřeno", open: false };
   }
 
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
