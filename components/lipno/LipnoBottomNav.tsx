@@ -6,10 +6,10 @@ import { lipnoBrand } from "@/lib/lipno-data";
 
 const items = [
   { href: "/", icon: "home", label: "Domů" },
-  { href: "/zazitky", icon: "map", label: "Zážitky" },
-  { href: "/planovat", icon: "edit_calendar", label: "Plánovat" },
-  { href: "/servis", icon: "build_circle", label: "Servis" },
-  { href: "/ai", icon: "pets", label: "AI průvodce" },
+  { href: "/zazitky", icon: "explore", label: "Aktivity" },
+  { href: "/mapa", icon: "map", label: "Mapa" },
+  { href: "/lipnocard", icon: "person", label: "Moje Lipno" },
+  { href: "/vice", icon: "menu", label: "Více" },
 ];
 
 export default function LipnoBottomNav() {
@@ -22,7 +22,9 @@ export default function LipnoBottomNav() {
     >
       <div className="max-w-2xl mx-auto flex justify-around items-center px-3 pb-6 pt-2">
         {items.map(({ href, icon, label }) => {
-          const active = pathname === href || pathname.startsWith(`${href}/`);
+          const active = href === "/"
+            ? pathname === "/"
+            : pathname === href || pathname.startsWith(`${href}/`);
           return (
             <Link
               key={href}
