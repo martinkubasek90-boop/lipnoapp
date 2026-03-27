@@ -106,46 +106,7 @@ export default function LipnoMapPage() {
               })}
             </div>
 
-            <div className="grid gap-4 p-4 md:grid-cols-[0.95fr_1.15fr] md:p-5">
-              <div>
-                <div className="flex items-center justify-between gap-3">
-                  <h2 className="font-headline text-lg font-extrabold" style={{ color: lipnoBrand.ink }}>Místa v mapě</h2>
-                  <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>{visiblePoints.length} bodů</p>
-                </div>
-                <div className="mt-4 max-h-[24rem] space-y-2 overflow-auto pr-1">
-                  {visiblePoints.map((point) => {
-                    const active = activePoint?.id === point.id;
-                    const meta = categoryMeta[point.category];
-                    return (
-                      <button
-                        key={point.id}
-                        type="button"
-                        onClick={() => setActiveId(point.id)}
-                        className="block w-full rounded-[1.3rem] p-4 text-left transition-all"
-                        style={active
-                          ? { background: lipnoBrand.primarySoft, border: "1px solid rgba(0,30,96,0.16)" }
-                          : { background: "rgba(0,30,96,0.03)", border: "1px solid transparent" }}
-                      >
-                        <div className="flex items-start justify-between gap-3">
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <span className="rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.14em]" style={{ background: meta.bg, color: meta.color }}>
-                                {point.code}
-                              </span>
-                              <span className="text-[10px] font-black uppercase tracking-[0.14em]" style={{ color: lipnoBrand.muted }}>
-                                {meta.label}
-                              </span>
-                            </div>
-                            <h3 className="mt-2 font-headline text-base font-extrabold" style={{ color: lipnoBrand.ink }}>{point.title}</h3>
-                            <p className="mt-1 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{point.summary}</p>
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
+            <div className="grid gap-4 p-4 md:grid-cols-[1.15fr_0.95fr] md:p-5">
               {activePoint ? (
                 <div className="rounded-[1.6rem] p-5" style={{ background: "#f8fbff", border: "1px solid rgba(12,74,110,0.08)" }}>
                   <div className="flex items-start justify-between gap-3">
@@ -209,6 +170,45 @@ export default function LipnoMapPage() {
                   ) : null}
                 </div>
               ) : null}
+
+              <div>
+                <div className="flex items-center justify-between gap-3">
+                  <h2 className="font-headline text-lg font-extrabold" style={{ color: lipnoBrand.ink }}>Místa v mapě</h2>
+                  <p className="text-xs font-semibold" style={{ color: lipnoBrand.muted }}>{visiblePoints.length} bodů</p>
+                </div>
+                <div className="mt-4 max-h-[24rem] space-y-2 overflow-auto pr-1">
+                  {visiblePoints.map((point) => {
+                    const active = activePoint?.id === point.id;
+                    const meta = categoryMeta[point.category];
+                    return (
+                      <button
+                        key={point.id}
+                        type="button"
+                        onClick={() => setActiveId(point.id)}
+                        className="block w-full rounded-[1.3rem] p-4 text-left transition-all"
+                        style={active
+                          ? { background: lipnoBrand.primarySoft, border: "1px solid rgba(0,30,96,0.16)" }
+                          : { background: "rgba(0,30,96,0.03)", border: "1px solid transparent" }}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span className="rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.14em]" style={{ background: meta.bg, color: meta.color }}>
+                                {point.code}
+                              </span>
+                              <span className="text-[10px] font-black uppercase tracking-[0.14em]" style={{ color: lipnoBrand.muted }}>
+                                {meta.label}
+                              </span>
+                            </div>
+                            <h3 className="mt-2 font-headline text-base font-extrabold" style={{ color: lipnoBrand.ink }}>{point.title}</h3>
+                            <p className="mt-1 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{point.summary}</p>
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         </section>

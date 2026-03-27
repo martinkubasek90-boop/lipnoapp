@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
 import { useSeason } from "@/components/lipno/SeasonProvider";
+import { lipnoGastroDetails } from "@/lib/lipno-gastro";
 import {
   lipnoBrand,
   lipnoConditions,
@@ -48,6 +50,33 @@ export default function LipnoHomePage() {
         { time: "18:00", temp: "23°", icon: "rainy" },
         { time: "19:00", temp: "21°", icon: "wb_twilight" },
       ];
+  const gastroCards = lipnoGastroDetails.slice(0, 4);
+
+  function getOpenState(openingHours: string[]) {
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const dailyHours = openingHours.find((item) => /Denně\s+\d{1,2}:\d{2}[–-]\d{1,2}:\d{2}/.test(item));
+
+    if (!dailyHours) {
+      return { label: "Ověřit provoz", open: null as boolean | null };
+    }
+
+    const match = dailyHours.match(/(\d{1,2}:\d{2})[–-](\d{1,2}:\d{2})/);
+    if (!match) {
+      return { label: "Ověřit provoz", open: null as boolean | null };
+    }
+
+    const toMinutes = (value: string) => {
+      const [hours, minutes] = value.split(":").map(Number);
+      return hours * 60 + minutes;
+    };
+
+    const openMinutes = toMinutes(match[1]);
+    const closeMinutes = toMinutes(match[2]);
+    const isOpen = currentMinutes >= openMinutes && currentMinutes <= closeMinutes;
+
+    return { label: isOpen ? "Otevřeno" : "Zavřeno", open: isOpen };
+  }
 
   return (
     <>
@@ -213,6 +242,70 @@ export default function LipnoHomePage() {
                   <p className="mt-2 text-xl font-black text-white">{item.temp}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="px-4 pt-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-headline text-lg font-bold" style={{ color: lipnoBrand.ink }}>Gastro</h2>
+              <p className="text-xs mt-0.5" style={{ color: lipnoBrand.muted }}>Výběr podniků s rychlým detailem a okamžitým zavoláním.</p>
+            </div>
+            <Link href="/gastro" className="text-sm font-bold" style={{ color: lipnoBrand.primary }}>Vše →</Link>
+          </div>
+          <div className="mt-4 -mx-4 overflow-x-auto px-4 pb-2 hide-scrollbar">
+            <div className="flex gap-4">
+              {gastroCards.map((item) => {
+                const openState = getOpenState(item.openingHours);
+                return (
+                  <article
+                    key={item.slug}
+                    className="w-[18.5rem] shrink-0 overflow-hidden rounded-[1.9rem] bg-white"
+                    style={{ border: "1px solid rgba(12,74,110,0.08)", boxShadow: "0 14px 30px rgba(12,74,110,0.08)" }}
+                  >
+                    <div className="relative h-44 w-full">
+                      <Image src={item.heroImage} alt={item.imageAlt} fill className="object-cover" unoptimized />
+                      <div className="absolute inset-x-0 bottom-0 h-20" style={{ background: "linear-gradient(180deg, transparent, rgba(5,21,54,0.72))" }} />
+                      <div className="absolute left-4 top-4">
+                        <span
+                          className="inline-flex rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]"
+                          style={
+                            openState.open === true
+                              ? { background: "rgba(220,252,231,0.96)", color: "#15803d" }
+                              : openState.open === false
+                                ? { background: "rgba(254,226,226,0.96)", color: "#b91c1c" }
+                                : { background: "rgba(255,255,255,0.92)", color: lipnoBrand.primary }
+                          }
+                        >
+                          {openState.label}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-headline text-xl font-extrabold" style={{ color: lipnoBrand.ink }}>{item.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed" style={{ color: lipnoBrand.muted }}>{item.teaser}</p>
+                      <div className="mt-4 flex items-center gap-3">
+                        <Link
+                          href={`/gastro/${item.slug}`}
+                          className="inline-flex flex-1 items-center justify-center rounded-2xl px-4 py-3 text-sm font-bold"
+                          style={{ background: lipnoBrand.primary, color: "#fff" }}
+                        >
+                          Detail
+                        </Link>
+                        <a
+                          href={`tel:${item.phone.replace(/\s+/g, "")}`}
+                          className="inline-flex h-12 w-12 items-center justify-center rounded-2xl"
+                          style={{ background: lipnoBrand.primarySoft, color: lipnoBrand.primary }}
+                          aria-label={`Zavolat ${item.title}`}
+                        >
+                          <span className="material-symbols-outlined">call</span>
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
