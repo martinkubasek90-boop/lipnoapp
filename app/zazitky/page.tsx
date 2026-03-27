@@ -303,6 +303,33 @@ export default function LipnoExperiencesPage() {
             </div>
           </div>
         </section>
+
+        <section className="px-4 pb-4">
+          <Link
+            href="/mapa"
+            className="block overflow-hidden rounded-[2rem]"
+            style={{ background: "linear-gradient(135deg, #001E60 0%, #003083 68%, #009639 100%)", boxShadow: "0 16px 34px rgba(12,74,110,0.18)" }}
+          >
+            <div className="relative min-h-[13rem] p-6">
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,18,58,0.10),rgba(0,18,58,0.34),rgba(0,18,58,0.52))]" />
+              <div className="relative z-10 max-w-[24rem]">
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/84" style={{ textShadow: "0 4px 14px rgba(0,0,0,0.28)" }}>
+                  Orientace v areálu
+                </p>
+                <h2 className="mt-3 font-headline text-3xl font-extrabold leading-tight text-white" style={{ textShadow: "0 10px 28px rgba(0,0,0,0.36)" }}>
+                  Kde jednotlivá místa najdeš v mapě
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-white/94" style={{ textShadow: "0 6px 18px rgba(0,0,0,0.28)" }}>
+                  Otevři interaktivní mapu a přepínej mezi atrakcemi, gastrem, službami a dopravou podle konkrétní lokality.
+                </p>
+                <div className="mt-5 inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black shadow-lg" style={{ background: "#ffffff", color: lipnoBrand.primary, boxShadow: "0 14px 30px rgba(0,0,0,0.16)" }}>
+                  Otevřít mapu
+                  <span className="material-symbols-outlined text-base">arrow_forward</span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </section>
       </main>
       <LipnoBottomNav />
     </>
