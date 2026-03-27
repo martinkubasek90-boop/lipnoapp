@@ -27,11 +27,11 @@ export default function LipnoHomePage() {
   const heroVideoUrl = "https://www.lipno.info/files/lipno/uploads/files/video/leto/172121452141-171-lipno-leto-2024.mp4";
   const homeTiles = [
     { id: "tickets", title: "Vstupenky", icon: "confirmation_number", href: "/lipnocard", description: "Lipno.card, výhody a vstupy." },
+    { id: "rentals", title: "Půjčovny", icon: "pedal_bike", href: "/pujcovny", description: "Kola, lodě i další vybavení." },
     { id: "hours", title: "Otevírací doby", icon: "schedule", href: "https://www.lipno.info/provoz.html", description: "Rychlý provoz areálu a služeb." },
-    { id: "map", title: "Mapa", icon: "map", href: "/mapa", description: "Interaktivní orientace v resortu." },
+    { id: "map", title: "Mapy", icon: "map", href: "/mapa", description: "Interaktivní orientace v resortu." },
     { id: "weather", title: "Počasí", icon: isWinter ? "ac_unit" : "wb_sunny", href: "/pocasi", description: "Předpověď, voda a webkamery." },
     { id: "gastro", title: "Gastro", icon: "restaurant", href: "/gastro", description: "Restaurace, kavárny a podniky." },
-    { id: "cams", title: "Webkamery", icon: "videocam", href: "/pocasi#webkamery", description: "Živý pohled z hlavních míst." },
   ];
   const hourlyForecast = isWinter
     ? [
@@ -84,7 +84,7 @@ export default function LipnoHomePage() {
       <main className="pt-24 pb-4 max-w-2xl mx-auto" style={{ background: lipnoBrand.sand }}>
         <section className="px-4 pt-5">
           <div
-            className="relative overflow-hidden rounded-[2rem] min-h-[29rem] p-5 md:p-7"
+            className="relative overflow-hidden rounded-[2rem] min-h-[20rem] p-5 md:min-h-[21rem] md:p-6"
             style={{
               background: seasonHero.heroBackground,
               boxShadow: "0 18px 40px rgba(12,74,110,0.18)",
@@ -117,7 +117,7 @@ export default function LipnoHomePage() {
             ) : (
               <div className="absolute inset-x-0 bottom-0 h-28 opacity-30" style={{ background: "linear-gradient(180deg, transparent, rgba(255,255,255,0.12))" }} />
             )}
-            <div className="relative z-10 flex min-h-[25rem] flex-col justify-end">
+            <div className="relative z-10 flex min-h-[16rem] flex-col justify-end md:min-h-[17rem]">
               <div className="max-w-[28rem]">
                 <div
                   className="inline-flex rounded-full px-4 py-2 text-sm font-semibold"
@@ -126,7 +126,7 @@ export default function LipnoHomePage() {
                   Čtvrtek, 26. března 2026
                 </div>
                 <h1
-                  className="mt-6 font-headline text-[3.2rem] font-extrabold leading-[0.9] tracking-tight text-white md:text-[4.4rem]"
+                  className="mt-4 font-headline text-[2.7rem] font-extrabold leading-[0.9] tracking-tight text-white md:text-[3.5rem]"
                   style={{ textShadow: "0 10px 28px rgba(0,0,0,0.24)" }}
                 >
                   {seasonCopy.heroTitle.split("\n").map((line, index) => (
@@ -137,7 +137,7 @@ export default function LipnoHomePage() {
                   ))}
                 </h1>
                 <p
-                  className="mt-4 max-w-[26rem] text-base leading-relaxed md:text-lg"
+                  className="mt-3 max-w-[24rem] text-[15px] leading-relaxed md:text-base"
                   style={{ color: "rgba(255,255,255,0.88)", textShadow: "0 6px 18px rgba(0,0,0,0.18)" }}
                 >
                   {seasonCopy.heroText}
