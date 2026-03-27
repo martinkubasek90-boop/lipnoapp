@@ -3,7 +3,7 @@ import Link from "next/link";
 import LipnoTopBar from "@/components/lipno/LipnoTopBar";
 import LipnoBottomNav from "@/components/lipno/LipnoBottomNav";
 import { lipnoBrand } from "@/lib/lipno-data";
-import { lipnoCalendarEvents, lipnoCalendarSourceUrl } from "@/lib/lipno-calendar";
+import { lipnoCalendarEvents } from "@/lib/lipno-calendar";
 
 export default function LipnoCalendarPage() {
   const featured = lipnoCalendarEvents[0];
@@ -18,23 +18,13 @@ export default function LipnoCalendarPage() {
             className="rounded-[2rem] p-6"
             style={{ background: "linear-gradient(135deg, #001E60 0%, #0a5ea3 62%, #009639 100%)", boxShadow: "0 18px 40px rgba(12,74,110,0.18)" }}
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white/74">Kalendář akcí</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-white" style={{ textShadow: "0 4px 14px rgba(0,0,0,0.24)" }}>Kalendář akcí</p>
             <h1 className="mt-3 font-headline text-3xl font-extrabold tracking-tight text-white md:text-[2.8rem]">
               Co se děje na Lipně
             </h1>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/84">
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-white" style={{ textShadow: "0 6px 18px rgba(0,0,0,0.22)" }}>
               Přehled aktuálních akcí z oficiálního kalendáře Lipno.info. Data níže odpovídají stavu k 27. březnu 2026.
             </p>
-            <a
-              href={lipnoCalendarSourceUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-5 inline-flex items-center gap-2 rounded-2xl px-4 py-3 text-sm font-bold"
-              style={{ background: "rgba(255,255,255,0.94)", color: lipnoBrand.primary }}
-            >
-              Otevřít oficiální kalendář
-              <span className="material-symbols-outlined text-base">open_in_new</span>
-            </a>
           </div>
         </section>
 

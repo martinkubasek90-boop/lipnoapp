@@ -19,9 +19,8 @@ export default function LipnoExperiencesPage() {
 
   const calendarCards = lipnoCalendarEvents.slice(0, 4);
   const activityCards = lipnoAttractions
-    .filter((item) => (isWinter ? item.slug !== "kralovstvi-lesa" && item.slug !== "bikepark-lipno" : true))
-    .slice(0, 4);
-  const rentalCards = lipnoRentalDetails.slice(0, 6);
+    .filter((item) => (isWinter ? item.slug !== "kralovstvi-lesa" && item.slug !== "bikepark-lipno" : true));
+  const rentalCards = lipnoRentalDetails;
   const gastroCards = lipnoGastroDetails.slice(0, 4);
   const accommodationCards = lipnoAccommodationDetails.slice(0, 3);
 

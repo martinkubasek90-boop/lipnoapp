@@ -14,6 +14,7 @@ const categoryMeta: Record<LipnoMapPointCategory | "vse", { label: string; bg: s
   gastro: { label: "Gastro", bg: "rgba(234,88,12,0.12)", color: "#c2410c" },
   sluzby: { label: "Služby", bg: "rgba(0,30,96,0.10)", color: lipnoBrand.primary },
   doprava: { label: "Doprava", bg: "rgba(59,130,246,0.12)", color: "#1d4ed8" },
+  ubytovani: { label: "Ubytování", bg: "rgba(168,85,247,0.12)", color: "#7c3aed" },
 };
 
 export default function LipnoMapPage() {
