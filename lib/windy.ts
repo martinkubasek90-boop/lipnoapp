@@ -3,6 +3,8 @@ const WINDY_POINT_FORECAST_URL = "https://api.windy.com/api/point-forecast/v2";
 const LIPNO_LAT = 48.6396;
 const LIPNO_LON = 14.2294;
 
+const monthlyAverageWaterTemp = [5, 5, 7, 10, 13, 19, 20, 19, 18, 13, 9, 4];
+
 type WindyResponse = {
   ts: number[];
   units?: Record<string, string | null>;
@@ -56,7 +58,7 @@ export const fallbackWeather: LipnoWeatherSnapshot = {
   highTemp: "26°",
   lowTemp: "14°",
   windLabel: "12 km/h",
-  waterTempLabel: "19 °C",
+  waterTempLabel: "7 °C",
   webcamCountLabel: "5",
   currentIcon: "wb_sunny",
   hourlyForecast: [
@@ -106,6 +108,11 @@ function formatTemp(value: number | null | undefined) {
   }
 
   return `${Math.round(temp)}°`;
+}
+
+function getMonthlyWaterTempLabel(date: Date) {
+  const average = monthlyAverageWaterTemp[date.getMonth()] ?? 7;
+  return `${average} °C`;
 }
 
 function formatPrecipLabel(totalPrecipMm: number) {
@@ -300,7 +307,7 @@ function buildWeatherSnapshot(data: WindyResponse): LipnoWeatherSnapshot {
     highTemp: `${Math.round(todayHigh)}°`,
     lowTemp: `${Math.round(todayLow)}°`,
     windLabel: windKmh ? `${windKmh} km/h` : fallbackWeather.windLabel,
-    waterTempLabel: fallbackWeather.waterTempLabel,
+    waterTempLabel: getMonthlyWaterTempLabel(todayDate),
     webcamCountLabel: fallbackWeather.webcamCountLabel,
     currentIcon,
     hourlyForecast: hourlyForecast.length ? hourlyForecast : fallbackWeather.hourlyForecast,
@@ -314,11 +321,17 @@ export async function getLipnoWeatherSnapshot(): Promise<LipnoWeatherSnapshot> {
   try {
     const data = await fetchWindyPointForecast();
     if (!data?.ts?.length) {
-      return fallbackWeather;
+      return {
+        ...fallbackWeather,
+        waterTempLabel: getMonthlyWaterTempLabel(new Date()),
+      };
     }
 
     return buildWeatherSnapshot(data);
   } catch {
-    return fallbackWeather;
+    return {
+      ...fallbackWeather,
+      waterTempLabel: getMonthlyWaterTempLabel(new Date()),
+    };
   }
 }
