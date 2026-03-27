@@ -498,8 +498,8 @@ export const lipnoSeasonCopy: Record<LipnoSeason, {
 }> = {
   leto: {
     label: "Léto",
-    heroTitle: "Dnes na\nLipně",
-    heroText: "Jezero, rodinné zážitky, webkamery a servis pro celý den v resortu.",
+    heroTitle: "Lipno,\nCelý den\nplný zážitků.",
+    heroText: "Sport, půjčovny, dobrý oběd a akce v areálu — přehledně na jednom místě.",
     weatherLabel: "Počasí",
     conditionsLabel: "Voda",
     featureOne: "Stezka + Království lesa",
@@ -507,8 +507,8 @@ export const lipnoSeasonCopy: Record<LipnoSeason, {
   },
   zima: {
     label: "Zima",
-    heroTitle: "Dnes na\nLipně",
-    heroText: "Sníh, lanovky, skipasy a rodinný program přepnutý do zimního režimu.",
+    heroTitle: "Lipno,\nCelý den\nplný zážitků.",
+    heroText: "Sport, půjčovny, dobrý oběd a akce v areálu — přehledně na jednom místě.",
     weatherLabel: "Počasí",
     conditionsLabel: "Sníh",
     featureOne: "Skiareál + Fox park",
