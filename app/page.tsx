@@ -29,6 +29,7 @@ export default function LipnoHomePage() {
   const [featuredEvent] = lipnoEvents.filter((item) => item.seasons.includes(season));
   const seasonQuickActions = lipnoQuickActions.filter((item) => !item.seasons || item.seasons.includes(season)).slice(0, 6);
   const isWinter = season === "zima";
+  const heroVideoUrl = "https://www.lipno.info/files/lipno/uploads/files/video/leto/172121452141-171-lipno-leto-2024.mp4";
 
   return (
     <>
@@ -42,6 +43,25 @@ export default function LipnoHomePage() {
               boxShadow: "0 18px 40px rgba(12,74,110,0.18)",
             }}
           >
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+            >
+              <source src={heroVideoUrl} type="video/mp4" />
+            </video>
+            <div
+              className="absolute inset-0"
+              style={{
+                background: isWinter
+                  ? "linear-gradient(180deg, rgba(0,22,63,0.52) 0%, rgba(11,47,111,0.62) 45%, rgba(22,44,101,0.82) 100%)"
+                  : "linear-gradient(180deg, rgba(0,30,96,0.46) 0%, rgba(0,48,131,0.42) 38%, rgba(0,150,57,0.56) 100%)",
+              }}
+            />
             <div className="absolute inset-x-0 top-0 h-32 opacity-70" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.18), transparent)" }} />
             <div className="absolute right-[-2rem] top-[-2rem] h-40 w-40 rounded-full blur-2xl" style={{ background: seasonHero.heroGlowSecondary }} />
             <div className="absolute left-[-3rem] bottom-[-4rem] h-52 w-52 rounded-full blur-3xl" style={{ background: seasonHero.heroGlow }} />
@@ -72,12 +92,12 @@ export default function LipnoHomePage() {
               >
                 <div className="grid grid-cols-2 gap-3 text-white sm:grid-cols-4">
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{seasonCopy.weatherLabel}</p>
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">Teplota</p>
                     <p className="mt-1 font-headline text-xl font-black">{lipnoConditions.weather}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{seasonCopy.conditionsLabel}</p>
-                    <p className="mt-1 font-headline text-xl font-black">{season === "zima" ? lipnoConditions.snow : "19 °C voda"}</p>
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{isWinter ? "Výška sněhu" : "Teplota vody"}</p>
+                    <p className="mt-1 font-headline text-xl font-black">{isWinter ? lipnoConditions.snow : lipnoConditions.lake}</p>
                   </div>
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.14em] text-white/66">{isWinter ? "Lanovky" : "Program"}</p>
