@@ -40,6 +40,13 @@ const sections = [
     kind: "internal" as const,
   },
   {
+    title: "Gastro",
+    text: "Restaurace, kavárny a gastro podniky s vlastními detailovými stránkami.",
+    href: "/gastro",
+    icon: "restaurant",
+    kind: "internal" as const,
+  },
+  {
     title: "Kalendář Lipna",
     text: "Oficiální program a akce přímo na webu Lipno.info.",
     href: "https://www.lipno.info/kalendar.html",
